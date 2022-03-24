@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import styles from "../styles/Home.module.scss";
 import ProductCard from "../components/ProductCard";
 import NavBar from "../components/NavBar";
+import toast, { Toaster } from "react-hot-toast";
 
 const Home: NextPage = () => {
   const data = {
@@ -22,10 +23,11 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}> 
-
         <NavBar />
-  
-
+      <button className={styles.button} onClick={notify}>
+        TOASTER
+      </button>
+      <Toaster />
       <div id = {styles.card}>
         <ProductCard productData={data} /> 
         <ProductCard productData={data2} /> 
