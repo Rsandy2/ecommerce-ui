@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "../styles/NavBar.module.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 
 const NavBar = () => {
@@ -12,7 +10,6 @@ const NavBar = () => {
                 <input className={styles.search__bar} type="text" placeholder="Search..."/>
                 <input className={styles.search__btn} type="submit"/>
             </div>
-            <FontAwesomeIcon icon={["fas fa-sign-in-alt"]}></FontAwesomeIcon>
             <h2>shopping cart</h2>
         </div>
     );

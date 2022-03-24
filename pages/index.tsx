@@ -4,6 +4,7 @@ import ProductCard from "../components/ProductCard";
 import NavBar from "../components/NavBar";
 import toast, { Toaster } from "react-hot-toast";
 
+const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
   const data = {
     bookTitle: "Percy Jackson and the Olympians: The Lightning Thief",
