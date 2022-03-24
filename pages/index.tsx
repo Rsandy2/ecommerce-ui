@@ -22,9 +22,9 @@ const Home: NextPage = () => {
     buttonText: "Add to cart",
   };
 
+ 
   return (
-    <div className={styles.container}> 
-        <NavBar />
+    <div className={styles.container}>
       <button className={styles.button} onClick={notify}>
         TOASTER
       </button>
