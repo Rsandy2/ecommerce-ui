@@ -6,39 +6,211 @@ const sidebarStyle = {
 
 function SideBar() {
   return (
-    <div className="flex-shrink-0 p-3 bg-light" style={sidebarStyle}>
-      <ul className="list-unstyled ps-0">
-        <li className="mb-1">
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-            >
-              Genre
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
+    <nav
+      id="navbar-example3"
+      className="navbar navbar-light bg-light flex-column align-items-stretch p-3"
+    >
+      <a className="navbar-brand">Filters</a>
+      <nav className="nav nav-pills flex-column">
+        <hr></hr>
+        <h6>Genre</h6>
+        <form>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Action and Adventure
+            </label>
           </div>
-        </li>
-      </ul>
-    </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckChecked"
+              checked
+            />
+            <label className="form-check-label" for="flexCheckChecked">
+              Classics
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Comic and Graphic Novels
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Detective
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Fantasy
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Historical Fiction
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Horror
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Science Fiction
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Thriller and Suspense
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Romance
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Contemporary
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Young Adult
+            </label>
+          </div>
+        </form>
+        <hr></hr>
+        <h6>Vender</h6>
+        <form>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Sample Vender
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckChecked"
+              checked
+            />
+            <label className="form-check-label" for="flexCheckChecked">
+              Sample Vender
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Sample Vender
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Sample Vender
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label className="form-check-label" for="flexCheckDefault">
+              Sample Vender
+            </label>
+          </div>
+        </form>
+      </nav>
+    </nav>
   );
 }
 
