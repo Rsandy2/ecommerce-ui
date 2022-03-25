@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
   const data = {
-    bookTitle: "Percy Jackson and the Olympians: The Lightning Thief",
+    bookTitle: "The Lightning Thief",
     authorName: "Rick Riordan",
     bookCoverUrl: "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
     altText: "Percy Jackson Book Cover",
@@ -25,16 +25,18 @@ const Home: NextPage = () => {
  
   return (
     <div className={styles.container}>
-      <button className={styles.button} onClick={notify}>
+      <NavBar />
+      {/* <button className={styles.button} onClick={notify}>
         TOASTER
       </button>
-      <Toaster />
-      <div id = {styles.card}>
-        <ProductCard productData={data} /> 
-        <ProductCard productData={data2} /> 
-        <ProductCard productData={data} /> 
-        <ProductCard productData={data2} />
+      <Toaster /> */}
+      <div className={styles.card__container}>
+          <ProductCard productData={data} /> 
+          <ProductCard productData={data2} /> 
+          <ProductCard productData={data} /> 
+          <ProductCard productData={data2} />
       </div>
+
     </div>
   );
 };
