@@ -14,7 +14,7 @@ function Product() {
           alt="..."
         />
         <div className="card-body">
-          <div className="card-title">Book Name</div>
+          <div className="card-title fw-bold">Book Name</div>
           <p className="card-text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
             necessitatibus eos at ratione corrupti reiciendis ipsum!

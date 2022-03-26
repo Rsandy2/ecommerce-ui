@@ -37,7 +37,7 @@ export default function Home() {
             <input
               type="text"
               className="form-control"
-              aria-label="Text input with dropdown button"
+              placeholder="Sample Search"
             />
           </div>
         </form>
