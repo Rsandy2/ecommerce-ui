@@ -12,6 +12,7 @@ const Home: NextPage = () => {
     bookCoverUrl: "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
     altText: "Percy Jackson Book Cover",
     buttonText: "Add to cart",
+    bookPrice: "$15.00"
   };
 
   const data2 = {
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
     bookCoverUrl: "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
     altText: "City of Bones Book Cover",
     buttonText: "Add to cart",
+    bookPrice: "$15.00"
   };
 
  

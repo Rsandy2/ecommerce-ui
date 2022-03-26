@@ -20,15 +20,19 @@
         }
 
         &__img {
-                width: 140px;
-                height: auto;
+            width: 140px;
+            height: auto;
             }
+
+        &__price {
+            font-size: 14px;
+        }
     
         input.card__btn[type=submit] {
             background-color: #C3DBC5;
             color: #36373D;
             border: none;
-            padding: 10px 30px;
+            padding: 10px 40px;
             margin: 6px 4px;
         }
         
