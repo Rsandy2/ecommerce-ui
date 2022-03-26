@@ -26,16 +26,16 @@ const Modal: React.FC = () => {
             <form className={styles.form_containter} noValidate>
               <div className={styles.container}>
                 <input
-                  name="Title"
+                  name="Data"
                   className={styles.form_input}
-                  placeholder="Title"
+                  placeholder="Data"
                   required
                 />
               </div>
               <div className={styles.container}>
                 <input
-                  name="Image"
-                  placeholder="Image Link"
+                  name="Data"
+                  placeholder="Data "
                   className={styles.form_input}
                   required
                 />
@@ -57,16 +57,16 @@ const Modal: React.FC = () => {
               <div className={styles.additionalInfo}>
                 <div className={styles.container}>
                   <input
-                    name="Title"
+                    name="Data"
                     className={styles.form_input_left}
-                    placeholder="Title"
+                    placeholder="Data"
                     required
                   />
                 </div>
                 <div className={styles.container}>
                   <input
-                    name="Image"
-                    placeholder="Image Link"
+                    name="Data"
+                    placeholder="Data"
                     className={styles.form_input_right}
                     required
                   />

@@ -1,7 +1,7 @@
 import { BeakerIcon } from "@heroicons/react/solid";
 import styles from "../styles/Login.module.scss";
 
-export default function LogIn(props) {
+export default function signup(props) {
   return (
     <div className={styles.logInTest}>
       <div className={styles.logInLeftPanel}>
@@ -32,11 +32,23 @@ export default function LogIn(props) {
         </div>
 
         <div className={styles.form_container}>
-          <h1 className={styles.form_title}>Welcome</h1>
+          {/* <h1 className={styles.form_title}>Welcome</h1>
 
           <div className={styles.form_content}>
             <input type="text" required="required" />
             <label>Username</label>
+            <div className={styles.line}></div>
+          </div>
+
+          <div className={styles.form_content}>
+            <input type="text" required="required" />
+            <label>Email</label>
+            <div className={styles.line}></div>
+          </div>
+
+          <div className={styles.form_content}>
+            <input type="date" required="required" />
+            <label>Date of Birth</label>
             <div className={styles.line}></div>
           </div>
 
@@ -47,9 +59,16 @@ export default function LogIn(props) {
               <div className={styles.line}></div>
             </div>
 
-            <button>Login</button>
+            <button>Sign-Up</button>
 
             <div className={styles.signUp}>Don't have an account?</div>
+          </div> */}
+          <div>
+            <h1>Registration Sucess</h1>
+            <p>
+              Thank you for signing up with Ecommerce UI.Please check your inbox
+              for a confirmation email .
+            </p>
           </div>
         </div>
       </div>
