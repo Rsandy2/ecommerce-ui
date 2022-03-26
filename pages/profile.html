@@ -1,0 +1,169 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A Basic HTML5 Template</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../styles/profile.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="booksReserved">
+                            <h3>Books Reserved</h3>
+                            <hr>
+                            <div class="card" id="reservedBookCard">
+                                <img class="card-img-top"
+                                    src="https://www.readriordan.com/wp-content/uploads/2022/02/Lightning-Thief-flat-cover.png"
+                                    alt="Percy Jackson and the Lightning Thief">
+                                <div class="card-body">
+                                    <h5 class="card-title text-left">Percy Jackson and the Lightning Thief</h5>
+                                    <p class="card-text text-left">$12.99</p>
+                                    <p class="card-text text-left">Suwanee Barnes & Nobles</p>
+                                </div>
+                            </div>
+                            <div class="card" id="reservedBookCard">
+                                <img class="card-img-top"
+                                    src="https://m.media-amazon.com/images/I/51o792WLdJL.jpg"
+                                    alt="Fablehaven">
+                                <div class="card-body">
+                                    <h5 class="card-title text-left">Fablehaven</h5>
+                                    <p class="card-text text-left">$8.99</p>
+                                    <p class="card-text text-left">Brooke's Books</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Account Details</h6>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" placeholder="Enter full name"
+                                        value="Clara Zhang">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Enter phone number"
+                                        value="123-456-7890">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="eMail">Email</label>
+                                    <input type="email" class="form-control" id="eMail" placeholder="Enter email ID"
+                                        value="claraemail@gmail.com">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="website">Password</label>
+                                    <input type="url" class="form-control" id="website" placeholder="Change password">
+                                    <!--!!!-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 text-primary">Billing Information</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="ccName">Name on Card</label>
+                                    <input type="text" class="form-control" id="ccName" placeholder="Name on Card">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="billingAddress">Billing Address</label>
+                                    <input type="text" class="form-control" id="billingAddress" placeholder="Billing Address">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="ccNum">Card Number</label>
+                                    <input type="text" class="form-control" id="ccNum" placeholder="Card Number">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="ccvNum">CCV</label>
+                                    <input type="text" class="form-control" id="ccvNum" placeholder="CCV">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Street">Street</label>
+                                    <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="ciTy">City</label>
+                                    <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="sTate">State</label>
+                                    <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="zIp">Zip Code</label>
+                                    <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row gutters">
+
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Keep me subscribed to email promotions
+                                    </label>
+                                </div>
+                                <div class="text-right">
+                                    <button type="button" id="submit" name="submit"
+                                        class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
