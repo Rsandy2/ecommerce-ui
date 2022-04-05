@@ -16,7 +16,7 @@ model Content {
   title     String
   content   String?
   published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
+  // author    User?   @relation(fields: [authorId], references: [id])
   authorId  Int?
 }
 
@@ -26,6 +26,6 @@ model User {
   email         String?   @unique
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Content[]
+  // posts         Content[]
   @@map(name: "users")
 }

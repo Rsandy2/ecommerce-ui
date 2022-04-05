@@ -6,18 +6,73 @@ import Signup from "../components/signup";
 import Modal from "../components/Modal";
 import Owner from "../components/Owner";
 import Confirmation from "../components/Confirmation";
+import { useForm } from "react-hook-form";
 
 const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const CLOG = (data: any): any => console.log(data);
+  const onSubmit = (data: any) => {
+    try {
+      toast.promise(
+        create(data),
+        {
+          loading: "Working on it...",
+          success: "Submitted successfully!",
+          error: "Oops! something went wrong.",
+        },
+        { duration: 3000 }
+      );
+    } catch (error: any) {
+      // toast.error("Oops");
+      console.log(error);
+    }
+  };
+  const create = async (data: any) => {
+    console.log(data);
+    try {
+      fetch("http://localhost:3000/api/create", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+    } catch (err) {
+      console.log("err");
+    }
+  };
   return (
     <div className={styles.container}>
       {/* <Signup /> */}
 
-      {/* <button className={styles.button} onClick={notify}>
+      <button className={styles.button} onClick={notify} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          id="name"
+          type="text"
+          placeholder="Name"
+          {...register("name", { required: true, maxLength: 80 })}
+        />
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+          {...register("email", {})}
+        />
+
+        <input type="submit" />
+      </form>
+      <button className={styles.button} onClick={notify}>
         TOASTER
-      </button> */}
+      </button>
       {/* <Confirmation /> */}
-      <Owner />
+      {/* <Modal /> */}
       <Toaster />
     </div>
   );
