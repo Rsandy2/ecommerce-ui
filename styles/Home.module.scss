@@ -2,9 +2,6 @@
   background: #36373d;
   height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .button {
@@ -16,4 +13,10 @@
 }
 .button:hover {
   background: #e0e0e0;
+}
+
+.card__container {
+  display: flex;
+  justify-content: space-evenly;
+  width: auto;
 }
