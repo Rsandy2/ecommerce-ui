@@ -29,3 +29,30 @@ model User {
   // posts         Content[]
   @@map(name: "users")
 }
+
+model Vendor {
+  id Int @default(autoincrement()) @id
+  name String
+  Books Book[]
+}
+
+enum Genre {
+  ACTION
+  COMEDY
+  PHIL
+  GENERIC
+}
+
+model Book { 
+  isbn Int  @id @unique
+  title String
+  author    String
+  createdAt DateTime @default(now())
+  publishedDate String
+  description String
+  genre Genre @default(GENERIC)
+  language String
+  vendorID Int?
+  vendor Vendor? @relation(references: [id], fields: [vendorID])
+
+}

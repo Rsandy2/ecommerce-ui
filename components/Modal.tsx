@@ -1,7 +1,45 @@
 import styles from "../styles/Modal.module.scss";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 const Modal: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const create = async (data: any) => {
+    console.log(data);
+    try {
+      fetch("http://localhost:3000/api/create", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+    } catch (err) {
+      console.log("err");
+    }
+  };
+  const onSubmit = (data: any) => {
+    try {
+      toast.promise(
+        create(data),
+        {
+          loading: "Working on it...",
+          success: "Submitted successfully!",
+          error: "Oops! something went wrong.",
+        },
+        { duration: 3000 }
+      );
+    } catch (error: any) {
+      // toast.error("Oops");
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className={styles.topLevelContainer}>
@@ -22,23 +60,30 @@ const Modal: React.FC = () => {
               <h1>Do Something</h1>
               <p>Do something subtext</p>
             </div>
-
-            <form className={styles.form_containter} noValidate>
+            \
+            <form
+              className={styles.form_containter}
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className={styles.container}>
                 <input
-                  name="Data"
+                  id="name"
                   className={styles.form_input}
-                  placeholder="Data"
+                  placeholder="Name"
                   required
+                  {...register("name", { required: true, maxLength: 80 })}
                 />
               </div>
               <div className={styles.container}>
                 <input
-                  name="Data"
-                  placeholder="Data "
+                  id="Email"
+                  placeholder="Email"
                   className={styles.form_input}
                   required
+                  {...register("email", {})}
                 />
+
+                <input className={styles.button} type="submit" />
               </div>
               {/* <div className={styles.container}>
                 <input

@@ -1,14 +1,18 @@
 import { prisma } from "../../lib/prisma";
 
 export default async function handler(req, res) {
-  const { id, name, email } = req.body;
+  const { isbn, title, author, publishedDate, description, language } =
+    req.body;
 
   try {
-    await prisma.user.create({
+    await prisma.book.create({
       data: {
-        id,
-        name,
-        email,
+        isbn,
+        title,
+        author,
+        publishedDate,
+        description,
+        language,
       },
     });
 

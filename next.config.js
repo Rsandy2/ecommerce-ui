@@ -8,4 +8,11 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
+
+module.exports = {
+  webpack(config, options) {
+    config.resolve.alias["server"] = path.join(__dirname, "server");
+    return config;
+  },
+};
