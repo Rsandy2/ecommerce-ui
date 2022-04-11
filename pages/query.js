@@ -106,19 +106,17 @@ function bookSearch() {
 
     return (
       <div className="py-3 rounded-full">
-        <form>
-          <select onChange={handleChange} value={selectValue}>
-            {Object.keys(books).length === 0 ? (
-              <option>Empty</option>
-            ) : (
-              books.map((book) => (
-                <option key={book["id"]} value={JSON.stringify(book)}>
-                  {book["volumeInfo"]["title"]}
-                </option>
-              ))
-            )}
-          </select>
-        </form>
+        <select onChange={handleChange} value={selectValue}>
+          {Object.keys(books).length === 0 ? (
+            <option>Empty</option>
+          ) : (
+            books.map((book) => (
+              <option key={book["id"]} value={JSON.stringify(book)}>
+                {book["volumeInfo"]["title"]}
+              </option>
+            ))
+          )}
+        </select>
       </div>
     );
   }

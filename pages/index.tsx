@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 import Owner from "../components/Owner";
 import Confirmation from "../components/Confirmation";
 import Query from "../components/Query";
+import Edit from "../components/Edit";
 import { useForm } from "react-hook-form";
 
 const notify = () => toast("Here is a toast.");
@@ -51,7 +52,6 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       {/* <Signup /> */}
-
       {/* <form onSubmit={handleSubmit(onSubmit)}>
         <input
           id="name"
@@ -72,8 +72,9 @@ const Home: NextPage = () => {
         TOASTER
       </button> */}
       {/* <Confirmation /> */}
-      <Modal />
+      {/* <Modal /> */}
       {/* <Query /> */}
+      {/* <Edit /> */}
       <Toaster />
     </div>
   );
