@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
 import FloatingInput from "../components/floatingInput";
-import NavBar from "../components/navBar";
+import NavBar from "../components/NavBar";
 import toast, { Toaster } from "react-hot-toast";
 
 function Profile() {
-  const [selectedTab, setSelectedTab] = useState();
+  // const [selectedTab, setSelectedTab] = useState();
 
   const handleAccountUpdate = () => {
     console.log("account update button pressed");
@@ -22,11 +22,11 @@ function Profile() {
     toast.success("Successfully Updated");
   };
 
-  const handleTabChange = (newValue) => {
-    setSelectedTab(newValue);
-  };
+  // const handleTabChange = (newValue) => {
+  //   setSelectedTab(newValue);
+  // };
 
-  console.log(selectedTab);
+  // console.log(selectedTab);
 
   const AccountDetails = () => {
     return (
