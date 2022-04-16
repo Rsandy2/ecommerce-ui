@@ -1,44 +1,50 @@
 import styles from "../styles/Query.module.scss";
 import { FieldPathValues, FieldValues, useForm } from "react-hook-form";
-import { useState } from "react";
-// import fetchData from "../lib/puppeteer";
+import { useEffect, useState } from "react";
 import { prisma } from "../lib/prisma";
-function Edit({ userData }) {
-  const [debugContent, setDebugContent] = useState("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    // setDebugContent();
-  };
-  console.log(errors);
+import { useRouter } from "next/router";
 
-  const submitWebsiteUrl = async () => {
-    // const res = await fetch("http://localhost:3000/api/get-book-data", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     url: websiteURL,
-    //   }),
-    // }).then(
-    //   (res) => res.json()
-    //   // console.log(res.json());
-    // );
-    // const res = await fetch(
-    //   "https://www.googleapis.com/books/v1/volumes?q={Catching Fire}",
-    //   {
-    //     method: "GET",
-    //     headers: { "Content-Type": "application/json" },
-    //   }
-    // ).then((res) => res.json());
-    // console.log(res);
+function Edit({ userData }) {
+  const [formData, setFormData] = useState({ name: "", email: "", id: "" });
+  const [debugContent, setDebugContent] = useState();
+  const [isEdit, setIsEdit] = useState(false);
+  const [isDisabled, setDisabled] = useState(true);
+
+  const router = useRouter();
+  const handleSubmit = (data) => {
+    update(formData);
   };
-  //   console.log(props);
+
+  const reloadRoute = () => {
+    router.reload();
+    // router.replace(router.asPath);
+  };
+
+  async function update(data) {
+    try {
+      fetch("http://localhost:3000/api/update", {
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      })
+        .then((res) => {
+          reloadRoute();
+          return res.json();
+        })
+        .then((res) => console.log(res));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    isEdit && JSON.stringify(debugContent) !== JSON.stringify(formData)
+      ? setDisabled(false)
+      : setDisabled(true);
+  });
+
   return (
     <>
       <div className={styles.container}>
@@ -92,6 +98,31 @@ function Edit({ userData }) {
                             >
                               {user.email}
                             </td>
+                            <td
+                              className="text-sm text-gray-900 font-light px-6
+                              py-4 whitespace-nowrap"
+                            >
+                              <button
+                                onClick={() => {
+                                  setFormData({
+                                    name: user.name,
+                                    email: user.email,
+                                    id: user.id,
+                                  });
+
+                                  setDebugContent({
+                                    name: user.name,
+                                    email: user.email,
+                                    id: user.id,
+                                  });
+
+                                  setIsEdit(true);
+                                }}
+                                className="bg-red-400 mr-5 p-2 text-white "
+                              >
+                                Edit
+                              </button>
+                            </td>
                           </tr>
                         </>
                       ))
@@ -103,32 +134,53 @@ function Edit({ userData }) {
               </div>
             </div>
           </div>
-        </div>
+          {/* <EditForm /> */}
 
-        <div className="mb-4">
-          <form
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Content
-            </label>
-            <input
-              type="url"
-              placeholder="Link"
-              onChange={(e) => {
-                // setDebugContent(e.target.value);
+          <div className="mb-4">
+            <form
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(formData);
+                setIsEdit(false);
               }}
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline w-full overflow-x-hidden"
-            />
+            >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Content
+              </label>
+              <input
+                type="input"
+                placeholder="Name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline w-full overflow-x-hidden"
+              />
 
-            <input
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
-              type="submit"
-            />
+              <input
+                type="input"
+                placeholder="Email"
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                }}
+                value={formData.email}
+                className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline w-full overflow-x-hidden"
+              />
 
-            <p className="w-full overflow-x-hidden">Debug: {debugContent}</p>
-          </form>
+              <input
+                className={`text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor:pointer ${
+                  isDisabled ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+                }`}
+                type="submit"
+                disabled={isDisabled}
+              />
+
+              <p className="w-full overflow-x-hidden">
+                Debug: <pre>{JSON.stringify(debugContent)}</pre>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </>

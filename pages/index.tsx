@@ -8,6 +8,8 @@ import Owner from "../components/Owner";
 import Confirmation from "../components/Confirmation";
 import Query from "../components/Query";
 import Edit from "../components/Edit";
+import TestLogin from "../components/TestLogin";
+
 import { useForm } from "react-hook-form";
 
 const notify = () => toast("Here is a toast.");
@@ -51,26 +53,11 @@ const Home: NextPage = () => {
   };
   return (
     <div className={styles.container}>
-      {/* <Signup /> */}
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          id="name"
-          type="text"
-          placeholder="Name"
-          {...register("name", { required: true, maxLength: 80 })}
-        />
-        <input
-          id="email"
-          type="email"
-          placeholder="Email"
-          {...register("email", {})}
-        />
-
-        <input className={styles.button} type="submit" />
-      </form> */}
       {/* <button className={styles.button} onClick={notify}>
         TOASTER
       </button> */}
+      {/* <Login /> */}
+      <TestLogin />
       {/* <Confirmation /> */}
       {/* <Modal /> */}
       {/* <Query /> */}
