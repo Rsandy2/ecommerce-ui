@@ -38,13 +38,13 @@ const MenuSideBar = () => {
             onStateChange={(state) => ctx.stateChangeHandler(state)}
     
             burgerBarClassName="bg-coffee" 
-            itemClassName="text-white no-underline text-xl py-2"
+            itemClassName="text-white no-underline outline-none text-xl py-2 hover:text-slate-300"
             crossButtonClassName="scale-125"
             crossClassName="bg-white"
             menuClassName="bg-darkGreen pt-10 px-6 text-xl"
             morphShapeClassName="fill-current"
             itemListClassName="bg-darkGreen p-3.5"
-            overlayClassName="bg-opacity-50 relative"
+            overlayClassName="bg-opacity-50"
         >
             <a id="home" className="menu-item" href="/">Home</a>
             <a id="" className="menu-item" href="/bookView">Book View</a>
