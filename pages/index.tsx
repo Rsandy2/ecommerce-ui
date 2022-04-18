@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
-import styles from "../styles/Home.module.scss";
 import ProductCard from "../components/ProductCard";
-import NavBar from "../components/NavBar";
+import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
+import MenuSideBar from "../components/MenuSideBar";
+import Banner from "../components/Banner";
+// import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
@@ -12,7 +14,6 @@ const Home: NextPage = () => {
     bookCoverUrl:
       "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
     altText: "Percy Jackson Book Cover",
-    buttonText: "Add to cart",
     bookPrice: "$15.00",
   };
 
@@ -22,19 +23,33 @@ const Home: NextPage = () => {
     bookCoverUrl:
       "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
     altText: "City of Bones Book Cover",
-    buttonText: "Add to cart",
     bookPrice: "$15.00",
   };
 
   return (
-    <div className={styles.container}>
-      <NavBar />
-      <div className={styles.card__container}>
-        <ProductCard productData={data} />
-        <ProductCard productData={data2} />
-        <ProductCard productData={data} />
-        <ProductCard productData={data2} />
+    <div id="outer-container" className="bg-primary min-h-screen w-screen">
+      <MenuSideBar />
+      <Toaster />
+      <div id="page-wrap">
+        <div className="">
+          <Header />
+          <Banner />
+        </div>
+
+        {/* product container */}
+        <div className="flex flex-col items-center">
+          <h1 className="text-coffee text-3xl m-6">Trending Books</h1>
+          <div className="flex justify-center content-evenly space-x-6">
+            <ProductCard productData={data} />
+            <ProductCard productData={data2} />
+            <ProductCard productData={data} />
+            <ProductCard productData={data2} />
+          </div>
+        </div>
+        {/* Footer */}
       </div>
+      {/* <Footer /> */}
+      <div></div>
     </div>
   );
 };
