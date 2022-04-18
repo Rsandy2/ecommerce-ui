@@ -6,7 +6,7 @@ function FilterItems() {
         <hr></hr>
         <h6>Genre</h6>
         <form>
-          <div className="form-check">
+          {/* <div className="form-check">
             <input
               className="form-check-input"
               type="checkbox"
@@ -198,7 +198,7 @@ function FilterItems() {
             <label className="form-check-label" for="flexCheckDefault">
               Sample Vender
             </label>
-          </div>
+          </div> */}
         </form>
       </nav>
     </div>

@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
-import styles from "../styles/NavBar.module.scss";
+import styles from "../styles/Navigation.module.scss";
 import {
   MdLogin,
   MdShoppingCart,
@@ -78,15 +78,15 @@ const NavBar = () => {
         </form>
       </div>
       <div className="container-fluid" style={{ justifyContent: "end" }}>
-        <a className={styles.navBar__icons} style={navIconStyle}>
+        <a className={styles.navIcon}>
           <MdAccountCircle />
           Profile
         </a>
-        <a className={styles.navBar__icons} style={navIconStyle}>
+        <a className={styles.navIcon}>
           <MdShoppingCart />
           Cart
         </a>
-        <a className={styles.navBar__icons} style={navIconStyle}>
+        <a className={styles.navIcon}>
           <MdLogin /> Login
         </a>
       </div>
