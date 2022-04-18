@@ -69,6 +69,7 @@ model Content {
 model Vendor {
   id Int @default(autoincrement()) @id
   name String
+  email String
   Books Book[]
 }
 
