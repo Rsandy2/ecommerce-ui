@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import ProductCard from "../components/ProductCard";
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
-import MenuSideBar from "../components/MenuSideBar";
 import Banner from "../components/Banner";
 // import Footer from "../components/Footer";
 
@@ -27,12 +26,9 @@ const Home: NextPage = () => {
   return (
     <div id ="outer-container" className="bg-primary min-h-screen w-screen">
       <Toaster />
-      <MenuSideBar />
       <div id="page-wrap"> 
-        <div className="">
           <Header />
           <Banner />
-        </div>
 
         {/* product container */}
         <div className="flex flex-col items-center">
