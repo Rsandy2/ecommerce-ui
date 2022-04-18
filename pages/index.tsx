@@ -62,7 +62,7 @@ const Home: NextPage = () => {
       {/* <Modal /> */}
       {/* <Query /> */}
       {/* <Edit /> */}
-      <Toaster />
+      {/* <Toaster /> */}
     </div>
   );
 };
