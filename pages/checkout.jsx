@@ -73,7 +73,7 @@ export default function MyForm() {
             paddingRight: "2rem",
           }}
         >
-          <div className="col-8 checkoutCol">
+          <div className="col-lg-8 checkoutCol">
             <div className="card" style={card}>
               <h2>
                 Shipping Address
@@ -143,7 +143,10 @@ export default function MyForm() {
               </form>
             </div>
             <div className="card" style={card}>
-              <h2>Payment Method</h2>
+              <h2>
+                Payment Method
+                <hr />
+              </h2>
               <form onSubmit={handleSubmit}>
                 <label style={labelStyle}>
                   Name on Card:
@@ -230,7 +233,7 @@ export default function MyForm() {
               <h1>Have a loop component to generate product cards?</h1>
             </div>
           </div>
-          <div className="col-sm-4 checkoutCol">
+          <div className="col-lg-4 checkoutCol">
             <div className="card" style={card}>
               <h2>Order Summary</h2>
               <h7>Items (var item amt here?) </h7>
@@ -255,5 +258,3 @@ export default function MyForm() {
     </div>
   );
 }
-
-//ReactDOM.render(<MyForm />, document.getElementById("root"));
