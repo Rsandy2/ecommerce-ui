@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import {push as Menu} from "react-burger-menu";
 
-class MenuSideBar extends React.Component {
+class MenuSideBar extends Component {
   showSettings (event) {
     event.preventDefault();
   }
