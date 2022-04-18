@@ -10,10 +10,11 @@ type ModalProp = {
 
 const ShoppingCart = ({ isOpen , setIsOpen} : ModalProp) => {
     return(
+        <>
         <div>
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto flex justify-center" onClose={setIsOpen}>
-                    <div className="min-h-screen px-4 text-center">
+                <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto flex justify-center items-center" onClose={setIsOpen}>
+                    <div className="text-center flex flex-col min-w-full px-10">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -25,7 +26,7 @@ const ShoppingCart = ({ isOpen , setIsOpen} : ModalProp) => {
                         >
                             <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
                         </Transition.Child>
-                        <span aria-hidden="true">&#8203;</span>
+                        <span className="" aria-hidden="true">&#8203;</span>
 
                         <Transition.Child
                             as={Fragment}
@@ -39,17 +40,19 @@ const ShoppingCart = ({ isOpen , setIsOpen} : ModalProp) => {
                         {/* cart */}
                             <div className="relative bg-gray-100">
                                 <div className="flex">
-                                <div className="w-3/5 bg-white px-10 py-10">
+                                {/* Left container */}
+                                <div className="w-3/4 bg-white px-10 py-10">
                                     <div className="flex justify-between border-b pb-8">
-                                    <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-                                    <h2 className="font-semibold text-2xl">3 Items</h2>
+                                        <h1 className="font-semibold text-2xl">Shopping Cart</h1>
+                                        <h2 className="font-semibold text-2xl">3 Items</h2>
                                     </div>
                                     <div className="flex mt-10 mb-5">
-                                    <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
-                                    <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Quantity</h3>
-                                    <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Price</h3>
-                                    <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Total</h3>
+                                        <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+                                        <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Quantity</h3>
+                                        <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Price</h3>
+                                        <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Total</h3>
                                     </div>
+
                                     {/* product */}
                                     <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                                     <div className="flex w-2/5">
@@ -96,7 +99,8 @@ const ShoppingCart = ({ isOpen , setIsOpen} : ModalProp) => {
                                     <button onClick={() => setIsOpen(false)} className="flex font-semibold text-indigo-600 text-sm mt-10"><BsArrowLeft size="1.4rem" className="pr-2"/>Continue Shopping</button>
                                 </div>
 
-                                <div id="summary" className="w-2/5 px-8 py-10">
+                                {/* Right container */}
+                                <div id="summary" className="w-1/4 px-8 py-10 flex flex-col">
                                     <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                                     <div className="flex justify-between mt-10 mb-5">
                                     <span className="font-semibold text-sm uppercase">Subtotal</span>
@@ -134,6 +138,7 @@ const ShoppingCart = ({ isOpen , setIsOpen} : ModalProp) => {
                 </Dialog>
             </Transition>
         </div>
+        </>
     );
 }; 
 export default ShoppingCart;
