@@ -26,8 +26,8 @@ const Home: NextPage = () => {
 
   return (
     <div id ="outer-container" className="bg-primary min-h-screen w-screen">
-      <MenuSideBar />
       <Toaster />
+      <MenuSideBar />
       <div id="page-wrap"> 
         <div className="">
           <Header />

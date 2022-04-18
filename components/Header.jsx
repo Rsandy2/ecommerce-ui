@@ -1,7 +1,10 @@
 import React from "react";
 import {BsPersonCircle, BsSearch, BsCart3} from "react-icons/bs";
+import ShoppingCart from "./ShoppingCart";
 
 const header = () => {
+    const [isOpen, setIsOpen] = React.useState(false)
+
     return(
         <div className="flex flex-row items-center justify-center h-20 mx-3">
                 <h1 className="text-coffee text-3xl ml-20">Bookstore</h1>
@@ -18,8 +21,8 @@ const header = () => {
             {/* icon row */}
             <div className="flex flex-row items-center mx-2">
                 <button className="text-coffee flex flex-row items-center mr-2"><BsPersonCircle size="2rem" className="pr-2"/>Sign In</button>
-                <a href="/cartPage" className="text-coffee flex flex-row items-center mr-2"><BsCart3 size="2rem" className="pr-2"/>Cart</a>
-
+                <button onClick={() => setIsOpen(!isOpen)} className="text-coffee flex flex-row items-center mr-2"><BsCart3 size="2rem" className="pr-2"/>Cart</button>
+                <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen}/>
             </div>
         </div>
     );
