@@ -11,24 +11,26 @@ const Home: NextPage = () => {
   const data = {
     bookTitle: "The Lightning Thief",
     authorName: "Rick Riordan",
-    bookCoverUrl: "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
+    bookCoverUrl:
+      "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
     altText: "Percy Jackson Book Cover",
-    bookPrice: "$15.00"
+    bookPrice: "$15.00",
   };
 
   const data2 = {
     bookTitle: "City of Bones",
     authorName: "Cassandra Clare",
-    bookCoverUrl: "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
+    bookCoverUrl:
+      "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
     altText: "City of Bones Book Cover",
-    bookPrice: "$15.00"
+    bookPrice: "$15.00",
   };
 
   return (
-    <div id ="outer-container" className="bg-primary min-h-screen w-screen">
+    <div id="outer-container" className="bg-primary min-h-screen w-screen">
       <MenuSideBar />
       <Toaster />
-      <div id="page-wrap"> 
+      <div id="page-wrap">
         <div className="">
           <Header />
           <Banner />
@@ -38,18 +40,16 @@ const Home: NextPage = () => {
         <div className="flex flex-col items-center">
           <h1 className="text-coffee text-3xl m-6">Trending Books</h1>
           <div className="flex justify-center content-evenly space-x-6">
-            <ProductCard productData={data} /> 
-            <ProductCard productData={data2} /> 
-            <ProductCard productData={data} />  
+            <ProductCard productData={data} />
             <ProductCard productData={data2} />
-
-          </div>  
+            <ProductCard productData={data} />
+            <ProductCard productData={data2} />
+          </div>
         </div>
         {/* Footer */}
-        </div>
-          {/* <Footer /> */}
-        <div>
       </div>
+      {/* <Footer /> */}
+      <div></div>
     </div>
   );
 };
