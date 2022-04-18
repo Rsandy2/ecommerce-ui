@@ -1,10 +1,19 @@
-import "bootstrap/dist/css/bootstrap.css";
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 import MenuSideBar from "../components/MenuSideBar";
 
 export default function BookView() {
   const handleAddCart = () => toast.success("Added to Cart!");
+
+  const card = {
+    boxShadow: "0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06)",
+    padding: "2rem",
+    margin: "2%",
+    backgroundColor: "rgb(255, 255, 255)",
+    backgroundClip: " border-box",
+    border: "0 solid rgba(0,0,0,.125)",
+    borderRadius: ".25rem",
+  };
 
   return (
     <div
@@ -21,9 +30,10 @@ export default function BookView() {
         <div
           className="container my-4"
           style={{
-            backgroundColor: "#ffe9d5",
+            backgroundColor: "white",
             padding: "3rem 3rem 5rem 3rem",
             boxShadow: "0px 2px 5px #B98B73",
+            borderRadius: ".25rem",
           }}
         >
           <div className="row">
