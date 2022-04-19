@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../components/product";
 import SearchView from "../components/searchView";
 import SideBar from "../components/sideBar";
-import MenuSideBar from "../components/MenuSideBar";
+// import MenuSideBar from "../components/MenuSideBar";
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -16,7 +16,7 @@ export default function Home() {
       className="min-h-screen w-screen"
       style={{ backgroundColor: "#dfbea9" }}
     >
-      <MenuSideBar />
+      {/* <MenuSideBar /> */}
       <Toaster />
       <div id="page-wrap">
         <div className="" style={{ backgroundColor: "#B98B73" }}>
@@ -50,7 +50,7 @@ export default function Home() {
           </form>
 
           <div className="row">
-            <div className="col-3">
+            <div className="col-lg-3 col-sm-3">
               <SideBar />
             </div>
             <div className="col">

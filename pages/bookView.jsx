@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
-import MenuSideBar from "../components/MenuSideBar";
+// import MenuSideBar from "../components/MenuSideBar";
 
 export default function BookView() {
   const handleAddCart = () => toast.success("Added to Cart!");
@@ -20,7 +20,7 @@ export default function BookView() {
       className="min-h-screen w-screen"
       style={{ backgroundColor: "#dfbea9" }}
     >
-      <MenuSideBar />
+      {/* <MenuSideBar /> */}
       <Toaster />
       <div id="page-wrap">
         <div className="" style={{ backgroundColor: "#B98B73" }}>

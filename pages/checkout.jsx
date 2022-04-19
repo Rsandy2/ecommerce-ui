@@ -1,6 +1,6 @@
 import { useState } from "react"; // Using to handle forms?
 import React from "react";
-import MenuSideBar from "../components/MenuSideBar";
+//import MenuSideBar from "../components/MenuSideBar";
 import { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 // Shift + Alt + F nice.
@@ -55,7 +55,7 @@ export default function MyForm() {
         padding: "0",
       }}
     >
-      <MenuSideBar />
+      {/* <MenuSideBar /> */}
       <Toaster />
       <div id="page-wrap">
         <div className="" style={{ backgroundColor: "#B98B73" }}>
