@@ -52,6 +52,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  userRole      String?
   accounts      Account[]
   sessions      Session[]
     // posts         Content[]
