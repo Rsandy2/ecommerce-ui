@@ -1,0 +1,6 @@
+{
+  "card": "div.singleCell",
+  "title": "h1#title",
+  "link": "a.singleCellTitle",
+  "image": "div.dealContainer img"
+}

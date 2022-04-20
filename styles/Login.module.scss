@@ -1,0 +1,205 @@
+.logInTest {
+  /* position: absolute; */
+  width: 856px;
+  height: 690px;
+  /* height: 87.453%; */
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */
+  position: absolute;
+  display: flex;
+  /* justify-content: center;
+    align-items: center; */
+}
+
+.logInLeftPanel {
+  height: 100%;
+  width: 416px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-right: 1px solid rgba(0, 0, 0, 0.3); */
+  position: relative;
+}
+
+.logInLeftPanel .img {
+  /* min-width: 10%;
+    min-height: 10%; */
+  /* position: relative; */
+  height: 100%;
+  width: 100%;
+  /* z-index: -1; */
+  filter: brightness(0.7);
+  /* transform: scale(1.1); */
+  /* object-fit: contain; */
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/516b9e9b-d50f-45d7-941f-19aad8374759/deuplzg-2d8899d4-b76f-4744-b4f0-3d2b9fa44221.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzUxNmI5ZTliLWQ1MGYtNDVkNy05NDFmLTE5YWFkODM3NDc1OVwvZGV1cGx6Zy0yZDg4OTlkNC1iNzZmLTQ3NDQtYjRmMC0zZDJiOWZhNDQyMjEuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4UIj9Q09u0Npr5OQzy5Ft4t7Hw3U-bAO8aoUyTij2-M");
+  /* background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a27d59af-8edf-4418-8d57-562a31604113/dezq567-94cfbb84-f3d6-4972-a812-7fb167f875f1.jpg/v1/fill/w_1043,h_766,q_70,strp/sorcerer_of_the_fang_by_caiomm_dezq567-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTQwIiwicGF0aCI6IlwvZlwvYTI3ZDU5YWYtOGVkZi00NDE4LThkNTctNTYyYTMxNjA0MTEzXC9kZXpxNTY3LTk0Y2ZiYjg0LWYzZDYtNDk3Mi1hODEyLTdmYjE2N2Y4NzVmMS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.a34VDa8S_Qjn9dI8HPRbCNCgykixwKp9sskHb0vV-LQ"); */
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-position: bottom;
+}
+.logInLeftTitleCard {
+  position: absolute;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 50%;
+  height: 100%;
+}
+
+.logInLeftTitleCard h1 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  line-height: 42px;
+}
+.logInLeftPanel p {
+  max-width: 90%;
+  font-size: 14px;
+  margin-top: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+.logInRightPanel {
+  height: 100%;
+  width: 440px;
+  background: #fff;
+
+  box-shadow: 0 40pt 50pt 0 rgb(0 0 0 / 35%);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.escapeLogIn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 20px; */
+  /* margin: 12px; */
+  cursor: pointer;
+  /* color: red; */
+  /* background-color: blue; */
+  /* border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3); */
+}
+.escapeLogIn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.form_container {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  padding: 77px 55px 33px 55px;
+  //   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .form_title {
+    font-size: 25px;
+    display: block;
+    color: #333;
+    line-height: 32px;
+    text-align: left;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .form_content {
+    input {
+      width: 100%;
+      height: 45px;
+      border: none;
+      outline: none;
+      position: relative;
+      top: 30px;
+    }
+
+    label {
+      position: relative;
+      top: -10px;
+      font-family: arial;
+      font-size: 11px;
+      color: #adadad;
+      pointer-events: none;
+      transition: all 0.2s;
+    }
+    input:focus + label {
+      top: -30px;
+    }
+    input:valid + label {
+      top: -30px;
+    }
+    .line {
+      width: 100%;
+      height: 0.1em;
+      background-color: #adadad;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+  button {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-family: arial;
+    font-size: 15px;
+    color: white;
+    border: none;
+    outline: none;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+    z-index: 9999;
+    cursor: pointer;
+  }
+  button:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 00%;
+    top: 0px;
+    background: linear-gradient(45deg, #21d4fd, #21ffcf);
+    z-index: -1;
+    transition: all 0.4s;
+  }
+  button:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -100%;
+    top: 0px;
+    background: linear-gradient(45deg, #21ff76, #21d4fd);
+    transition: all 0.4s;
+    z-index: -1;
+  }
+  button:hover:before {
+    left: 100%;
+  }
+  button:hover:after {
+    left: 0%;
+  }
+
+  .signUp {
+    font-size: 14px;
+    text-align: center;
+    color: #adadad;
+    margin-top: 100px;
+  }
+}
