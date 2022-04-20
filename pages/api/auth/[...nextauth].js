@@ -3,11 +3,11 @@ import Auth0Provider from "next-auth/providers/auth0";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../lib/prisma";
 import toast, { Toaster } from "react-hot-toast";
+import { compileString } from "sass";
 
 export default NextAuth({
   // Configure one or more authentication providers
-  // adapter: PrismaAdapter(prisma),
-
+  adapter: PrismaAdapter(prisma),
   providers: [
     Auth0Provider({
       clientId: process.env.AUTH0_CLIENT_ID,
@@ -38,7 +38,7 @@ export default NextAuth({
   events: {
     async signIn(message) {
       // toast.success("Successfully toasted!"), (<Toaster />);
-      console.log("Signed IN YERR");
+      console.log(message);
     },
     async signOut(message) {
       /* on signout */
