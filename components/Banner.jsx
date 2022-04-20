@@ -3,7 +3,7 @@ import React from "react";
 
 const CarouselBanner = () => {
   return(
-    <div className=" bg-secondary">
+    <div className=" bg-s1">
       <div className="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-row justify-center">
           <div className="flex flex-col">

@@ -25,7 +25,7 @@ const MyProvider = (props) => {
 const MenuButton = () => {
   const ctx = useContext(MyContext)
   return (
-    <CgMenu size="2.4rem" onClick={() => ctx.toggleMenu()}/>
+    <CgMenu size="2.4rem" className="hover:cursor-pointer hover:text-slate-600 mt-1" onClick={() => ctx.toggleMenu()}/>
   )
 }
 
@@ -63,7 +63,7 @@ const header = () => {
                 <MenuSideBar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
             <div className="flex flex-row items-center justify-center h-16 mx-3 z-10">
                 <MenuButton />
-                <h1 className="text-coffee text-3xl mx-2">Bookstore</h1>
+                <a className="text-coffee text-3xl mx-2 no-underline font-semibold" href="/">Bookstore</a>
                 {/* search bar */}
                 <div className="flex-grow mx-2">
                     <div className="wrapper">
