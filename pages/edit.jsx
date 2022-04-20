@@ -3,8 +3,11 @@ import { FieldPathValues, FieldValues, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { prisma } from "../lib/prisma";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function Edit({ userData }) {
+  const { data: session } = useSession();
   const [formData, setFormData] = useState({ username: "", email: "", id: "" });
   const [debugContent, setDebugContent] = useState();
   const [isEdit, setIsEdit] = useState(false);
@@ -178,6 +181,7 @@ function Edit({ userData }) {
 
               <p className="w-full overflow-x-hidden">
                 Debug: <pre>{JSON.stringify(debugContent)}</pre>
+                <Link href="/">Home</Link>
               </p>
             </form>
           </div>

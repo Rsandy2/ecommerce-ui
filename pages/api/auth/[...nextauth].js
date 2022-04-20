@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
-import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
-import prisma from "../../../lib/prisma";
-let userAccount = null;
+import { PrismaClient } from "@prisma/client";
 
+let userAccount = null;
+const prisma = new PrismaClient();
 const bcrypt = require("bcrypt");
 
 const confirmPasswordHash = (plainPassword, hashedPassword) => {
@@ -30,9 +30,9 @@ const configuration = {
       async authorize(credentials) {
         // console.log(credentials);/
         try {
-          console.log(credentials);
-          console.log("good nhere");
-          console.log(credentials.email);
+          // console.log(credentials);
+          // console.log("good nhere");
+          // console.log(credentials.email);
 
           const user = await prisma.user.findFirst({
             where: {
@@ -40,7 +40,7 @@ const configuration = {
             },
           });
 
-          console.log("good?");
+          // console.log("good?");
           // console.log(user.email);
 
           if (user !== null) {
@@ -51,17 +51,20 @@ const configuration = {
               user.password
             );
             if (res === true) {
-              // userAccount = {
-              //   userId: user.id,
-              //   username: user.username,
-              //   email: user.email,
-              // };
-              // return userAccount;
+              userAccount = {
+                userId: user.id,
+                username: user.username,
+                email: user.email,
+              };
+
+              console.log("Made it to: ", userAccount);
+              return userAccount;
             } else {
               console.log("Hash not matched logging in");
               return null;
             }
           } else {
+            console.log("hmmm");
             return null;
           }
         } catch (err) {
@@ -75,8 +78,13 @@ const configuration = {
       try {
         //the user object is wrapped in another user object so extract it
         user = user.user;
-        console.log("Sign in callback", user);
-        console.log("User id: ", user.userId);
+        if (typeof user.userId !== typeof undefined) {
+          console.log("This is: ", user);
+          return user;
+        } else {
+          console.log("User id was undefined");
+          return false;
+        }
       } catch (err) {
         console.error("Signin callback error:", err);
       }
@@ -98,12 +106,11 @@ const configuration = {
     },
     async session(session, token) {
       if (userAccount !== null) {
-        //session.user = userAccount;
-        session.user = {
-          userId: userAccount.userId,
-          name: `${userAccount.username}`,
-          email: userAccount.email,
-        };
+        console.log("Sessions is not equal to null");
+        console.log("Before, ", session.user + "UserAccount, :", userAccount);
+        session.user = userAccount;
+
+        console.log(session.user, "After");
       } else if (
         typeof token.user !== typeof undefined &&
         (typeof session.user === typeof undefined ||
@@ -114,10 +121,13 @@ const configuration = {
       } else if (typeof token !== typeof undefined) {
         session.token = token;
       }
+
+      // console.log("This is session: ", session);
       return session;
     },
+
     async jwt(token, user, account, profile, isNewUser) {
-      console.log("JWT callback. Got User: ", user);
+      // console.log("JWT callback. Got User: ", user);
       if (typeof user !== typeof undefined) {
         token.user = user;
       }

@@ -6,7 +6,6 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Login() {
-  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginStarted, setIsLoginStarted] = useState(false);
@@ -27,7 +26,7 @@ export default function Login() {
     signIn("credentials", {
       email,
       password,
-      callbackUrl: `${window.location.origin}/dashboard`,
+      callbackUrl: `${window.location.origin}/edit`,
       redirect: false,
     }).then(function (result) {
       if (result.error !== null) {
@@ -36,7 +35,7 @@ export default function Login() {
             "Your username/password combination was incorrect. Please try again"
           );
         } else {
-          setLoginError(result.error);
+          setLoginError("Outside Login", result.error);
         }
       } else {
         router.push(result.url);
@@ -48,15 +47,15 @@ export default function Login() {
     <form onSubmit={handleLogin}>
       {loginError}
       <label>
-        Email:{" "}
+        Email:
         <input
           type="text"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </label>
       <label>
-        Password:{" "}
+        Password:
         <input
           type="password"
           value={password}

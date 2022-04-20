@@ -11,9 +11,12 @@ import Edit from "../components/Edit";
 import TestLogin from "../components/TestLogin";
 
 import { useForm } from "react-hook-form";
+import { useSession } from "next-auth/react";
 
 const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
+  const { data: session } = useSession();
+  console.log(session);
   const {
     register,
     handleSubmit,
@@ -51,6 +54,7 @@ const Home: NextPage = () => {
       console.log("err");
     }
   };
+
   return (
     <div className={styles.container}>
       {/* <button className={styles.button} onClick={notify}>

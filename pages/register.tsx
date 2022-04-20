@@ -31,7 +31,7 @@ export default function Register() {
       username,
       email,
       password,
-      callbackUrl: `${window.location.origin}/dashboard`,
+      callbackUrl: `${window.location.origin}`,
       redirect: false,
     })
       .then(function (result: any) {
