@@ -7,6 +7,7 @@ import Query from "../components/Query";
 import Edit from "../components/Edit";
 import toast, { Toaster } from "react-hot-toast";
 import TestLogin from "../components/TestLogin";
+import type { NextPage } from "next";
 
 import { useForm } from "react-hook-form";
 
