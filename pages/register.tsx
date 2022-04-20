@@ -1,6 +1,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -8,8 +11,35 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const registerUser = (event: any) => {
+  const router = useRouter();
+  const registerUser = async (event: any) => {
     event.preventDefault();
+
+    const data = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    await axios.post("/api/register", data);
+    // fetch("/api/register", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    // });
+
+    signIn("credentials", {
+      username,
+      email,
+      password,
+      callbackUrl: `${window.location.origin}/dashboard`,
+      redirect: false,
+    })
+      .then(function (result: any) {
+        router.push(result.url);
+      })
+      .catch((err) => {
+        console.log("Failed to register outside: " + err.toString());
+      });
   };
 
   return (

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma";
 const bcrypt = require("bcrypt");
 
 export default async (req, res) => {
@@ -18,7 +18,7 @@ export default async (req, res) => {
 
       return res.status(200).end();
     } catch (err) {
-      return res.status(503).json({ err: err.toString() });
+      return res.status(503).json({ err: "this" + err.toString() });
     }
   } else {
     return res

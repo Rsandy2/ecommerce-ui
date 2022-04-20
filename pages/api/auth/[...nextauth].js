@@ -28,26 +28,35 @@ const configuration = {
       name: "credentials",
       credentials: {},
       async authorize(credentials) {
+        // console.log(credentials);/
         try {
+          console.log(credentials);
+          console.log("good nhere");
+          console.log(credentials.email);
+
           const user = await prisma.user.findFirst({
             where: {
               email: credentials.email,
             },
           });
 
+          console.log("good?");
+          // console.log(user.email);
+
           if (user !== null) {
             //Compare the hash
+
             const res = await confirmPasswordHash(
               credentials.password,
               user.password
             );
             if (res === true) {
-              userAccount = {
-                userId: user.userId,
-                user: user.username,
-                email: user.email,
-              };
-              return userAccount;
+              // userAccount = {
+              //   userId: user.id,
+              //   username: user.username,
+              //   email: user.email,
+              // };
+              // return userAccount;
             } else {
               console.log("Hash not matched logging in");
               return null;
@@ -56,7 +65,7 @@ const configuration = {
             return null;
           }
         } catch (err) {
-          console.log("Authorize error:", err);
+          console.log("Authorize error: ", err);
         }
       },
     }),
@@ -74,9 +83,9 @@ const configuration = {
     },
     async register(username, email, password) {
       try {
-        await prisma.users.create({
+        await prisma.user.create({
           data: {
-            username: firstName,
+            username: username,
             email: email,
             password: password,
           },

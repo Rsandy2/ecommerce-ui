@@ -3,8 +3,10 @@ import styles from "../styles/pageStyles/login.module.scss";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginStarted, setIsLoginStarted] = useState(false);
@@ -18,51 +20,52 @@ export default function Login() {
     }
   }, [router]);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setIsLoginStarted(true);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     signIn("credentials", {
       email,
       password,
-      callbackUrl: `${window.location.origin}/welcome`,
+      callbackUrl: `${window.location.origin}/dashboard`,
+      redirect: false,
+    }).then(function (result) {
+      if (result.error !== null) {
+        if (result.status === 401) {
+          setLoginError(
+            "Your username/password combination was incorrect. Please try again"
+          );
+        } else {
+          setLoginError(result.error);
+        }
+      } else {
+        router.push(result.url);
+      }
     });
   };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>NextAuth Example</title>
-      </Head>
-      <main className={styles.loginMain}>
-        <div className={styles.loginStep}>
-          <h1>Welcome Back</h1>
-          <form onSubmit={(e) => handleLogin(e)} className={styles.loginForm}>
-            <label htmlFor="loginEmail">Email</label>
-            <input
-              id="loginEmail"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={loginError ? styles.errorInput : ""}
-            />
-            <span className={styles.error}>{loginError}</span>
-            <label htmlFor="inputPassword">Password</label>
-            <input
-              id="inputPassword"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-              type="submit"
-              disabled={isLoginStarted}
-              className={styles.blueButtonRound}
-            >
-              Log In
-            </button>
-          </form>
-        </div>
-      </main>
-    </div>
+    <form onSubmit={handleLogin}>
+      {loginError}
+      <label>
+        Email:{" "}
+        <input
+          type="text"
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
+        />
+      </label>
+      <label>
+        Password:{" "}
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <button type="submit">Submit login</button>
+
+      <Link href="/register">Register</Link>
+    </form>
   );
 }
