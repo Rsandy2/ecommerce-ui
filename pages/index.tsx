@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div id="outer-container" className="bg-primary min-h-screen w-screen">
+    <div id="outer-container" className="bg-p1 min-h-screen w-screen">
       <Toaster />
       <div id="page-wrap">
         <Header />
