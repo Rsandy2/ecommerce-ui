@@ -18,7 +18,9 @@ export default async (req, res) => {
 
       return res.status(200).end();
     } catch (err) {
-      return res.status(503).json({ err: "this" + err.toString() });
+      return res.status(503).json({
+        err: "this is in register ts api route file : " + err.toString(),
+      });
     }
   } else {
     return res

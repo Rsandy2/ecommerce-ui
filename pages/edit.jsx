@@ -5,7 +5,7 @@ import { prisma } from "../lib/prisma";
 import { useRouter } from "next/router";
 
 function Edit({ userData }) {
-  const [formData, setFormData] = useState({ name: "", email: "", id: "" });
+  const [formData, setFormData] = useState({ username: "", email: "", id: "" });
   const [debugContent, setDebugContent] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
@@ -87,10 +87,10 @@ function Edit({ userData }) {
                               {user.id}
                             </td>
                             <td
-                              key={user.name}
+                              key={user.username}
                               className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                             >
-                              {user.name}
+                              {user.username}
                             </td>
                             <td
                               key={user.email}
@@ -105,13 +105,13 @@ function Edit({ userData }) {
                               <button
                                 onClick={() => {
                                   setFormData({
-                                    name: user.name,
+                                    name: user.username,
                                     email: user.email,
                                     id: user.id,
                                   });
 
                                   setDebugContent({
-                                    name: user.name,
+                                    name: user.username,
                                     email: user.email,
                                     id: user.id,
                                   });
@@ -153,7 +153,7 @@ function Edit({ userData }) {
                 placeholder="Name"
                 value={formData.name}
                 onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
+                  setFormData({ ...formData, username: e.target.value })
                 }
                 className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline w-full overflow-x-hidden"
               />
@@ -191,7 +191,7 @@ export async function getServerSideProps() {
   const userData = await prisma.user.findMany({
     select: {
       id: true,
-      name: true,
+      username: true,
       email: true,
     },
   });
