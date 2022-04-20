@@ -69,8 +69,12 @@ function ReviewCard() {
                         <h5 className="card-title">Title</h5>
                         <h6 className="card-subtitle mb-2 text-muted">Author</h6>
                         <h6 className="card-subtitle mb-2 text-muted">Price</h6>
-                        <h6 className="card-subtitle mb-2 text-muted">Reserve Book [insert checkbox]</h6>
+                        
+                        <label className="form-check-label" for="checkReserve">
+                            <input className="form-check-input" type="checkbox" value="" id="checkReserve"></input>
+                            &nbsp;&nbsp;&nbsp;Reserve Instead
 
+                        </label>
                     </div>
                 </div>
             </div>

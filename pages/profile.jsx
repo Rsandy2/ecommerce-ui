@@ -57,12 +57,13 @@ function Profile() {
         </div>
 
         <a href="#">Forgot Password? [Don't implement unless we have time]</a>
-        <input
-          className="py-2 px-4 bg-yellow-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
-          type="submit"
-          value="Save Changes"
-          style={{ float: "right" }}
-        />
+        <label className="form-check-label" for="checkSubscribe" style={{ float: "right" }}>
+          <input className="form-check-input" type="checkbox" value="" id="checkSubscribe"></input>
+          &nbsp;&nbsp;&nbsp;Keep me subscribed to emails and promotions
+
+        </label>
+
+
         <br></br>
         <br></br>
         <hr />
@@ -75,31 +76,22 @@ function Profile() {
         <h3>Address Details</h3>
         <div className="row">
           <div className="col-lg-6">
-          <FloatingInput
-          title="Street"
-          id="addressStreet"
-          type="text"
-          value="170 Rainbow Ave for billing"
-        />
+            <FloatingInput
+              title="Street"
+              id="addressStreet"
+              type="text"
+              value="170 Rainbow Ave for billing"
+            />
 
-        <FloatingInput title="State" id="adressState" type="text" value="Georgia" />
-        
+            <FloatingInput title="State" id="adressState" type="text" value="Georgia" />
+
           </div>
           <div className="col-lg-6">
-          <FloatingInput title="City" id="addressCity" type="text" value="Athens" />
-          <FloatingInput title="Zip Code" id="addressCip" type="text" value="30609" />       
+            <FloatingInput title="City" id="addressCity" type="text" value="Athens" />
+            <FloatingInput title="Zip Code" id="addressCip" type="text" value="30609" />
           </div>
         </div>
-        <input
-          className="py-2 px-4 bg-yellow-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
-          type="submit"
-          value="Save Changes"
-          style={{ float: "right" }}
-        />
-        <br></br>
-        <br></br>
         <hr />
-
       </div>
     );
   };
@@ -110,30 +102,24 @@ function Profile() {
         <h3>Billing Address Details</h3>
         <div className="row">
           <div className="col-lg-6">
-          <FloatingInput
-          title="Cardholder Name"
-          id="billCardName"
-          type="text"
-          value="Doug Dimadome"
-        />
-        <FloatingInput title="Expiration Date" id="billExpDate" type="text" value="type Date instead?" />
-        <FloatingInput title="Street" id="billStreet" type="text" value="123 Wacky Way" />
-        <FloatingInput title="State" id="billState" type="text" value="Sus State" />
+            <FloatingInput
+              title="Cardholder Name"
+              id="billCardName"
+              type="text"
+              value="Doug Dimadome"
+            />
+            <FloatingInput title="Expiration Date" id="billExpDate" type="text" value="type Date instead?" />
+            <FloatingInput title="Street" id="billStreet" type="text" value="123 Wacky Way" />
+            <FloatingInput title="State" id="billState" type="text" value="Sus State" />
           </div>
           <div className="col-lg-6">
-          <FloatingInput title="Card Number" id="billCardNum" type="text" value="1234-1234-1234-1234" />
-          <FloatingInput title="CCV" id="billCCV" type="text" value="123" />
-          <FloatingInput title="City" id="billCity" type="text" value="Psych Port Town" />
-          <FloatingInput title="Zip Code" id="billZip" type="text" value="1234" />
+            <FloatingInput title="Card Number" id="billCardNum" type="text" value="1234-1234-1234-1234" />
+            <FloatingInput title="CCV" id="billCCV" type="text" value="123" />
+            <FloatingInput title="City" id="billCity" type="text" value="Psych Port Town" />
+            <FloatingInput title="Zip Code" id="billZip" type="text" value="1234" />
           </div>
-          </div>
-          <input
-          className="py-2 px-4 bg-yellow-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
-          type="submit"
-          value="Save Changes"
-          style={{ float: "right" }}
-        />
-      
+        </div>
+        <hr />
       </div>
     );
   };
@@ -166,6 +152,18 @@ function Profile() {
 
               <AddressDetails />
               <BillingDetails />
+              <input
+                className="py-2 px-4 bg-yellow-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                type="submit"
+                value="Save Changes"
+                style={{ float: "right" }}
+              />
+              <input
+                className="py-2 px-4 bg-red-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                type="submit"
+                value="Delete Account"
+                style={{ float: "left" }}
+              />
             </div>
           </div>
         </div>
