@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 export default async (req, res) => {
   if (req.method === "POST") {
-    const { username, email, password } = req.body;
+    const { username, email, password, userRole } = req.body;
 
     try {
       const hash = await bcrypt.hash(password, 0);
@@ -13,6 +13,8 @@ export default async (req, res) => {
           username: username,
           email: email,
           password: hash,
+          userRole,
+          userRole,
         },
       });
 

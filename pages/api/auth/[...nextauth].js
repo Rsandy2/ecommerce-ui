@@ -55,6 +55,7 @@ const configuration = {
                 userId: user.id,
                 username: user.username,
                 email: user.email,
+                userRole: user.userRole,
               };
 
               console.log("Made it to: ", userAccount);
