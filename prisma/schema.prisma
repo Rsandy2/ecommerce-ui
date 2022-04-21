@@ -90,7 +90,8 @@ model Book {
   isbn          Int      @id @unique
   title         String
   author        String
-  image         String
+  image         String?
+  price         Int?
   createdAt     DateTime @default(now())
   publishedDate String
   description   String

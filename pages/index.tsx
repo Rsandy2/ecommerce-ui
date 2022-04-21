@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 import Banner from "../components/Banner";
+import { prisma } from "../lib/prisma";
 // import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
@@ -46,5 +47,15 @@ const Home: NextPage = () => {
     </div>
   );
 };
+export async function getStaticProps() {
+  // const prisma = new PrismaClient();
+  const bookData = await prisma.book.findMany();
+  console.log(bookData);
+  return {
+    props: {
+      bookData,
+    },
+  };
+}
 
 export default Home;
