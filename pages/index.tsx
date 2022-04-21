@@ -1,76 +1,51 @@
 import type { NextPage } from "next";
-import styles from "../styles/Home.module.scss";
+import ProductCard from "../components/ProductCard";
+import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
-import Login from "../components/login";
-import Signup from "../components/signup";
-import Modal from "../components/Modal";
-import Owner from "../components/Owner";
-import Confirmation from "../components/Confirmation";
-import Query from "../components/Query";
-import Edit from "../components/Edit";
-import TestLogin from "../components/TestLogin";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { useSession } from "next-auth/react";
+import Banner from "../components/Banner";
+// import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
 const Home: NextPage = () => {
-  const { data: session } = useSession();
-  console.log(session);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const CLOG = (data: any): any => console.log(data);
-  const onSubmit = (data: any) => {
-    try {
-      toast.promise(
-        create(data),
-        {
-          loading: "Working on it...",
-          success: "Submitted successfully!",
-          error: "Oops! something went wrong.",
-        },
-        { duration: 3000 }
-      );
-    } catch (error: any) {
-      // toast.error("Oops");
-      console.log(error);
-    }
+  const data = {
+    bookTitle: "The Lightning Thief",
+    authorName: "Rick Riordan",
+    bookCoverUrl:
+      "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
+    altText: "Percy Jackson Book Cover",
+    bookPrice: "$15.00",
   };
-  const create = async (data: any) => {
-    console.log(data);
-    try {
-      fetch("http://localhost:3000/api/create", {
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
-    } catch (err) {
-      console.log("err");
-    }
+
+  const data2 = {
+    bookTitle: "City of Bones",
+    authorName: "Cassandra Clare",
+    bookCoverUrl:
+      "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
+    altText: "City of Bones Book Cover",
+    bookPrice: "$15.00",
   };
 
   return (
-    <div className={styles.container}>
-      {/* <button className={styles.button} onClick={notify}>
-        TOASTER
-      </button> */}
-      {/* <Login /> */}
-      <TestLogin />
-      <Link href="/login">Login</Link>
-      <Link href="/admin">Admin</Link>
-      <Link href="/api-example">API</Link>
-      <Link href="/edit">EDIT</Link>
-      {/* <Confirmation /> */}
-      {/* <Modal /> */}
-      {/* <Query /> */}
-      {/* <Edit /> */}
-      {/* <Toaster /> */}
+    <div id="outer-container" className="bg-p1 min-h-screen w-screen">
+      <Toaster />
+      <div id="page-wrap">
+        <Header />
+        <Banner />
+
+        {/* product container */}
+        <div className="flex flex-col items-center">
+          <h1 className="text-coffee text-3xl m-6">Trending Books</h1>
+          <div className="flex justify-center content-evenly space-x-6">
+            <ProductCard productData={data} />
+            <ProductCard productData={data2} />
+            <ProductCard productData={data} />
+            <ProductCard productData={data2} />
+          </div>
+        </div>
+        {/* Footer */}
+      </div>
+      {/* <Footer /> */}
+      <div></div>
     </div>
   );
 };

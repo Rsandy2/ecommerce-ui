@@ -148,3 +148,9 @@
 .button:hover {
   background: #e0e0e0;
 }
+
+.card__container {
+  display: flex;
+  justify-content: space-evenly;
+  width: auto;
+}
