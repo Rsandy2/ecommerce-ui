@@ -1,20 +1,25 @@
 import { useSession, getSession } from "next-auth/react";
-import Layout from "../components/layout";
-import type { NextPageContext } from "next";
-export default function ApiExamplePage() {
-  return (
-    <Layout>
-      <h1>API Example</h1>
-      <p>The examples below show responses from the example API endpoints.</p>
-      <p>
-        <em>You must be signed in to see responses.</em>
-      </p>
-      <h2>Session</h2>
-      <p>/api/examples/session</p>
-      <iframe src="/api/session" />
-      <h2>JSON Web Token</h2>
-      <p>/api/examples/jwt</p>
-      <iframe src="/api/jwt" />
-    </Layout>
-  );
+
+export default function Page() {
+  const { data: session } = useSession();
+
+  if (typeof window === "undefined") return null;
+
+  if (session) {
+    return (
+      <>
+        <h1>Protected Page</h1>
+        <p>You can view this page because you are signed in.</p>
+      </>
+    );
+  }
+  return <p>Access Denied</p>;
+}
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
 }

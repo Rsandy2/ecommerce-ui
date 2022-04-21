@@ -106,25 +106,21 @@ const configuration = {
       }
     },
     async session(session, token) {
-      // if (userAccount !== null) {
-      //   console.log("Sessions is not equal to null");
-      //   console.log("Before, ", session.user + "UserAccount, :", userAccount);
-      //   session.user = userAccount;
+      if (userAccount !== null) {
+        console.log("Sessions is not equal to null");
+        console.log("Before, ", session.user + "UserAccount, :", userAccount);
+        session.user = userAccount;
 
-      //   console.log(session.user, "After");
-      // } else if (
-      //   typeof token.user !== typeof undefined &&
-      //   (typeof session.user === typeof undefined ||
-      //     (typeof session.user !== typeof undefined &&
-      //       typeof session.user.userId === typeof undefined))
-      // ) {
-      //   session.user = token.user;
-      // } else if (typeof token !== typeof undefined) {
-      //   session.token = token;
-      // }
-
-      if (token) {
-        session.id = token.id;
+        console.log(session.user, "After");
+      } else if (
+        typeof token.user !== typeof undefined &&
+        (typeof session.user === typeof undefined ||
+          (typeof session.user !== typeof undefined &&
+            typeof session.user.userId === typeof undefined))
+      ) {
+        session.user = token.user;
+      } else if (typeof token !== typeof undefined) {
+        session.token = token;
       }
 
       // console.log("This is session: ", session);
