@@ -9,7 +9,7 @@ import Confirmation from "../components/Confirmation";
 import Query from "../components/Query";
 import Edit from "../components/Edit";
 import TestLogin from "../components/TestLogin";
-
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
 
@@ -62,6 +62,10 @@ const Home: NextPage = () => {
       </button> */}
       {/* <Login /> */}
       <TestLogin />
+      <Link href="/login">Login</Link>
+      <Link href="/admin">Admin</Link>
+      <Link href="/api-example">API</Link>
+      <Link href="/edit">EDIT</Link>
       {/* <Confirmation /> */}
       {/* <Modal /> */}
       {/* <Query /> */}

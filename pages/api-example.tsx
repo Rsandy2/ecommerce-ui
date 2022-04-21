@@ -2,11 +2,6 @@ import { useSession, getSession } from "next-auth/react";
 import Layout from "../components/layout";
 import type { NextPageContext } from "next";
 export default function ApiExamplePage() {
-  const { data: session, status } = useSession();
-  //   const loading = status === "loading";
-
-  console.log(session);
-
   return (
     <Layout>
       <h1>API Example</h1>
@@ -22,12 +17,4 @@ export default function ApiExamplePage() {
       <iframe src="/api/jwt" />
     </Layout>
   );
-}
-
-export async function getServerSideProps(context: NextPageContext) {
-  return {
-    props: {
-      session: await getSession(context),
-    },
-  };
 }
