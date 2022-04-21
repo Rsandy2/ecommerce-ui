@@ -49,6 +49,7 @@ function bookSearch() {
     let volumeInfo = Object.assign(selectValue["volumeInfo"]);
     let isbn = volumeInfo["industryIdentifiers"][1]["identifier"];
     let author = volumeInfo["authors"][0];
+    let image = volumeInfo["imageLinks"]["smallThumbnail"];
     console.log(isbn);
     let subset = _.pick(volumeInfo, [
       "title",
@@ -56,7 +57,11 @@ function bookSearch() {
       "description",
       "language",
     ]);
-    Object.assign(subset, { isbn: parseInt(isbn), author: author });
+    Object.assign(subset, {
+      isbn: parseInt(isbn),
+      author: author,
+      image: image,
+    });
     console.log(subset);
     return subset;
   };

@@ -7,14 +7,13 @@ import { prisma } from "../lib/prisma";
 // import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
-const Home: NextPage = () => {
+const Home: NextPage = ({ bookData }: any) => {
   const data = {
-    bookTitle: "The Lightning Thief",
-    authorName: "Rick Riordan",
-    bookCoverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
+    title: "The Lightning Thief",
+    author: "Rick Riordan",
+    image: "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
     altText: "Percy Jackson Book Cover",
-    bookPrice: "$15.00",
+    price: "$15.00",
   };
 
   const data2 = {
@@ -38,9 +37,13 @@ const Home: NextPage = () => {
           <h1 className="text-coffee text-3xl m-6">Trending Books</h1>
           <div className="flex justify-center content-evenly space-x-6">
             <ProductCard productData={data} />
-            <ProductCard productData={data2} />
+            {/* <ProductCard productData={data2} />
             <ProductCard productData={data} />
-            <ProductCard productData={data2} />
+            <ProductCard productData={data2} /> */}
+
+            {bookData.map((book: any) => (
+              <ProductCard productData={book} />
+            ))}
           </div>
         </div>
       </div>
@@ -49,7 +52,14 @@ const Home: NextPage = () => {
 };
 export async function getStaticProps() {
   // const prisma = new PrismaClient();
-  const bookData = await prisma.book.findMany();
+  const bookData = await prisma.book.findMany({
+    select: {
+      title: true,
+      author: true,
+      image: true,
+      price: true,
+    },
+  });
   console.log(bookData);
   return {
     props: {

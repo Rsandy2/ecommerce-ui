@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { isbn, title, author, publishedDate, description, language } =
+  const { isbn, title, author, publishedDate, description, language, image } =
     req.body;
 
   try {
@@ -17,6 +17,7 @@ export default async function handler(
         publishedDate,
         description,
         language,
+        image,
       },
     });
 

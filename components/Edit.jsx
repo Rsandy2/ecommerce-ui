@@ -80,8 +80,13 @@ export default function Edit(props) {
 }
 
 export async function getStaticProps() {
-  // const prisma = new PrismaClient();
-  const userData = await prisma.user.findMany();
+  const userData = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+    },
+  });
   console.log(userData);
   return {
     props: {
