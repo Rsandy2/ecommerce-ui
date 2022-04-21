@@ -90,6 +90,7 @@ model Book {
   isbn          Int      @id @unique
   title         String
   author        String
+  image         String
   createdAt     DateTime @default(now())
   publishedDate String
   description   String

@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div id="outer-container" className="bg-p1 min-h-screen w-screen">
+    <div id="outer-container" className="bg-p1 h-screen w-full">
       <Toaster />
       <div id="page-wrap">
         <Header />
@@ -42,10 +42,7 @@ const Home: NextPage = () => {
             <ProductCard productData={data2} />
           </div>
         </div>
-        {/* Footer */}
       </div>
-      {/* <Footer /> */}
-      <div></div>
     </div>
   );
 };
