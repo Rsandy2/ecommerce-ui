@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-   previewFeatures = ["dataProxy"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["dataProxy"]
 }
 
 datasource db {
@@ -12,18 +12,18 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -37,6 +37,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -45,18 +46,17 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-
 model User {
   id            String    @id @default(cuid())
-  username          String?
+  username      String?
   email         String?   @unique
   password      String    @db.VarChar(250)
   emailVerified DateTime?
   image         String?
-  userRole      String? @default("user")
+  userRole      String?   @default("user")
   accounts      Account[]
   sessions      Session[]
-    // posts         Content[]
+  // posts         Content[]
 }
 
 model Vendor {
@@ -66,12 +66,12 @@ model Vendor {
   password      String    @db.VarChar(250)
   emailVerified DateTime?
   image         String?
-  userRole      String? @default("user")
-  Books Book[]
+  userRole      String?   @default("user")
+  Books         Book[]
 }
 
 model Content {
-  id        Int     @default(autoincrement()) @id
+  id        Int     @id @default(autoincrement())
   title     String
   content   String?
   published Boolean @default(false)
@@ -86,16 +86,18 @@ enum Genre {
   GENERIC
 }
 
-model Book { 
-  isbn Int  @id @unique
-  title String
-  author    String
-  createdAt DateTime @default(now())
+model Book {
+  isbn          Int      @id @unique
+  title         String
+  author        String
+  createdAt     DateTime @default(now())
   publishedDate String
-  description String
-  genre Genre @default(GENERIC)
-  language String
-  vendorID Int?
-  vendor Vendor? @relation(references: [id], fields: [vendorID])
+  description   String
+  genre         Genre    @default(GENERIC)
+  language      String
+  
+  // vendor Vendor? @relation(references: [id], fields: [vendorID])
 
+  Vendor   Vendor? @relation(fields: [vendorId], references: [id])
+  vendorId String?
 }
