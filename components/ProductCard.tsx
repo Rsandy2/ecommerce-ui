@@ -40,7 +40,7 @@ const ProductCard = (props: CardProps) => {
               </button>
             </div>
             <div className="absolute top-2 right-2 py-2 px-4 bg-white rounded-lg">
-              <span className="text-md">{price}</span>
+              <span className="text-md">${price}.99</span>
             </div>
           </div>
         </div>

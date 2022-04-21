@@ -34,9 +34,9 @@ const Home: NextPage = ({ bookData }: any) => {
 
         {/* product container */}
         <div className="flex flex-col items-center">
-          <h1 className="text-coffee text-3xl m-6">Trending Books</h1>
+          <h1 className=" text-coffee text-3xl m-6">Trending Books</h1>
           <div className="flex justify-center content-evenly space-x-6">
-            <ProductCard productData={data} />
+            {/* <ProductCard productData={data} /> */}
             {/* <ProductCard productData={data2} />
             <ProductCard productData={data} />
             <ProductCard productData={data2} /> */}
