@@ -108,13 +108,13 @@ function Edit({ userData }) {
                               <button
                                 onClick={() => {
                                   setFormData({
-                                    name: user.username,
+                                    username: user.username,
                                     email: user.email,
                                     id: user.id,
                                   });
 
                                   setDebugContent({
-                                    name: user.username,
+                                    username: user.username,
                                     email: user.email,
                                     id: user.id,
                                   });

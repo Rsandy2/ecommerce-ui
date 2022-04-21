@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 import Banner from "../components/Banner";
 import { prisma } from "../lib/prisma";
+import Login from "../components/login";
 // import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
