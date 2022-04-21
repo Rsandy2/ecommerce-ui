@@ -59,6 +59,17 @@ model User {
     // posts         Content[]
 }
 
+model Vendor {
+  id            String    @id @default(cuid())
+  username      String?
+  email         String?   @unique
+  password      String    @db.VarChar(250)
+  emailVerified DateTime?
+  image         String?
+  userRole      String? @default("user")
+  Books Book[]
+}
+
 model Content {
   id        Int     @default(autoincrement()) @id
   title     String
@@ -66,12 +77,6 @@ model Content {
   published Boolean @default(false)
   // author    User?   @relation(fields: [authorId], references: [id])
   authorId  Int?
-}
-
-model Vendor {
-  id Int @default(autoincrement()) @id
-  name String
-  Books Book[]
 }
 
 enum Genre {

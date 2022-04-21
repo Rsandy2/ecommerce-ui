@@ -11,7 +11,8 @@ export default function SessionWrapper(props: any) {
     (session !== null && session?.status === "authenticated") ||
     router.pathname === "/" ||
     router.pathname === "/register" ||
-    router.pathname === "/login"
+    router.pathname === "/login" ||
+    "/query"
   ) {
     return props.children;
   } else {

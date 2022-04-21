@@ -8,17 +8,28 @@ export default async (req, res) => {
 
     try {
       const hash = await bcrypt.hash(password, 0);
+
       await prisma.user.create({
         data: {
           username: username,
           email: email,
           password: hash,
-          userRole,
-          userRole,
+          userRole: userRole,
         },
       });
 
-      return res.status(200).end();
+      req.body.userRole === "vendor"
+        ? await prisma.vendor.create({
+            data: {
+              username: username,
+              email: email,
+              password: hash,
+              userRole: userRole,
+            },
+          })
+        : console.log("No create");
+
+      return res.status(200).json({ message: req.body });
     } catch (err) {
       return res.status(503).json({
         err: "this is in register ts api route file : " + err.toString(),
