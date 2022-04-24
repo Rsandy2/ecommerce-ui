@@ -95,7 +95,7 @@ model Book {
   cardId        String?
   price         Int?
   Vendor        Vendor?  @relation(fields: [vendorId], references: [id])
-  shoppingCart  ShoppingCart? @relation(fields: [cardId], references: [id])
+  shoppingCart  ShoppingCart[] @relation(references: [id])
 }
 
 enum Genre {
