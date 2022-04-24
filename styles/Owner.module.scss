@@ -1,0 +1,320 @@
+.light:root {
+  --app-bg: #fff;
+  --sidebar: #f3f6fd;
+  --app-content-secondary-color: #f3f6fd;
+  --app-content-main-color: #1f1c2e;
+  --sidebar-link: #1f1c2e;
+  --sidebar-hover-link: rgba(195, 207, 244, 0.5);
+  --sidebar-active-link: rgba(195, 207, 244, 1);
+  --sidebar-main-color: #1f1c2e;
+  --filter-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+$font-small: 14px;
+$font-medium: 16px;
+$font-large: 24px;
+
+.app_container {
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 1280px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.action_button {
+  border-radius: 4px;
+  height: 32px;
+  background-color: var(--app-content-secondary-color);
+  border: 1px solid var(--app-content-secondary-color);
+  display: flex;
+  align-items: center;
+  color: var(--app-content-main-color);
+  font-size: $font-small;
+  margin-left: 8px;
+  cursor: pointer;
+
+  span {
+    margin-right: 4px;
+  }
+
+  &:hover {
+    border-color: var(--action-color-hover);
+  }
+
+  &:focus,
+  &.active {
+    outline: none;
+    color: var(--action-color);
+    border-color: var(--action-color);
+  }
+}
+
+.filter_button_wrapper {
+  position: relative;
+}
+
+@mixin arrowDown($color) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23#{$color}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
+.filter_menu {
+  background-color: var(--app-content-secondary-color);
+  position: absolute;
+  top: calc(100% + 16px);
+  right: -74px;
+  border-radius: 4px;
+  padding: 8px;
+  width: 220px;
+  z-index: 2;
+  box-shadow: var(--filter-shadow);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid var(--app-content-secondary-color);
+    bottom: 100%;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    top: calc(100% + 8px);
+  }
+
+  label {
+    display: block;
+    font-size: $font-small;
+    color: var(--app-content-main-color);
+    margin-bottom: 8px;
+  }
+
+  select {
+    appearance: none;
+    @include arrowDown("fff");
+    background-repeat: no-repeat;
+    padding: 8px 24px 8px 8px;
+    background-position: right 4px center;
+    border: 1px solid var(--app-content-main-color);
+    border-radius: 4px;
+    color: var(--app-content-main-color);
+    font-size: 12px;
+    background-color: transparent;
+    margin-bottom: 16px;
+    width: 100%;
+    option {
+      font-size: 14px;
+    }
+
+    .light & {
+      @include arrowDown("1f1c2e");
+    }
+
+    &:hover {
+      border-color: var(--action-color-hover);
+    }
+
+    &:focus,
+    &.active {
+      outline: none;
+      color: var(--action-color);
+      border-color: var(--action-color);
+      @include arrowDown("2869ff");
+    }
+  }
+}
+
+.filter_menu_buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-button {
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+
+  &.apply {
+    background-color: var(--action-color);
+  }
+
+  &.reset {
+    background-color: var(--filter-reset);
+  }
+}
+
+.products_area_wrapper {
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 0 4px;
+}
+
+.tableView {
+  .products_header {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    background-color: var(--app-content-secondary-color);
+    position: sticky;
+    top: 0;
+  }
+
+  .products_row {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+
+    &:hover {
+      box-shadow: var(--filter-shadow);
+      background-color: var(--app-content-secondary-color);
+    }
+  }
+
+  .product_cell {
+    flex: 1;
+    padding: 8px 16px;
+    color: var(--app-content-main-color);
+    font-size: $font-small;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      margin-right: 6px;
+    }
+  }
+
+  .sort_button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--app-content-main-color);
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: var(--action-color);
+    }
+    svg {
+      width: 12px;
+    }
+  }
+
+  .cell_label {
+    display: none;
+  }
+}
+
+.status {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 12px;
+
+  &:before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+
+  &.active {
+    color: #2ba972;
+    background-color: rgba(43, 169, 114, 0.2);
+
+    &:before {
+      background-color: #2ba972;
+    }
+  }
+
+  &.disabled {
+    color: #59719d;
+    background-color: rgba(89, 113, 157, 0.2);
+
+    &:before {
+      background-color: #59719d;
+    }
+  }
+}
+
+.gridView {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+
+  .products_header {
+    display: none;
+  }
+
+  .products_row {
+    margin: 8px;
+    width: calc(25% - 16px);
+    background-color: var(--app-content-secondary-color);
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+
+    &:hover {
+      transform: scale(1.01);
+      box-shadow: var(--filter-shadow);
+    }
+  }
+
+  .product-cell {
+    color: var(--app-content-main-color);
+    font-size: $font-small;
+    margin-bottom: 8px;
+
+    &:not(.image) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &.image span {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .cell_label {
+    opacity: 0.6;
+  }
+}
