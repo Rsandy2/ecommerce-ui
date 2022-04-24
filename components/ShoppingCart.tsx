@@ -9,6 +9,8 @@ type ModalProp = {
 };
 
 const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
+  // const [cart, setCart] = useState<ShoppingCart[]>();
+
   return (
     <>
       <div>

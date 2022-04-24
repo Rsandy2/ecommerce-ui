@@ -8,7 +8,25 @@ import Login from "../components/login";
 // import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
-const Home: NextPage = ({ bookData }: any) => {
+
+// export async function getServerSideProps() {
+//   const cart = await prisma.shoppingCart.findMany({
+//     where: {
+//       userId: "cl2dgsopn000007nu7g7tw4w3",
+//     },
+//     select: {
+//       books: true,
+//     },
+//   });
+//   return {
+//     props: {
+//       initialCart: cart,
+//     },
+//   };
+// }
+
+const Home: NextPage = ({ bookData, cartData }: any) => {
+  console.log(cartData);
   const data = {
     title: "The Lightning Thief",
     author: "Rick Riordan",
@@ -25,6 +43,21 @@ const Home: NextPage = ({ bookData }: any) => {
     altText: "City of Bones Book Cover",
     bookPrice: "$15.00",
   };
+
+  // async function test() {
+  //   const cart = await prisma.shoppingCart.findMany({
+  //     where: {
+  //       userId: "cl2dgsopn000007nu7g7tw4w3",
+  //     },
+  //     select: {
+  //       books: true,
+  //     },
+  //   });
+
+  //   console.log(cart);
+  // }
+
+  // test();
 
   return (
     <div id="outer-container" className="bg-p1 h-screen w-full">
@@ -51,8 +84,17 @@ const Home: NextPage = ({ bookData }: any) => {
     </div>
   );
 };
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // const prisma = new PrismaClient();
+  const cartData = await prisma.shoppingCart.findMany({
+    where: {
+      userId: "cl2dgsopn000007nu7g7tw4w3",
+    },
+    select: {
+      books: true,
+    },
+  });
+
   const bookData = await prisma.book.findMany({
     select: {
       title: true,
@@ -61,10 +103,11 @@ export async function getStaticProps() {
       price: true,
     },
   });
-  console.log(bookData);
+
   return {
     props: {
-      bookData,
+      bookData: bookData,
+      cartData: cartData,
     },
   };
 }
