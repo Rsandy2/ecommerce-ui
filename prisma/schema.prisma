@@ -44,17 +44,37 @@ model VerificationToken {
 
 model User {
   id            String    @id @default(cuid())
-  username      String?
+  username      String?   @unique
   email         String?   @unique
   password      String    @db.VarChar(250)
   emailVerified DateTime?
   image         String?
   userRole      String?   @default("user")
+  profile       Profile @relation(fields: [profileId], references: [id]) // references `id` of `Profile`
+  profileId     String // relation scalar field (used in the `@relation` attribute above)
   shoppingCart  ShoppingCart?
+  promotions    Promotions[]
   accounts      Account[]
   sessions      Session[]
 }
 
+model Promotions{
+  id            String    @id @default(cuid())
+  user  User[] @relation(references: [id])
+}
+model Profile {
+  id     String  @id @default(cuid())
+  user   User? 
+  address Address?
+}
+
+model Address {
+  id        String      @default(cuid()) @unique
+  address   String
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String // relation scalar field (used in the `@relation` attribute above)
+}
 model ShoppingCart {
   id        String      @id @default(cuid())
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
