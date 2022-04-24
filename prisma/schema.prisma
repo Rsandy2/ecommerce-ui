@@ -92,7 +92,7 @@ model Book {
   genre         Genre    @default(GENERIC)
   language      String
   vendorId      String?
-  cardId        String
+  cardId        String?
   price         Int?
   Vendor        Vendor?  @relation(fields: [vendorId], references: [id])
   shoppingCart  ShoppingCart? @relation(fields: [cardId], references: [id])

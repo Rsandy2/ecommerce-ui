@@ -58,7 +58,7 @@ function bookSearch() {
       "language",
     ]);
     Object.assign(subset, {
-      isbn: parseInt(isbn),
+      isbn: isbn,
       author: author,
       image: image,
     });
