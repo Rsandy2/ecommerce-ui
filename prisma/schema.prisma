@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["dataProxy"]
@@ -17,15 +14,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -54,9 +50,16 @@ model User {
   emailVerified DateTime?
   image         String?
   userRole      String?   @default("user")
+  shoppingCart  ShoppingCart?
   accounts      Account[]
   sessions      Session[]
-  // posts         Content[]
+}
+
+model ShoppingCart {
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String 
+  books     Book[]
 }
 
 model Vendor {
@@ -67,7 +70,7 @@ model Vendor {
   emailVerified DateTime?
   image         String?
   userRole      String?   @default("user")
-  Books         Book[]
+  books         Book[]
 }
 
 model Content {
@@ -75,8 +78,24 @@ model Content {
   title     String
   content   String?
   published Boolean @default(false)
-  // author    User?   @relation(fields: [authorId], references: [id])
   authorId  Int?
+}
+
+model Book {
+  isbn          String      @id @unique
+  title         String
+  author        String
+  image         String?
+  createdAt     DateTime @default(now())
+  publishedDate String
+  description   String
+  genre         Genre    @default(GENERIC)
+  language      String
+  vendorId      String?
+  cardId        String
+  price         Int?
+  Vendor        Vendor?  @relation(fields: [vendorId], references: [id])
+  shoppingCart  ShoppingCart? @relation(fields: [cardId], references: [id])
 }
 
 enum Genre {
@@ -84,22 +103,4 @@ enum Genre {
   COMEDY
   PHIL
   GENERIC
-}
-
-model Book {
-  isbn          Int      @id @unique
-  title         String
-  author        String
-  image         String?
-  price         Int?
-  createdAt     DateTime @default(now())
-  publishedDate String
-  description   String
-  genre         Genre    @default(GENERIC)
-  language      String
-  
-  // vendor Vendor? @relation(references: [id], fields: [vendorID])
-
-  Vendor   Vendor? @relation(fields: [vendorId], references: [id])
-  vendorId String?
 }

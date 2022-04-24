@@ -78,6 +78,7 @@ export default function Login() {
             <h1 className={styles.form_title}>Welcome</h1>
 
             <form onSubmit={handleLogin}>
+              {loginError}
               <div className={styles.form_content}>
                 <input
                   type="text"
