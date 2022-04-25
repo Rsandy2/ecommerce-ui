@@ -129,7 +129,7 @@ const header = () => {
             <BsCart3 size="2rem" className="pr-2" />
             Cart
           </button>
-          <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen} />
+          {/* <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         </div>
       </div>
     </MyProvider>

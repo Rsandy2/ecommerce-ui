@@ -53,40 +53,36 @@ model User {
   profileId     String        @unique
   profile       Profile       @relation(fields: [profileId], references: [id])
   accounts      Account[]
+  cards         Payment[]
   sessions      Session[]
   shoppingCart  ShoppingCart?
   promotions    Promotions[]
-  cards         Payment[]
 }
 
 model Promotions {
-  id            String @id @default(cuid())
-  user          User[]
-  books         Book[]
-  discountType  discountType? @default(FLAT)
-  discount      Float
-}
-
-enum discountType {
-  FLAT
-  PERCENTAGE
+  id           String        @id @default(cuid())
+  discountType discountType? @default(FLAT)
+  discount     Float
+  books        Book[]
+  user         User[]
 }
 
 model Profile {
   id      String   @id @default(cuid())
+  mobile  String?
   address Address?
   user    User?
 }
 
 model Address {
   id               String  @unique @default(cuid())
-  address          String
+  address          String?
   profileId        String  @unique
-  City             String
-  State            String
-  Zip              Int
   addressSecondary String?
-  profile          Profile @relation(fields: [profileId], references: [id])
+  city             String?
+  state            String?
+  zip              Int?
+  profile          Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model ShoppingCart {
@@ -104,7 +100,7 @@ model Vendor {
   emailVerified DateTime?
   image         String?
   userRole      String?   @default("user")
-  books         Book[]
+  Book          Book[]
 }
 
 model Content {
@@ -128,9 +124,24 @@ model Book {
   promotionId   String?
   cardId        String?
   price         Float?
-  Vendor        Vendor?        @relation(fields: [vendorId], references: [id])
-  shoppingCart  ShoppingCart[]
   promotion     Promotions?    @relation(fields: [promotionId], references: [id])
+  shoppingCart  ShoppingCart[]
+  Vendor        Vendor[]
+}
+
+model Payment {
+  id         String   @id @default(cuid())
+  userId     String
+  cardNumber Int
+  expiration String
+  cvv        Int
+  type       CardType @default(VISA)
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+enum discountType {
+  FLAT
+  PERCENTAGE
 }
 
 enum Genre {
@@ -141,16 +152,6 @@ enum Genre {
   MYSTERY
   PHIL
   GENERIC
-}
-
-model Payment {
-  id            String    @id @default(cuid())
-  userId        String
-  cardNumber    Int
-  expiration    String
-  cvv           Int
-  type          CardType  @default(VISA)
-  user          User      @relation(fields: [userId], references: [id])
 }
 
 enum CardType {

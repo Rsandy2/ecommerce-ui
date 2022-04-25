@@ -4,9 +4,60 @@ import React from "react";
 import { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import ReviewCard from "../components/productReviewCard";
+import { getToken } from "next-auth/jwt";
+import { prisma } from "../lib/prisma";
 // Shift + Alt + F nice.
 
-export default function MyForm() {
+export async function getServerSideProps(context) {
+  const session = await getToken(context);
+  console.log("session", session);
+  const books = await prisma.shoppingCart.findMany({
+    where: {
+      userId: `${session ? session["token"]["user"]["userId"] : ""}`,
+    },
+    select: {
+      books: true,
+    },
+  });
+  const userData = await prisma.user.findUnique({
+    where: {
+      id: `${session ? session["token"]["user"]["userId"] : ""}`,
+    },
+    select: {
+      username: true,
+      email: true,
+    },
+  });
+  return {
+    props: {
+      books,
+      userData,
+    },
+  };
+}
+
+export default function MyForm({ books, userData }) {
+  console.log(books);
+  console.log(userData);
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs.init("kvMbDFm5UqrDUyUvy");
+    emailjs
+      .send("service_t61tx0k", "template_927474s", {
+        to_name: "iskerop",
+        confirmation_number: "32e423423",
+        message: "hunger games : qty 3",
+      })
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   const [inputs, setInputs] = useState({});
 
   // Input handler stuff... that idk how it works...
@@ -140,28 +191,36 @@ export default function MyForm() {
                       <h2 style={{ color: "#900020" }}>Order Total: </h2>
                     </div>
                     <div className="col-sm-6">
-                      <h2 style={{ ...{ float: "right" }, ...{ color: "#900020" } }}>$amt</h2>
+                      <h2
+                        style={{
+                          ...{ float: "right" },
+                          ...{ color: "#900020" },
+                        }}
+                      >
+                        $amt
+                      </h2>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="card" style={reviewCard}>
-              <h2>Review Items and Shipping</h2>              
+              <h2>Review Items and Shipping</h2>
             </div>
             <ReviewCard />
             <div className="card" style={card}>
               Have loop that generates cards...
-              </div>
+            </div>
             <div className="card" style={card}>
-              <h2 style={{textAlign: "center"}}>I have reviewed my order and confirmed it to be correct.&nbsp;</h2> 
+              <h2 style={{ textAlign: "center" }}>
+                I have reviewed my order and confirmed it to be correct.&nbsp;
+              </h2>
               <input
-                  className="py-2 px-4 bg-green-500 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
-                  type="submit"
-                  value="Place Order"
-                  //style={{ width: "100%" }}
-                />
-
+                className="py-2 px-4 bg-green-500 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                type="submit"
+                value="Place Order"
+                //style={{ width: "100%" }}
+              />
             </div>
           </div>
 
@@ -194,7 +253,6 @@ export default function MyForm() {
                         name="shipState"
                         value={inputs.shipState || ""}
                         onChange={handleChange}
-                        
                       />
                     </label>
                   </div>
@@ -259,7 +317,13 @@ export default function MyForm() {
                 <img src="https://i.imgur.com/35tC99g.png" width="30"></img>
               </div>
               <form onSubmit={handleSubmit}>
-                <div className="row" style={{ ...{ paddingBottom: "3%" }, ...{ paddingTop: "3%" } }}>
+                <div
+                  className="row"
+                  style={{
+                    ...{ paddingBottom: "3%" },
+                    ...{ paddingTop: "3%" },
+                  }}
+                >
                   <div className="col-sm-6">
                     <label className="floatLeft" style={labelStyle}>
                       Cardholder Name<br></br>
@@ -339,7 +403,7 @@ export default function MyForm() {
                   </div>
                 </div>
                 <div className="row" style={{ paddingBottom: "3%" }}>
-                <div className="col-sm-6">
+                  <div className="col-sm-6">
                     <label style={labelStyle}>
                       State
                       <input
@@ -363,9 +427,8 @@ export default function MyForm() {
                       />
                     </label>
                   </div>
-                  
                 </div>
-                
+
                 <input
                   className="py-2 px-4 bg-yellow-400 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
                   type="submit"
@@ -374,7 +437,6 @@ export default function MyForm() {
                 />
               </form>
             </div>
-
           </div>
         </div>
       </div>
