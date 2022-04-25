@@ -108,10 +108,9 @@ const configuration = {
     async session(session, token) {
       if (userAccount !== null) {
         console.log("Sessions is not equal to null");
-        console.log("Before, ", session.user + "UserAccount, :", userAccount);
         session.user = userAccount;
 
-        console.log(session.user, "After");
+        // console.log(session.user, "After");
       } else if (
         typeof token.user !== typeof undefined &&
         (typeof session.user === typeof undefined ||
@@ -128,11 +127,10 @@ const configuration = {
     },
 
     async jwt(token, user, account, profile, isNewUser) {
-      // console.log("JWT callback. Got User: ", user);
-      if (user) {
-        token.id = user.id;
+      // console.log("JWT", user);
+      if (typeof user !== typeof undefined) {
+        token.user = user;
       }
-
       return token;
     },
   },

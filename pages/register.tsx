@@ -108,7 +108,7 @@ function Register(props: any) {
                 <input
                   type="text"
                   value={username}
-                  required="required"
+                  // required="required"
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <label>Username</label>
@@ -118,7 +118,7 @@ function Register(props: any) {
                 <input
                   type="text"
                   value={email}
-                  required="required"
+                  // required="required"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <label>Email</label>
@@ -129,7 +129,7 @@ function Register(props: any) {
                 <input
                   type="text"
                   value={password}
-                  required="required"
+                  // required="required"
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <label>Password</label>

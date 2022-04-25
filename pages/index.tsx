@@ -5,6 +5,11 @@ import toast, { Toaster } from "react-hot-toast";
 import Banner from "../components/Banner";
 import { prisma } from "../lib/prisma";
 import Login from "../components/login";
+import { createContext, useContext } from "react";
+import CartContext from "../components/context/cartContext";
+import session from "./api/session";
+import { useSession, getSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
 // import Footer from "../components/Footer";
 
 const notify = () => toast("Here is a toast.");
@@ -26,7 +31,12 @@ const notify = () => toast("Here is a toast.");
 // }
 
 const Home: NextPage = ({ bookData, cartData }: any) => {
-  console.log(cartData);
+  const { data: session } = useSession();
+  console.log(session);
+  // const cartContext = createContext(cartData);
+  async function getData() {
+    await fetch("http://localhost:3000/api/session");
+  }
   const data = {
     title: "The Lightning Thief",
     author: "Rick Riordan",
@@ -63,7 +73,9 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
     <div id="outer-container" className="bg-p1 h-screen w-full">
       <Toaster />
       <div id="page-wrap">
-        <Header />
+        <CartContext.Provider value={cartData}>
+          <Header />
+        </CartContext.Provider>
         <Banner />
 
         {/* product container */}
@@ -74,6 +86,7 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
             {/* <ProductCard productData={data2} />
             <ProductCard productData={data} />
             <ProductCard productData={data2} /> */}
+            <button onClick={getData}>Fwr</button>
 
             {bookData.map((book: any) => (
               <ProductCard productData={book} />
@@ -84,11 +97,16 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
     </div>
   );
 };
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  // const session = await fetch("http://localhost:3000/api/session");
+  // console.log(context);
+  const session = await getToken(context);
+
+  console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({
     where: {
-      userId: "cl2dgsopn000007nu7g7tw4w3",
+      userId: `${session ? session["token"]["user"]["userId"] : ""}`,
     },
     select: {
       books: true,
@@ -108,6 +126,7 @@ export async function getServerSideProps() {
     props: {
       bookData: bookData,
       cartData: cartData,
+      session: await getSession(context),
     },
   };
 }

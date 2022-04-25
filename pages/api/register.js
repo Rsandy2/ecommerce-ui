@@ -9,22 +9,31 @@ export default async (req, res) => {
     try {
       const hash = await bcrypt.hash(password, 0);
 
-      await prisma.user.create({
+      await prisma.profile.create({
         data: {
-          username: username,
-          email: email,
-          password: hash,
-          userRole: userRole,
+          user: {
+            create: {
+              email: email,
+              username: username,
+              password: hash,
+              userRole: userRole,
+              shoppingCart: { create: {} },
+            },
+          },
         },
       });
 
       req.body.userRole === "vendor"
-        ? await prisma.vendor.create({
+        ? await prisma.profile.create({
             data: {
-              username: username,
-              email: email,
-              password: hash,
-              userRole: userRole,
+              vendor: {
+                create: {
+                  email: email,
+                  username: username,
+                  password: hash,
+                  userRole: userRole,
+                },
+              },
             },
           })
         : console.log("No create");
