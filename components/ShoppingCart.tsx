@@ -3,36 +3,51 @@ import { BsPlus, BsDash } from "react-icons/bs";
 import { BsCart3, BsArrowLeft } from "react-icons/bs";
 import { Dialog, Transition } from "@headlessui/react";
 import CartContext from "../components/context/cartContext";
+import { useSession } from "next-auth/react";
+
 type ModalProp = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
+  const { data: session } = useSession();
+  console.log(session);
   // const [cart, setCart] = useState<ShoppingCart[]>();
   const cart = useContext(CartContext);
-  const [cartData, setCartData] = useState<any>({});
+  const [bookData, setBookData] = useState({ isbn: "", session: session });
+  const [cartData, setCartData] = useState<any>([{}]);
   const [totalData, setTotalData] = useState(0);
 
   //   console.log("shopping cart", cart[0]["books"]);
 
   async function deleteCartItem(data: any) {
-    fetch("http://localhost:3000/api/cart-delete", {
+    // const preppedData = Object.assign(
+
+    //   "userId"data["session"]["user"]["userId"]
+    // );
+    const preppedData = { userId: "", isbn: "" };
+    preppedData["isbn"] = data["isbn"];
+    preppedData.userId = data["session"]["user"]["userId"];
+
+    console.log(preppedData);
+
+    fetch("http://localhost:3000/api/cartdelete", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(preppedData),
     });
   }
-  //   useEffect(() => {
-  //     // let cartObject = cart ? Object.assign(cart[0]["books"]) : {};
-  //     let cartObject = {};
-  //     setCartData(cartObject);
+  useEffect(() => {
+    let cartObject = cart ? Object.assign(cart[0]["books"]) : {};
+    //   let cartObject = {};
+    setCartData(cartObject);
 
-  //     // cartData.forEach((item: any) => {
-  //     //   console.log("items, ", item);
-  //     //   setTotalData((totalData) => (totalData += item["price"]));
-  //     //   console.log(totalData, "total");
-  //     // });
-  //   }, [cartData, setTotalData]);
+    // cartData.forEach((item: any) => {
+    //   console.log("items, ", item);
+    //   setTotalData((totalData) => (totalData += item["price"]));
+    //   console.log(totalData, "total");
+    // });
+  }, [cartData, setTotalData]);
   return (
     <>
       <div>
@@ -94,7 +109,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                       </div>
 
                       {/* product */}
-                      {/* {cartData
+                      {cartData
                         ? cartData.map((cartItem: any) => (
                             <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                               <div className="flex w-2/5">
@@ -112,12 +127,18 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                                   <span className="text-red-500 text-xs">
                                     {cartItem["author"]}
                                   </span>
-                                  <a
-                                    href="#"
+                                  <button
                                     className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                                    onClick={() => {
+                                      setBookData({
+                                        ...bookData,
+                                        isbn: cartItem["isbn"],
+                                      });
+                                      deleteCartItem(bookData);
+                                    }}
                                   >
                                     Remove
-                                  </a>
+                                  </button>
                                 </div>
                               </div>
                               <div className="flex justify-center w-1/5">
@@ -140,7 +161,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                               </span>
                             </div>
                           ))
-                        : null} */}
+                        : null}
 
                       {/* product */}
                       {/* <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">

@@ -69,8 +69,12 @@ model Profile {
 }
 
 model Address {
-  id        String      @default(cuid()) @unique
-  address   String
+  id                String      @default(cuid()) @unique
+  address           String
+  addressSecondary  String?
+  City              String
+  State             String
+  Zip               Int
 
   profile   Profile @relation(fields: [profileId], references: [id])
   profileId String // relation scalar field (used in the `@relation` attribute above)
