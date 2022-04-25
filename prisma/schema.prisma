@@ -76,15 +76,16 @@ model Profile {
   id      String   @id @default(cuid())
   address Address?
   user    User?
+  mobile  String?
 }
 
 model Address {
   id               String  @unique @default(cuid())
-  address          String
+  address          String?
   profileId        String  @unique
-  City             String
-  State            String
-  Zip              Int
+  city             String?
+  state            String?
+  zip              Int?
   addressSecondary String?
   profile          Profile @relation(fields: [profileId], references: [id])
 }
