@@ -2,34 +2,6 @@ import useScript from "../components/useScript";
 import emailjs from "@emailjs/browser";
 import { getToken } from "next-auth/jwt";
 
-export async function getServerSideProps(context) {
-  const session = await getToken(context);
-  console.log("session", session);
-  const books = await prisma.shoppingCart.findMany({
-    where: {
-      userId: `${session ? session["token"]["user"]["userId"] : ""}`,
-    },
-    select: {
-      books: true,
-    },
-  });
-  const userData = await prisma.user.findUnique({
-    where: {
-      id: `${session ? session["token"]["user"]["userId"] : ""}`,
-    },
-    select: {
-      username: true,
-      email: true,
-    },
-  });
-  return {
-    props: {
-      books,
-      userData,
-    },
-  };
-}
-
 export default function test({ books, userData }) {
   const sendEmail = (e) => {
     e.preventDefault();

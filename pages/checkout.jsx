@@ -1,11 +1,13 @@
 import { useState } from "react"; // Using to handle forms?
 import React from "react";
 //import MenuSideBar from "../components/MenuSideBar";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import ReviewCard from "../components/productReviewCard";
 import { getToken } from "next-auth/jwt";
 import { prisma } from "../lib/prisma";
+import emailjs from "@emailjs/browser";
+
 // Shift + Alt + F nice.
 
 export async function getServerSideProps(context) {
@@ -13,7 +15,8 @@ export async function getServerSideProps(context) {
   console.log("session", session);
   const books = await prisma.shoppingCart.findMany({
     where: {
-      userId: `${session ? session["token"]["user"]["userId"] : ""}`,
+      userId: "cl2egxssj000507myavnc5tql",
+      // userId: `${session ? session["token"]["user"]["userId"] : ""}`,
     },
     select: {
       books: true,
@@ -21,7 +24,8 @@ export async function getServerSideProps(context) {
   });
   const userData = await prisma.user.findUnique({
     where: {
-      id: `${session ? session["token"]["user"]["userId"] : ""}`,
+      id: "cl2egxssj000507myavnc5tql",
+      // id: `${session ? session["token"]["user"]["userId"] : ""}`,
     },
     select: {
       username: true,
@@ -44,16 +48,19 @@ export default function MyForm({ books, userData }) {
     emailjs.init("kvMbDFm5UqrDUyUvy");
     emailjs
       .send("service_t61tx0k", "template_927474s", {
-        to_name: "iskerop",
-        confirmation_number: "32e423423",
+        to_name: userData.username,
+        confirmation_number: "11830483171",
         message: "hunger games : qty 3",
+        send_to: userData.email,
       })
       .then(
         (result) => {
           console.log(result.text);
+          toast.success("Order Confirmed!");
         },
         (error) => {
           console.log(error.text);
+          toast.error("Whoops! Something went wrong...");
         }
       );
   };
@@ -219,6 +226,7 @@ export default function MyForm({ books, userData }) {
                 className="py-2 px-4 bg-green-500 text-gray-800 font-bold rounded-lg shadow-md hover:shadow-lg transition duration-300"
                 type="submit"
                 value="Place Order"
+                onClick={sendEmail}
                 //style={{ width: "100%" }}
               />
             </div>
