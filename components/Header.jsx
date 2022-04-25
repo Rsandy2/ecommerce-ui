@@ -116,7 +116,7 @@ const header = () => {
             {session ? (
               <div>
                 {" "}
-                <Link href="/profile">{session.user.username}</Link>
+                <Link href="/profile2">{session.user.username}</Link>
               </div>
             ) : (
               <Link href="/login">Sign In</Link>
