@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 const bcrypt = require("bcrypt");
 
@@ -24,16 +23,12 @@ export default async (req, res) => {
       });
 
       req.body.userRole === "vendor"
-        ? await prisma.profile.create({
+        ? await prisma.vendor.create({
             data: {
-              vendor: {
-                create: {
-                  email: email,
-                  username: username,
-                  password: hash,
-                  userRole: userRole,
-                },
-              },
+              email: email,
+              username: username,
+              password: hash,
+              userRole: userRole,
             },
           })
         : console.log("No create");

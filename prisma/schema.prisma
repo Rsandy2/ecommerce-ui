@@ -72,6 +72,7 @@ model Profile {
   mobile  String?
   address Address?
   user    User?
+  mobile  String?
 }
 
 model Address {
