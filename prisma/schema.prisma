@@ -129,7 +129,7 @@ model Book {
   promotionId   String?
   cardId        String?
   price         Float?
-  Vendor        Vendor?        @relation(fields: [vendorId], references: [id])
+  Vendor        Vendor[]       
   shoppingCart  ShoppingCart[]
   promotion     Promotions?    @relation(fields: [promotionId], references: [id])
 }

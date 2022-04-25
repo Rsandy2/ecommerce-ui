@@ -6,6 +6,9 @@ import { FaTrash } from "react-icons/fa";
 import EditUser from "../components/EditUser";
 import AddUser from "../components/AddUser";
 import { prisma } from "../lib/prisma";
+import axios from "axios";
+import { useRouter } from "next/router";
+
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
 export default function AdminPanel({ userData }) {
@@ -13,7 +16,14 @@ export default function AdminPanel({ userData }) {
   //const [isOpen, setIsOpen] = React.useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [addisOpen, addsetIsOpen] = useState(false);
+  const router = useRouter();
 
+  async function deleteUser(data) {
+    const dataP = { email: data };
+    await axios.post("/api/deleteUser", dataP);
+    router.replace(router.asPath);
+    // console.log(data);
+  }
   return (
     <div
       className="h-screen w-full flex justify-center items-center"
@@ -95,7 +105,7 @@ export default function AdminPanel({ userData }) {
                           style={{ float: "right" }}
                         >
                           <i data-toggle="tooltip" title="Delete">
-                            <FaTrash />
+                            <FaTrash onClick={() => deleteUser(user.email)} />
                           </i>
                         </a>
                       </td>

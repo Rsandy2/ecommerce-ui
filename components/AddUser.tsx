@@ -18,13 +18,22 @@ type ModalProp = {
 };
 
 const AddUser = ({ addisOpen, addsetIsOpen }: ModalProp) => {
+  const router = useRouter();
   // const [cart, setCart] = useState<ShoppingCart[]>();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  async function create(data) {
+    await axios.post("/api/create", data);
+    router.replace(router.asPath);
+  }
+  const onSubmit = (data) => {
+    console.log(data);
+    create(data);
+  };
+
   console.log(errors);
 
   return (
