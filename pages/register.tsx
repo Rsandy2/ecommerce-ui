@@ -194,7 +194,7 @@ function Register(props: any) {
 
                             <div className={styles.form_content}>
                               <input
-                                type="text"
+                                type="password"
                                 value={password}
                                 // required="required"
                                 onChange={(e) => setPassword(e.target.value)}

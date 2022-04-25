@@ -4,7 +4,7 @@ import ShoppingCart from "./ShoppingCart";
 import { push as Menu } from "react-burger-menu";
 import { CgMenu } from "react-icons/cg";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // make a new context
@@ -115,7 +115,6 @@ const header = () => {
             <BsPersonCircle size="2rem" className="pr-2" />
             {session ? (
               <div>
-                {" "}
                 <Link href="/profile">{session.user.username}</Link>
               </div>
             ) : (
@@ -130,6 +129,13 @@ const header = () => {
             Cart
           </button>
           <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen} />
+          {!session ? (
+            <div>
+              <></>
+            </div>
+          ) : (
+            <button onClick={() => signOut()}>Sign Out</button>
+          )}
         </div>
       </div>
     </MyProvider>
