@@ -75,7 +75,7 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                     <div className={styles.form_container}>
                       <h1 className={styles.form_title}>Add</h1>
 
-                      <form>
+                      <form onSubmit={handleSubmit(onSubmit)}>
                         {/*onSubmit={registerUser}>*/}
                         <div className="row">
                           <div className="col-lg-6">
@@ -119,9 +119,9 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 placeholder=""
-                                {...register("vendorID")}
+                                {...register("isbn")}
                               />
-                              <label>Vendor</label>
+                              <label>ISBN</label>
                               <div className={styles.line}></div>
                             </div>
 

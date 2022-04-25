@@ -20,9 +20,9 @@ export default function AdminPanel({ booksData }) {
 
   async function deleteBook(data) {
     const dataP = { id: data };
+
     await axios.post("/api/deleteBook", dataP);
     router.replace(router.asPath);
-    // console.log(data);
   }
 
   return (
