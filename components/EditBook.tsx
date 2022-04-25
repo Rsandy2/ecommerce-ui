@@ -68,9 +68,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Title</label>
                               <div className={styles.line}></div>
@@ -80,9 +77,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Author</label>
                               <div className={styles.line}></div>
@@ -92,8 +86,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="textarea"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Description</label>
                               <div className={styles.line}></div>
@@ -108,8 +100,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Vendor</label>
                               <div className={styles.line}></div>
@@ -119,8 +109,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Genre</label>
                               <div className={styles.line}></div>
@@ -130,8 +118,6 @@ const AddBook = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Price</label>
                               <div className={styles.line}></div>

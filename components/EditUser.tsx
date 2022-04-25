@@ -68,9 +68,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Full Name</label>
                               <div className={styles.line}></div>
@@ -80,9 +77,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Email</label>
                               <div className={styles.line}></div>
@@ -92,8 +86,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Street</label>
                               <div className={styles.line}></div>
@@ -103,8 +95,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>State</label>
                               <div className={styles.line}></div>
@@ -114,8 +104,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={username}
-                                // required="required"
-                                // onChange={(e) => setUsername(e.target.value)}
                               />
                               <label>Username</label>
                               <div className={styles.line}></div>
@@ -129,8 +117,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>User Type</label>
                               <div className={styles.line}></div>
@@ -140,8 +126,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="date"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Birth Date</label>
                               <div className={styles.line}></div>
@@ -151,8 +135,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>City</label>
                               <div className={styles.line}></div>
@@ -162,8 +144,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Zip Code</label>
                               <div className={styles.line}></div>
@@ -173,8 +153,6 @@ const EditUser = ({ isOpen, setIsOpen }: ModalProp) => {
                               <input
                                 type="password"
                                 //value={password}
-                                // required="required"
-                                // onChange={(e) => setPassword(e.target.value)}
                               />
                               <label>Password</label>
                               <div className={styles.line}></div>

@@ -68,9 +68,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Title</label>
                               <div className={styles.line}></div>
@@ -79,8 +76,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Author</label>
                               <div className={styles.line}></div>
@@ -90,8 +85,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>ISBN</label>
                               <div className={styles.line}></div>
@@ -101,8 +94,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="number"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Quantity</label>
                               <div className={styles.line}></div>
@@ -113,9 +104,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Image Link</label>
                               <div className={styles.line}></div>
@@ -125,8 +113,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Genre</label>
                               <div className={styles.line}></div>
@@ -136,8 +122,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Price</label>
                               <div className={styles.line}></div>
@@ -149,8 +133,6 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="textarea"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Empty</label>
                               <div className={styles.line}></div>
@@ -164,13 +146,12 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                             ...{ marginBottom: "0%" },
                           }}
                         >
-                          {/* <label for="exampleFormControlTextarea1">
+                          <label htmlFor="exampleFormControlTextarea1">
                             Book Description
-                          </label> */}
+                          </label>
                           <textarea
                             className="form-control"
                             id="exampleFormControlTextarea1"
-                            // rows="3"
                           ></textarea>
                         </div>
                         <div className="row">

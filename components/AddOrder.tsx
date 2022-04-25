@@ -68,9 +68,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Name</label>
                               <div className={styles.line}></div>
@@ -80,9 +77,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Email</label>
                               <div className={styles.line}></div>
@@ -92,8 +86,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="date"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Date</label>
                               <div className={styles.line}></div>
@@ -108,8 +100,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>User ID</label>
                               <div className={styles.line}></div>
@@ -119,8 +109,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Total Price</label>
                               <div className={styles.line}></div>
@@ -133,8 +121,6 @@ const AddOrder = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <input
                                 type="text"
                                 //value={email}
-                                // required="required"
-                                // onChange={(e) => setEmail(e.target.value)}
                               />
                               <label>Empty</label>
                               <div className={styles.line}></div>

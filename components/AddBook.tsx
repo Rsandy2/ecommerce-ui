@@ -9,6 +9,7 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
+import { useForm } from "react-hook-form";
 
 type ModalProp = {
   addisOpen: boolean;
@@ -17,6 +18,21 @@ type ModalProp = {
 
 const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
   // const [cart, setCart] = useState<ShoppingCart[]>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const router = useRouter();
+  async function create(data) {
+    await axios.post("/api/createbook", data);
+    router.replace(router.asPath);
+  }
+  const onSubmit = (data) => {
+    console.log(data);
+    create(data);
+  };
+  console.log(errors);
 
   return (
     <>
@@ -60,15 +76,16 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                       <h1 className={styles.form_title}>Add</h1>
 
                       <form>
-                        {" "}
                         {/*onSubmit={registerUser}>*/}
                         <div className="row">
                           <div className="col-lg-6">
                             <div className={styles.form_content}>
                               <input
                                 type="text"
-                                //value={email}
+                                placeholder=""
+                                {...register("title")}
                               />
+
                               <label>Title</label>
                               <div className={styles.line}></div>
                             </div>
@@ -76,7 +93,8 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                             <div className={styles.form_content}>
                               <input
                                 type="text"
-                                //value={email}
+                                placeholder=""
+                                {...register("author")}
                               />
                               <label>Author</label>
                               <div className={styles.line}></div>
@@ -84,8 +102,9 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
 
                             <div className={styles.form_content}>
                               <input
-                                type="textarea"
-                                //value={email}
+                                type="text"
+                                placeholder=""
+                                {...register("description")}
                               />
                               <label>Description</label>
                               <div className={styles.line}></div>
@@ -99,7 +118,8 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                             <div className={styles.form_content}>
                               <input
                                 type="text"
-                                //value={email}
+                                placeholder=""
+                                {...register("vendorID")}
                               />
                               <label>Vendor</label>
                               <div className={styles.line}></div>
@@ -108,7 +128,8 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                             <div className={styles.form_content}>
                               <input
                                 type="text"
-                                //value={email}
+                                placeholder=""
+                                {...register("genre")}
                               />
                               <label>Genre</label>
                               <div className={styles.line}></div>
@@ -117,7 +138,8 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                             <div className={styles.form_content}>
                               <input
                                 type="text"
-                                //value={email}
+                                placeholder=""
+                                {...register("price")}
                               />
                               <label>Price</label>
                               <div className={styles.line}></div>
