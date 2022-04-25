@@ -24,6 +24,7 @@ const configuration = {
   },
   providers: [
     CredentialsProvider({
+      secret: process.env.SECRET,
       id: "credentials",
       name: "credentials",
       credentials: {},
