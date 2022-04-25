@@ -11,6 +11,7 @@ import session from "./api/session";
 import { useSession, getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 // import Footer from "../components/Footer";
+import axios from "axios";
 
 const notify = () => toast("Here is a toast.");
 
@@ -35,7 +36,7 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
   console.log(session);
   // const cartContext = createContext(cartData);
   async function getData() {
-    await fetch("http://localhost:3000/api/session");
+    await axios.post("/api/session");
   }
   const data = {
     title: "The Lightning Thief",
@@ -86,7 +87,6 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
             {/* <ProductCard productData={data2} />
             <ProductCard productData={data} />
             <ProductCard productData={data2} /> */}
-            <button onClick={getData}>Fwr</button>
 
             {bookData.map((book: any) => (
               <ProductCard productData={book} />
@@ -119,6 +119,7 @@ export async function getServerSideProps(context) {
       author: true,
       image: true,
       price: true,
+      isbn: true,
     },
   });
 
