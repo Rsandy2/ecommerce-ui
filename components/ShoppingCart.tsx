@@ -1,8 +1,8 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext, useEffect } from "react";
 import { BsPlus, BsDash } from "react-icons/bs";
 import { BsCart3, BsArrowLeft } from "react-icons/bs";
 import { Dialog, Transition } from "@headlessui/react";
-
+import CartContext from "../components/context/cartContext";
 type ModalProp = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,7 +10,29 @@ type ModalProp = {
 
 const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
   // const [cart, setCart] = useState<ShoppingCart[]>();
+  const cart = useContext(CartContext);
+  const [cartData, setCartData] = useState<any>({});
+  const [totalData, setTotalData] = useState(0);
 
+  //   console.log("shopping cart", cart[0]["books"]);
+
+  async function deleteCartItem(data: any) {
+    fetch("http://localhost:3000/api/cart-delete", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+  //   useEffect(() => {
+  //     // let cartObject = cart ? Object.assign(cart[0]["books"]) : {};
+  //     let cartObject = {};
+  //     setCartData(cartObject);
+
+  //     // cartData.forEach((item: any) => {
+  //     //   console.log("items, ", item);
+  //     //   setTotalData((totalData) => (totalData += item["price"]));
+  //     //   console.log(totalData, "total");
+  //     // });
+  //   }, [cartData, setTotalData]);
   return (
     <>
       <div>
@@ -72,52 +94,56 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                       </div>
 
                       {/* product */}
-                      <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                        <div className="flex w-2/5">
-                          <div className="w-20">
-                            <img
-                              className="h-24"
-                              src="https://www.adobe.com/express/create/cover/media_178ebed46ae02d6f3284c7886e9b28c5bb9046a02.jpeg?width=400&format=jpeg&optimize=medium"
-                              alt=""
-                            ></img>
-                          </div>
-                          <div className="flex flex-col justify-between ml-4 flex-grow">
-                            <span className="font-bold text-sm">
-                              Lunar Storm
-                            </span>
-                            <span className="text-red-500 text-xs">
-                              Terry Crosby
-                            </span>
-                            <a
-                              href="#"
-                              className="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                            >
-                              Remove
-                            </a>
-                          </div>
-                        </div>
-                        <div className="flex justify-center w-1/5">
-                          <button data-action="">
-                            <BsDash size="2rem" />
-                          </button>
-                          <input
-                            className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
-                            value="1"
-                          ></input>
-                          <button data-action="">
-                            <BsPlus size="2rem" />
-                          </button>
-                        </div>
-                        <span className="text-center w-1/5 font-semibold text-sm">
-                          $400.00
-                        </span>
-                        <span className="text-center w-1/5 font-semibold text-sm">
-                          $400.00
-                        </span>
-                      </div>
+                      {/* {cartData
+                        ? cartData.map((cartItem: any) => (
+                            <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                              <div className="flex w-2/5">
+                                <div className="w-20">
+                                  <img
+                                    className="h-24"
+                                    src={cartItem["image"]}
+                                    alt=""
+                                  ></img>
+                                </div>
+                                <div className="flex flex-col justify-between ml-4 flex-grow">
+                                  <span className="font-bold text-sm">
+                                    {cartItem["title"]}
+                                  </span>
+                                  <span className="text-red-500 text-xs">
+                                    {cartItem["author"]}
+                                  </span>
+                                  <a
+                                    href="#"
+                                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                                  >
+                                    Remove
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="flex justify-center w-1/5">
+                                <button data-action="">
+                                  <BsDash size="2rem" />
+                                </button>
+                                <input
+                                  className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
+                                  value="1"
+                                ></input>
+                                <button data-action="">
+                                  <BsPlus size="2rem" />
+                                </button>
+                              </div>
+                              <span className="text-center w-1/5 font-semibold text-sm">
+                                ${cart["price"]}.00
+                              </span>
+                              <span className="text-center w-1/5 font-semibold text-sm">
+                                $400.00
+                              </span>
+                            </div>
+                          ))
+                        : null} */}
 
                       {/* product */}
-                      <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                      {/* <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                         <div className="flex w-2/5">
                           <div className="w-20">
                             <img
@@ -159,7 +185,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                         <span className="text-center w-1/5 font-semibold text-sm">
                           $400.00
                         </span>
-                      </div>
+                      </div> */}
 
                       {/* continue shopping */}
                       <button
@@ -216,7 +242,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                       <div className="border-t mt-8">
                         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                           <span>Total cost</span>
-                          <span>$810</span>
+                          <span>${totalData}</span>
                         </div>
                         {/* checkout button */}
                         <button

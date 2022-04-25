@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id, name, email } = req.body;
+  const { id, username, email } = req.body;
 
   try {
     await prisma.user.update({
@@ -14,7 +14,7 @@ export default async function handler(
       },
       data: {
         id,
-        name,
+        username,
         email,
       },
     });
