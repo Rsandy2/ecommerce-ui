@@ -117,10 +117,10 @@ model Book {
   title         String
   author        String
   image         String?
-  publishedDate String
+  publishedDate String?
   description   String
-  genre         Genre          @default(GENERIC)
-  language      String
+  genre         Genre?          @default(GENERIC)
+  language      String?
   vendorId      String?
   promotionId   String?
   cardId        String?
