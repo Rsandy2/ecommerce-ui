@@ -5,9 +5,11 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import EditBook from "../components/EditBook";
 import AddBook from "../components/AddBook";
+import { prisma } from "../lib/prisma";
+
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
-export default function AdminPanel() {
+export default function AdminPanel({ booksData }) {
   const [inputs, setInputs] = useState({});
   //const [isOpen, setIsOpen] = React.useState(false);
   let [isOpen, setIsOpen] = useState(false);
@@ -67,41 +69,46 @@ export default function AdminPanel() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>123</td>
-                  <td>
-                    Harry Potter and the Goblet of Fire and Gumdrops. This is
-                    how long names will fit like this eeeeeee eeeeeeeeeeeeee
-                    eeeeeeeeeeeeeeeee eeeeeeeeee eeeeeeeee eeeeeeeeeeee
-                    eeeeeeeeeeeeee eeeeeeeee
-                  </td>
-                  <td>Scholastic</td>
-                  <td>1234567890123</td>
-                  <td>$9.99</td>
+                {booksData.map((book) => (
+                  <>
+                    <tr>
+                      <td>{book.id}</td>
+                      <td>
+                        Harry Potter and the Goblet of Fire and Gumdrops. This
+                        is how long names will fit like this eeeeeee
+                        eeeeeeeeeeeeee eeeeeeeeeeeeeeeee eeeeeeeeee eeeeeeeee
+                        eeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeee
+                      </td>
+                      <td>Scholastic</td>
+                      <td>1234567890123</td>
+                      <td>$9.99</td>
 
-                  <td>
-                    <a
-                      className="edit"
-                      data-toggle="modal"
-                      style={{ float: "left" }}
-                      onClick={() => setIsOpen(!isOpen)}
-                    >
-                      <EditBook isOpen={isOpen} setIsOpen={setIsOpen} />
-                      <i data-toggle="tooltip" title="Edit">
-                        <FaEdit />
-                      </i>
-                    </a>
-                    <a
-                      className="delete"
-                      data-toggle="modal"
-                      style={{ float: "right" }}
-                    >
-                      <i data-toggle="tooltip" title="Delete">
-                        <FaTrash />
-                      </i>
-                    </a>
-                  </td>
-                </tr>
+                      <td>
+                        <a
+                          className="edit"
+                          data-toggle="modal"
+                          style={{ float: "left" }}
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
+                          <EditBook isOpen={isOpen} setIsOpen={setIsOpen} />
+                          <i data-toggle="tooltip" title="Edit">
+                            <FaEdit />
+                          </i>
+                        </a>
+                        <a
+                          className="delete"
+                          data-toggle="modal"
+                          style={{ float: "right" }}
+                        >
+                          <i data-toggle="tooltip" title="Delete">
+                            <FaTrash />
+                          </i>
+                        </a>
+                      </td>
+                    </tr>
+                  </>
+                ))}
+
                 <tr>
                   <td>001</td>
                   <td>vendor</td>
@@ -186,6 +193,9 @@ export async function getServerSideProps() {
       isbn: true,
       title: true,
       price: true,
+      author: true,
+      description: true,
+      id: true,
     },
   });
   console.log(bookData);
