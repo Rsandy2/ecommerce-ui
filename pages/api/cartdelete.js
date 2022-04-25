@@ -3,10 +3,11 @@ import { prisma } from "../../lib/prisma";
 export default async function handler(req, res) {
   const { isbn, userId } = req.body;
 
+  //   console.log();
   try {
     await prisma.book.update({
       where: {
-        isbn: "0545227240",
+        isbn: isbn,
       },
       data: {
         shoppingCart: {
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
       },
     });
 
-    res.status(200).json({ message: "Endpoint Success" });
+    res.status(200).json({ message: isbn });
   } catch (err) {
     res.status(400).json({
       message: `Something went wrong :/ ${err}`,
