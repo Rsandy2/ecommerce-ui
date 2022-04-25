@@ -14,10 +14,9 @@ export default async function handler(
         isbn,
         title,
         author,
-        publishedDate,
+
         description,
         language,
-        image,
       },
     });
 
