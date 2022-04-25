@@ -3,36 +3,36 @@ import { BsPlus, BsDash } from "react-icons/bs";
 import { BsCart3, BsArrowLeft } from "react-icons/bs";
 import { Dialog, Transition } from "@headlessui/react";
 import CartContext from "../components/context/cartContext";
+import { useSession } from "next-auth/react";
+
 type ModalProp = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
+  const { data: session } = useSession();
+
   // const [cart, setCart] = useState<ShoppingCart[]>();
   const cart = useContext(CartContext);
+  const [bookData, setBookData] = useState({ isbn: "", session: "" });
   const [cartData, setCartData] = useState<any>({});
   const [totalData, setTotalData] = useState(0);
 
-  //   console.log("shopping cart", cart[0]["books"]);
-
   async function deleteCartItem(data: any) {
-    fetch("http://localhost:3000/api/cart-delete", {
+    await fetch("http://localhost:3000/api/cartdelete", {
       method: "POST",
       body: JSON.stringify(data),
     });
   }
-  //   useEffect(() => {
-  //     // let cartObject = cart ? Object.assign(cart[0]["books"]) : {};
-  //     let cartObject = {};
-  //     setCartData(cartObject);
+  useEffect(() => {
+    let cartObject = cart[0] ? Object.assign(cart[0]["books"]) : {};
+    let sessionObject = session ? Object.assign(session["user"]["userId"]) : "";
+    //   let cartObject = {};
+    setCartData(cartObject);
+    setBookData({ ...bookData, session: sessionObject });
+  }, [setCartData, setTotalData, setBookData]);
 
-  //     // cartData.forEach((item: any) => {
-  //     //   console.log("items, ", item);
-  //     //   setTotalData((totalData) => (totalData += item["price"]));
-  //     //   console.log(totalData, "total");
-  //     // });
-  //   }, [cartData, setTotalData]);
   return (
     <>
       <div>
@@ -94,54 +94,57 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                       </div>
 
                       {/* product */}
-                      {/* {cartData
-                        ? cartData.map((cartItem: any) => (
-                            <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                              <div className="flex w-2/5">
-                                <div className="w-20">
-                                  <img
-                                    className="h-24"
-                                    src={cartItem["image"]}
-                                    alt=""
-                                  ></img>
-                                </div>
-                                <div className="flex flex-col justify-between ml-4 flex-grow">
-                                  <span className="font-bold text-sm">
-                                    {cartItem["title"]}
-                                  </span>
-                                  <span className="text-red-500 text-xs">
-                                    {cartItem["author"]}
-                                  </span>
-                                  <a
-                                    href="#"
-                                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                                  >
-                                    Remove
-                                  </a>
-                                </div>
-                              </div>
-                              <div className="flex justify-center w-1/5">
-                                <button data-action="">
-                                  <BsDash size="2rem" />
-                                </button>
-                                <input
-                                  className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
-                                  value="1"
-                                ></input>
-                                <button data-action="">
-                                  <BsPlus size="2rem" />
-                                </button>
-                              </div>
-                              <span className="text-center w-1/5 font-semibold text-sm">
-                                ${cart["price"]}.00
-                              </span>
-                              <span className="text-center w-1/5 font-semibold text-sm">
-                                $400.00
-                              </span>
+                      {Object.keys(cartData).map((cartItem: any) => (
+                        <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                          <div className="flex w-2/5">
+                            <div className="w-20">
+                              <img
+                                className="h-24"
+                                src={cartItem["image"]}
+                                alt=""
+                              ></img>
                             </div>
-                          ))
-                        : null} */}
-
+                            <div className="flex flex-col justify-between ml-4 flex-grow">
+                              <span className="font-bold text-sm">
+                                {cartItem["title"]}
+                              </span>
+                              <span className="text-red-500 text-xs">
+                                {cartItem["author"]}
+                              </span>
+                              <button
+                                className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                                onClick={() => {
+                                  setBookData({
+                                    ...bookData,
+                                    isbn: cartItem["isbn"],
+                                  });
+                                  deleteCartItem(bookData);
+                                }}
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                          <div className="flex justify-center w-1/5">
+                            <button data-action="">
+                              <BsDash size="2rem" />
+                            </button>
+                            <input
+                              className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
+                              value="1"
+                            ></input>
+                            <button data-action="">
+                              <BsPlus size="2rem" />
+                            </button>
+                          </div>
+                          <span className="text-center w-1/5 font-semibold text-sm">
+                            ${cart["price"]}.00
+                          </span>
+                          <span className="text-center w-1/5 font-semibold text-sm">
+                            $400.00
+                          </span>
+                        </div>
+                      ))}
                       {/* product */}
                       {/* <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                         <div className="flex w-2/5">

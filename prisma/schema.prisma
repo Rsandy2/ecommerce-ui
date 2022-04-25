@@ -43,43 +43,57 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  username      String?   @unique
-  email         String?   @unique
-  password      String    @db.VarChar(250)
+  id            String        @id @default(cuid())
+  username      String?       @unique
+  email         String?       @unique
+  password      String        @db.VarChar(250)
   emailVerified DateTime?
   image         String?
-  userRole      String?   @default("user")
-  profile       Profile @relation(fields: [profileId], references: [id]) // references `id` of `Profile`
-  profileId     String // relation scalar field (used in the `@relation` attribute above)
-  shoppingCart  ShoppingCart?
-  promotions    Promotions[]
+  userRole      String?       @default("user")
+  profileId     String        @unique
+  profile       Profile       @relation(fields: [profileId], references: [id])
   accounts      Account[]
   sessions      Session[]
+  shoppingCart  ShoppingCart?
+  promotions    Promotions[]
+  cards         Payment[]
 }
 
-model Promotions{
-  id            String    @id @default(cuid())
-  user  User[] @relation(references: [id])
+model Promotions {
+  id            String @id @default(cuid())
+  user          User[]
+  books         Book[]
+  discountType  discountType? @default(FLAT)
+  discount      Float
 }
+
+enum discountType {
+  FLAT
+  PERCENTAGE
+}
+
 model Profile {
-  id     String  @id @default(cuid())
-  user   User? 
+  id      String   @id @default(cuid())
   address Address?
+  user    User?
 }
 
 model Address {
-  id        String      @default(cuid()) @unique
-  address   String
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String // relation scalar field (used in the `@relation` attribute above)
+  id               String  @unique @default(cuid())
+  address          String
+  profileId        String  @unique
+  City             String
+  State            String
+  Zip              Int
+  addressSecondary String?
+  profile          Profile @relation(fields: [profileId], references: [id])
 }
+
 model ShoppingCart {
-  id        String      @id @default(cuid())
-  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String 
-  books     Book[]
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  books  Book[]
 }
 
 model Vendor {
@@ -102,24 +116,45 @@ model Content {
 }
 
 model Book {
-  isbn          String      @id @unique
+  isbn          String         @id @unique
   title         String
   author        String
   image         String?
   publishedDate String
   description   String
-  genre         Genre    @default(GENERIC)
+  genre         Genre          @default(GENERIC)
   language      String
   vendorId      String?
+  promotionId   String?
   cardId        String?
-  price         Int?
-  Vendor        Vendor?  @relation(fields: [vendorId], references: [id])
-  shoppingCart  ShoppingCart[] @relation(references: [id])
+  price         Float?
+  Vendor        Vendor?        @relation(fields: [vendorId], references: [id])
+  shoppingCart  ShoppingCart[]
+  promotion     Promotions?    @relation(fields: [promotionId], references: [id])
 }
 
 enum Genre {
   ACTION
   COMEDY
+  SCIFI
+  ROMANCE
+  MYSTERY
   PHIL
   GENERIC
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  userId        String
+  cardNumber    Int
+  expiration    String
+  cvv           Int
+  type          CardType  @default(VISA)
+  user          User      @relation(fields: [userId], references: [id])
+}
+
+enum CardType {
+  VISA
+  DISCOVER
+  MASTERCARD
 }
