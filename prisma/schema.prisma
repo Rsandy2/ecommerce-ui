@@ -117,7 +117,8 @@ model Content {
 }
 
 model Book {
-  isbn          String         @id @unique
+  id            String          @id @unique @default(cuid())
+  isbn          String         @unique
   title         String
   author        String
   image         String?
