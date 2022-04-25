@@ -6,6 +6,8 @@ import { FaTrash } from "react-icons/fa";
 import EditBook from "../components/EditBook";
 import AddBook from "../components/AddBook";
 import { prisma } from "../lib/prisma";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
@@ -14,6 +16,14 @@ export default function AdminPanel({ booksData }) {
   //const [isOpen, setIsOpen] = React.useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [addisOpen, addsetIsOpen] = useState(false);
+  const router = useRouter();
+
+  async function deleteBook(data) {
+    const dataP = { id: data };
+    await axios.post("/api/deleteBook", dataP);
+    router.replace(router.asPath);
+    // console.log(data);
+  }
 
   return (
     <div
@@ -41,7 +51,7 @@ export default function AdminPanel({ booksData }) {
                       addisOpen={addisOpen}
                       addsetIsOpen={addsetIsOpen}
                     />
-                    <i className="material-icons">&#xE147;</i>{" "}
+                    <i className="material-icons">&#xE147;</i>
                     <span>Add New Book</span>
                   </a>
                   <a
@@ -50,7 +60,7 @@ export default function AdminPanel({ booksData }) {
                     data-toggle="modal"
                     style={{ float: "right" }}
                   >
-                    <i className="material-icons">&#xE15C;</i>{" "}
+                    <i className="material-icons">&#xE15C;</i>
                     <span>checkbox check delete [opt ingnore]</span>
                   </a>
                 </div>
@@ -61,7 +71,7 @@ export default function AdminPanel({ booksData }) {
                 <tr>
                   <th>Product ID?</th>
                   <th>Title</th>
-                  <th>Vendor</th>
+
                   <th>ISBN</th>
                   <th>Price</th>
 
@@ -69,75 +79,42 @@ export default function AdminPanel({ booksData }) {
                 </tr>
               </thead>
               <tbody>
-                {booksData.map((book) => (
-                  <>
-                    <tr>
-                      <td>{book.id}</td>
-                      <td>
-                        Harry Potter and the Goblet of Fire and Gumdrops. This
-                        is how long names will fit like this eeeeeee
-                        eeeeeeeeeeeeee eeeeeeeeeeeeeeeee eeeeeeeeee eeeeeeeee
-                        eeeeeeeeeeee eeeeeeeeeeeeee eeeeeeeee
-                      </td>
-                      <td>Scholastic</td>
-                      <td>1234567890123</td>
-                      <td>$9.99</td>
+                {booksData
+                  ? booksData.map((book) => (
+                      <>
+                        <tr>
+                          <td>{book.id}</td>
+                          <td>{book.title}</td>
 
-                      <td>
-                        <a
-                          className="edit"
-                          data-toggle="modal"
-                          style={{ float: "left" }}
-                          onClick={() => setIsOpen(!isOpen)}
-                        >
-                          <EditBook isOpen={isOpen} setIsOpen={setIsOpen} />
-                          <i data-toggle="tooltip" title="Edit">
-                            <FaEdit />
-                          </i>
-                        </a>
-                        <a
-                          className="delete"
-                          data-toggle="modal"
-                          style={{ float: "right" }}
-                        >
-                          <i data-toggle="tooltip" title="Delete">
-                            <FaTrash />
-                          </i>
-                        </a>
-                      </td>
-                    </tr>
-                  </>
-                ))}
+                          <td>{book.id}</td>
+                          <td>${book.price}99</td>
 
-                <tr>
-                  <td>001</td>
-                  <td>vendor</td>
-                  <td>name</td>
-                  <td>username</td>
-                  <td>email@gmail.com</td>
-
-                  <td>
-                    <a
-                      className="edit"
-                      data-toggle="modal"
-                      style={{ float: "left" }}
-                      onClick={() => setIsOpen(!isOpen)}
-                    >
-                      <i data-toggle="tooltip" title="Edit">
-                        <FaEdit />
-                      </i>
-                    </a>
-                    <a
-                      className="delete"
-                      data-toggle="modal"
-                      style={{ float: "right" }}
-                    >
-                      <i data-toggle="tooltip" title="Delete">
-                        <FaTrash />
-                      </i>
-                    </a>
-                  </td>
-                </tr>
+                          <td>
+                            <a
+                              className="edit"
+                              data-toggle="modal"
+                              style={{ float: "left" }}
+                              onClick={() => setIsOpen(!isOpen)}
+                            >
+                              <EditBook isOpen={isOpen} setIsOpen={setIsOpen} />
+                              <i data-toggle="tooltip" title="Edit">
+                                <FaEdit />
+                              </i>
+                            </a>
+                            <a
+                              className="delete"
+                              data-toggle="modal"
+                              style={{ float: "right" }}
+                            >
+                              <i data-toggle="tooltip" title="Delete">
+                                <FaTrash onClick={() => deleteBook(book.id)} />
+                              </i>
+                            </a>
+                          </td>
+                        </tr>
+                      </>
+                    ))
+                  : null}
               </tbody>
             </table>
             <div className="clearfix">
@@ -188,7 +165,7 @@ export default function AdminPanel({ booksData }) {
 }
 
 export async function getServerSideProps() {
-  const bookData = await prisma.book.findMany({
+  const booksData = await prisma.book.findMany({
     select: {
       isbn: true,
       title: true,
@@ -198,10 +175,10 @@ export async function getServerSideProps() {
       id: true,
     },
   });
-  console.log(bookData);
+  console.log(booksData);
   return {
     props: {
-      bookData,
+      booksData,
     },
   };
 }
