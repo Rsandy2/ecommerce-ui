@@ -25,15 +25,10 @@ export default async (req, res) => {
       req.body.userRole === "vendor"
         ? await prisma.vendor.create({
             data: {
-              vendor: {
-                create: {
-                  email: email,
-                  username: username,
-                  password: hash,
-                  userRole: userRole,
-                  book: { create: {} },
-                },
-              },
+              email: email,
+              username: username,
+              password: hash,
+              userRole: userRole,
             },
           })
         : console.log("No create");

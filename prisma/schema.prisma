@@ -87,7 +87,7 @@ model Address {
   state            String?
   zip              Int?
   addressSecondary String?
-  profile          Profile @relation(fields: [profileId], references: [id])
+  profile          Profile @relation(fields: [profileId], references: [id],onDelete: Cascade)
 }
 
 model ShoppingCart {
