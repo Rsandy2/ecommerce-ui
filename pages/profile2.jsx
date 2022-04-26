@@ -71,7 +71,7 @@ export default function Profile({ userData }) {
           </div>
         </div>
 
-        <a href="#">Forgot Password? [Don't implement unless we have time]</a>
+        <a href="#">Forgot Password?</a>
         <label
           className="form-check-label"
           for="checkSubscribe"
@@ -102,7 +102,7 @@ export default function Profile({ userData }) {
               title="Street"
               id="addressStreet"
               type="text"
-              value="170 Rainbow Ave for billing"
+              value="170 Rainbow Ave"
             />
 
             <FloatingInput
@@ -154,7 +154,7 @@ export default function Profile({ userData }) {
               title="Street"
               id="billStreet"
               type="text"
-              value="123 Wacky Way"
+              value="123 Green Ave"
             />
             <FloatingInput
               title="State"
@@ -175,7 +175,7 @@ export default function Profile({ userData }) {
               title="City"
               id="billCity"
               type="text"
-              value="Psych Port Town"
+              value="Port Town"
             />
             <FloatingInput
               title="Zip Code"
@@ -206,7 +206,7 @@ export default function Profile({ userData }) {
       <Toaster />
       <div id="page-wrap">
         <div className="" style={{ backgroundColor: "#B98B73" }}>
-          <Header />
+          {/* <Header /> */}
           {/* <Banner /> */}
         </div>
         <div className="container-sm my-4" style={card}>

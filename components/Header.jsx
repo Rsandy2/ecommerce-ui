@@ -64,8 +64,23 @@ const MenuSideBar = () => {
       <a id="" className="menu-item" href="/search">
         Search View
       </a>
-      <a id="" className="menu-item" href="/cartPage">
+      {/* <a id="" className="menu-item" href="/cartPage">
         Cart View
+      </a> */}
+      <a id="" className="menu-item" href="/adminBooks">
+        Admin Book View
+      </a>
+      <a id="" className="menu-item" href="/edit">
+        Admin Edit User
+      </a>
+      <a id="" className="menu-item" href="/adminOrders">
+        Admin Order View
+      </a>
+      <a id="" className="menu-item" href="/editprofile">
+        Edit Profile
+      </a>
+      <a id="" className="menu-item" href="/profile">
+        Profile
       </a>
       <a className="menu-item--small" href="">
         Settings
