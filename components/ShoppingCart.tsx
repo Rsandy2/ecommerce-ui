@@ -16,7 +16,9 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
   // const [cart, setCart] = useState<ShoppingCart[]>();
   const cart = useContext(CartContext);
   const [bookData, setBookData] = useState({ isbn: "", session: "" });
-  const [cartData, setCartData] = useState<any>([{}]);
+  const [cartData, setCartData] = useState<any>([
+    { title: "", author: "", price: "", image: "" },
+  ]);
   const [totalData, setTotalData] = useState(0);
   const { data: session } = useSession();
   const router = useRouter();
@@ -29,10 +31,9 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
     router.reload();
   }
   useEffect(() => {
-    let cartObject = cart[0] ? Object.assign(cart[0]["books"]) : {};
-
+    // let cartObject = cart[0] ? Object.assign(cart[0]["books"]) : {};
     //   let cartObject = {};
-    setCartData(cartObject);
+    // setCartData(cartObject);
   }, [setCartData, setTotalData, setBookData]);
 
   return (
@@ -138,7 +139,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                                   </button>
                                 </div>
                                 <span className="text-center w-1/5 font-semibold text-sm">
-                                  ${cart["price"]}.00
+                                  {/* ${cart["price"]}.00 */}
                                 </span>
                                 <span className="text-center w-1/5 font-semibold text-sm">
                                   $400.00

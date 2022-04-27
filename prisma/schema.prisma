@@ -55,6 +55,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   shoppingCart  ShoppingCart?
+  processedPayments    ProcessedPayments?
   promotions    Promotions[]
   cards         Payment[]
 }
@@ -77,6 +78,7 @@ model Profile {
   address Address?
   user    User?
   mobile  String?
+  birthdate String?
 }
 
 model Address {
@@ -159,4 +161,11 @@ enum CardType {
   VISA
   DISCOVER
   MASTERCARD
+}
+
+
+model ProcessedPayments {
+  id     String     @id @unique @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

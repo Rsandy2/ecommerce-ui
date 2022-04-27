@@ -1,6 +1,9 @@
 import { prisma } from "../lib/prisma";
 import { useSession, getSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
+
 export default function profile({ userData }) {
+  // console.log(userData.profile.address.address);
   return (
     <div className="flex items-center h-screen w-full justify-center">
       <div className="max-w-xs">
@@ -25,7 +28,23 @@ export default function profile({ userData }) {
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Address
                   </td>
-                  <td className="px-2 py-2">400 Pine Lane Rd</td>
+                  <td className="px-2 py-2">
+                    {userData.profile.address.address}
+                  </td>
+                  <td className="px-2 py-2">
+                    City:
+                    {userData.profile.address.city}
+                  </td>
+                  <tr>
+                    <td className="px-2 py-2">
+                      State:
+                      {userData.profile.address.state}
+                    </td>
+                  </tr>
+                  <td className="px-2 py-2">
+                    Zip:
+                    {userData.profile.address.zip}
+                  </td>
                 </tr>
                 <tr>
                   <td className="px-2 py-2 text-gray-500 font-semibold">
@@ -37,7 +56,7 @@ export default function profile({ userData }) {
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Email
                   </td>
-                  <td className="px-2 py-2">{userData.email}</td>
+                  <td className="px-2 py-2">{userData.profile.user.email}</td>
                 </tr>
               </tbody>
             </table>
@@ -55,21 +74,17 @@ export default function profile({ userData }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   //   const { data: session, status } = useSession();
-  const session = fetch("api/session");
+  const session = await getToken(context);
   console.log(session);
-  const userData = await prisma.user.findFirst({
+  const userData = await prisma.user.findUnique({
     where: {
-      email: session.user.email,
+      email: `${session ? session["token"]["user"]["email"] : ""}`,
     },
-    select: {
-      id: true,
-      username: true,
-      email: true,
-      userRole: true,
-    },
+    select: { profile: { select: { user: {}, address: {} } } },
   });
+
   console.log(userData);
   return {
     props: {
