@@ -104,7 +104,7 @@ export async function getServerSideProps(context) {
   // const session = await fetch("http://localhost:3000/api/session");
   // console.log(context);
   const Csession = await getToken(context);
-
+  console.log(Csession, "Csession");
   // console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({
