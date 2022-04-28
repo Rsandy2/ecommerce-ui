@@ -6,7 +6,7 @@ import SideBar from "../components/sideBar";
 import Header from "../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Home() {
+export default function Search() {
   const handleSearchChange = (event) => {
     console.log("The search type has been updated: " + event.target.value);
   };

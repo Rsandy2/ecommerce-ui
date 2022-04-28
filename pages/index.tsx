@@ -7,6 +7,7 @@ import { prisma } from "../lib/prisma";
 import Login from "../components/login";
 import { createContext, useContext } from "react";
 import CartContext from "../components/context/cartContext";
+import SessionContext from "../components/context/sessionContext";
 import session from "./api/session";
 import { useSession, getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
@@ -31,7 +32,7 @@ const notify = () => toast("Here is a toast.");
 //   };
 // }
 
-const Home: NextPage = ({ bookData, cartData }: any) => {
+const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
   const { data: session } = useSession();
   console.log(session);
   // const cartContext = createContext(cartData);
@@ -74,9 +75,11 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
     <div id="outer-container" className="bg-p1 h-screen w-full">
       <Toaster />
       <div id="page-wrap">
-        <CartContext.Provider value={cartData}>
-          <Header />
-        </CartContext.Provider>
+        <SessionContext.Provider value={Csession}>
+          <CartContext.Provider value={cartData}>
+            <Header />
+          </CartContext.Provider>
+        </SessionContext.Provider>
         <Banner />
 
         {/* product container */}
@@ -100,13 +103,13 @@ const Home: NextPage = ({ bookData, cartData }: any) => {
 export async function getServerSideProps(context) {
   // const session = await fetch("http://localhost:3000/api/session");
   // console.log(context);
-  const session = await getToken(context);
-
+  const Csession = await getToken(context);
+  console.log(Csession, "Csession");
   // console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({
     where: {
-      userId: `${session ? session["token"]["user"]["userId"] : ""}`,
+      userId: `${Csession ? Csession["token"]["user"]["userId"] : ""}`,
     },
     select: {
       books: true,
@@ -127,7 +130,7 @@ export async function getServerSideProps(context) {
     props: {
       bookData: bookData,
       cartData: cartData,
-      session: await getSession(context),
+      session: Csession,
     },
   };
 }
