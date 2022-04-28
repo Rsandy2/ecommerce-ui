@@ -8,7 +8,7 @@ import { BeakerIcon } from "@heroicons/react/solid";
 import styles from "../styles/Login.module.scss";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginStarted, setIsLoginStarted] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -17,7 +17,7 @@ export default function Login() {
   useEffect(() => {
     if (router.query.error) {
       setLoginError(router.query.error);
-      setEmail(router.query.email);
+      setUsername(router.query.username);
     }
   }, [router]);
 
@@ -26,7 +26,7 @@ export default function Login() {
     event.stopPropagation();
 
     signIn("credentials", {
-      email,
+      username,
       password,
       callbackUrl: `${window.location.origin}`,
       redirect: false,
@@ -46,7 +46,10 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-slate-500 h-screen w-full flex justify-center items-center">
+    <div
+      className="h-screen w-full flex justify-center items-center"
+      style={{ backgroundColor: "#DDBEA9" }}
+    >
       <div className={styles.logInTest}>
         <div className={styles.logInLeftPanel}>
           <div className={styles.img}></div>
@@ -82,18 +85,19 @@ export default function Login() {
             <h1 className={styles.form_title}>Welcome</h1>
 
             <form onSubmit={handleLogin}>
+              {" "}
+              {/*  USERNAME INSTEAD*/}
               {loginError}
               <div className={styles.form_content}>
                 <input
                   type="text"
-                  value={email}
+                  value={username}
                   required="required"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
-                <label>Email</label>
+                <label>Username</label>
                 <div className={styles.line}></div>
               </div>
-
               <div className={styles.form_content}>
                 <input
                   type="password"
@@ -104,7 +108,6 @@ export default function Login() {
                 <label>Password</label>
                 <div className={styles.line}></div>
               </div>
-
               <button type="submit">Login</button>
             </form>
             <div className={styles.signUp}>

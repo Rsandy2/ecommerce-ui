@@ -14,8 +14,26 @@ import { getToken } from "next-auth/jwt";
 // import Footer from "../components/Footer";
 import axios from "axios";
 
-const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
-  const { data: session } = useSession();
+const notify = () => toast("Here is a toast.");
+
+// export async function getServerSideProps() {
+//   const cart = await prisma.shoppingCart.findMany({
+//     where: {
+//       userId: "cl2dgsopn000007nu7g7tw4w3",
+//     },
+//     select: {
+//       books: true,
+//     },
+//   });
+//   return {
+//     props: {
+//       initialCart: cart,
+//     },
+//   };
+// }
+
+const Home: NextPage = ({ bookData, cartData, session }: any) => {
+  // const { data: session } = useSession();
   console.log(session);
   // const cartContext = createContext(cartData);
   async function getData() {
@@ -30,7 +48,7 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
     >
       <Toaster />
       <div id="page-wrap">
-        <SessionContext.Provider value={Csession}>
+        <SessionContext.Provider value={session}>
           <CartContext.Provider value={cartData}>
             <Header />
           </CartContext.Provider>
@@ -58,13 +76,13 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
 export async function getServerSideProps(context) {
   // const session = await fetch("http://localhost:3000/api/session");
   // console.log(context);
-  const Csession = await getToken(context);
-  // console.log(Csession, "Csession");
+  const session = await getToken(context);
+  console.log(session, "Csession works");
   // console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({
     where: {
-      userId: `${Csession ? Csession["token"]["user"]["userId"] : ""}`,
+      userId: `${session ? session?.token["user"]["userId"] : ""}`,
     },
     select: {
       books: true,
@@ -85,7 +103,7 @@ export async function getServerSideProps(context) {
     props: {
       bookData: bookData,
       cartData: cartData,
-      session: Csession,
+      session: session,
     },
   };
 }

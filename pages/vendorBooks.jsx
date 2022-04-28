@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import EditBook from "../components/VendorEditBook";
 import AddBook from "../components/VendorAddBook";
+import VendorHeader from "../components/VendorHeader";
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
 export default function VendorPanel() {
@@ -13,7 +14,10 @@ export default function VendorPanel() {
     let [addisOpen, addsetIsOpen] = useState(false);
 
 	return (
-		<div className="h-screen w-full flex justify-center items-center" style={{ backgroundColor: "#DDBEA9" }}>
+		<div className="container-fluid min-h-screen w-screen" style={{ backgroundColor: "#DDBEA9" }}>
+			<div className="" style={{ backgroundColor: "#B98B73" }}>
+				<VendorHeader />
+			</div>
 			<div className="container-xl">
 				<div className="table_responsive" style={{ marginTop: "10%" }}>
 					<div className={styles.table_wrapper}>

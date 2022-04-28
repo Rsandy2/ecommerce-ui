@@ -6,7 +6,7 @@ import { CgMenu } from "react-icons/cg";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
+import { useForm } from "react-hook-form";
 // make a new context
 const MyContext = React.createContext();
 
@@ -92,7 +92,20 @@ const MenuSideBar = () => {
 const header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { data: session } = useSession();
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const router = useRouter();
+  const onSubmit = (data) => {
+    console.log(data);
+    router.push(`/search/${data.search}`);
+  };
+  console.log(errors);
+  function submitSearch(data) {
+    console.log(data);
+  }
   return (
     <MyProvider>
       <MenuSideBar
@@ -111,15 +124,27 @@ const header = () => {
         <div className="flex-grow mx-2">
           <div className="wrapper">
             <div className=" bg-white rounded flex items-center w-full p-2 shadow-sm border border-gray-200">
-              <input
-                type="search"
-                placeholder="search..."
-                x-model="q"
-                className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
-              ></input>
-              <button className="flex items-center justify-center pl-3 pr-2 border-l border-slate-300">
-                <BsSearch size="1rem" color="gray" />
-              </button>
+              {/* <input
+                  type="text"
+                  placeholder="search..."
+                  x-model="q"
+                  className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
+                ></input> */}
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="text"
+                  className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
+                  x-model="q"
+                  placeholder="search..."
+                  {...register("search", {})}
+                />
+                <button
+                  type="submit"
+                  className="flex items-center justify-center pl-3 pr-2 border-l border-slate-300"
+                >
+                  <BsSearch size="1rem" color="gray" />
+                </button>
+              </form>
             </div>
           </div>
         </div>

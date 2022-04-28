@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
+import axios from "axios";
 
 let userAccount = null;
 const prisma = new PrismaClient();
@@ -22,6 +23,7 @@ const configuration = {
     jwt: true,
     maxAge: 30 * 24 * 60 * 60,
   },
+
   providers: [
     CredentialsProvider({
       secret: process.env.SECRET,
@@ -129,9 +131,11 @@ const configuration = {
 
     async jwt(token, user, account, profile, isNewUser) {
       // console.log("JWT", user);
-      if (typeof user !== typeof undefined) {
-        token.user = user;
-      }
+      // if (typeof user !== typeof undefined) {
+      //   token.user = user;
+      // }
+      token.user = userAccount;
+      console.log(token);
       return token;
     },
   },

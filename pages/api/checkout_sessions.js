@@ -11,6 +11,11 @@ export default async function handler(req, res) {
             price: "price_1Kt46lDtQGvrlAZBivqXaHpf",
             quantity: 1,
           },
+
+          {
+            price: "price_1KtNbXDtQGvrlAZBgh1g1qQx",
+            quantity: 2,
+          },
         ],
         mode: "payment",
         success_url: `${req.headers.origin}/?success=true`,
