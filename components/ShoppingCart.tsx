@@ -19,6 +19,8 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
   const [cartData, setCartData] = useState<any>([
     { title: "", author: "", price: "", image: "" },
   ]);
+
+  const [listItems, setListItems] = useState([]);
   const [totalData, setTotalData] = useState(0);
   const { data: session } = useSession();
   const router = useRouter();
@@ -31,8 +33,8 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
     router.reload();
   }
   useEffect(() => {
-    if (cart[0] != null) {
-      setCartData(cart[0]["books"]);
+    if (cart != null) {
+      setCartData(cart[0]?.books);
     }
     //   let cartObject = {};
     // setCartData(cartObject);
@@ -82,7 +84,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                           Shopping Cart
                         </h1>
                         <h2 className="font-semibold text-2xl">
-                          {cartData.length} Items
+                          {cartData?.length} Items
                         </h2>
                       </div>
                       <div className="flex mt-10 mb-5">
@@ -102,57 +104,67 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
 
                       {/* product */}
                       <div className="h-full   overflow-y-scroll overflow-x-hidden	">
-                        {Object.keys(cartData).length > 0
-                          ? cartData.map(
-                              (cartItem: any) => (
-                                <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                                  <div className="flex w-2/5">
-                                    <div className="w-20">
-                                      <img
-                                        className="h-24"
-                                        src={cartItem["image"]}
-                                        alt=""
-                                      ></img>
+                        {cartData
+                          ? Object.keys(cartData)?.length > 0
+                            ? cartData.map(
+                                (cartItem: any) => (
+                                  <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                                    <div className="flex w-2/5">
+                                      <div className="w-20">
+                                        <img
+                                          className="h-24"
+                                          src={cartItem["image"]}
+                                          alt=""
+                                        ></img>
+                                      </div>
+                                      <div className="flex flex-col justify-between ml-4 flex-grow">
+                                        <span className="font-bold text-sm">
+                                          {cartItem["title"]}
+                                        </span>
+                                        <span className="text-red-500 text-xs">
+                                          {cartItem["author"]}
+                                        </span>
+                                        <button
+                                          className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                                          onClick={() => {
+                                            deleteCartItem(cartItem["isbn"]);
+                                          }}
+                                        >
+                                          Remove
+                                        </button>
+                                      </div>
                                     </div>
-                                    <div className="flex flex-col justify-between ml-4 flex-grow">
-                                      <span className="font-bold text-sm">
-                                        {cartItem["title"]}
-                                      </span>
-                                      <span className="text-red-500 text-xs">
-                                        {cartItem["author"]}
-                                      </span>
-                                      <button
-                                        className="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                                        onClick={() => {
-                                          deleteCartItem(cartItem["isbn"]);
+                                    <div className="flex justify-center w-1/5">
+                                      <button data-action="">
+                                        <BsDash size="2rem" />
+                                      </button>
+                                      <input
+                                        className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
+                                        onChange={(e) => {
+                                          setListItems((listItems) => [
+                                            ...listItems,
+                                            {
+                                              productId: cartItem?.productId,
+                                              quantity: e.target.value,
+                                            },
+                                          ]);
                                         }}
-                                      >
-                                        Remove
+                                      ></input>
+                                      <button data-action="">
+                                        <BsPlus size="2rem" />
                                       </button>
                                     </div>
+                                    <span className="text-center w-1/5 font-semibold text-sm">
+                                      {/* ${cart["price"]}.00 */}
+                                    </span>
+                                    <span className="text-center w-1/5 font-semibold text-sm">
+                                      $400.00
+                                    </span>
                                   </div>
-                                  <div className="flex justify-center w-1/5">
-                                    <button data-action="">
-                                      <BsDash size="2rem" />
-                                    </button>
-                                    <input
-                                      className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
-                                      value="1"
-                                    ></input>
-                                    <button data-action="">
-                                      <BsPlus size="2rem" />
-                                    </button>
-                                  </div>
-                                  <span className="text-center w-1/5 font-semibold text-sm">
-                                    {/* ${cart["price"]}.00 */}
-                                  </span>
-                                  <span className="text-center w-1/5 font-semibold text-sm">
-                                    $400.00
-                                  </span>
-                                </div>
+                                )
+                                // console.log(Object.keys(cartItem))
                               )
-                              // console.log(Object.keys(cartItem))
-                            )
+                            : null
                           : null}
                       </div>
                       {/* product */}

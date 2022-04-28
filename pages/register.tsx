@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
 import { Dialog, Transition } from "@headlessui/react";
+import { useForm } from "react-hook-form";
 
 export default function RegisterPage() {
   const [userRole, setUserRole] = useState("user");
@@ -54,32 +55,48 @@ export default function RegisterPage() {
 }
 
 function Register(props: any) {
+  /*
+  const [fullname, setfullname] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  */
+
   let [isOpen, setIsOpen] = useState(true);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    registerUser(data);
+  };
+  console.log(errors);
+
   const router = useRouter();
-  const registerUser = async (event: any) => {
-    event.preventDefault();
-
-    const data = {
-      username: username,
-      email: email,
-      password: password,
-      userRole: props.userRole,
-    };
-
-    await axios.post("/api/register", data);
+  const registerUser = async (data: any) => {
+    await axios.post("/api/create", data);
     // fetch("/api/register", {
     //   method: "POST",
     //   body: JSON.stringify(data),
     // });
+    let username = data?.username;
+    let email = data?.email;
+    let password = data?.password;
 
     signIn("credentials", {
       username,
       email,
       password,
+      data,
       callbackUrl: `${window.location.origin}`,
       redirect: false,
     })
@@ -134,8 +151,11 @@ function Register(props: any) {
                 {/* modal content */}
                 <div>
                   <div className=" h-screen w-full flex justify-center items-center">
-                    <div className={styles.logInTest} >
-                      <div className={styles.logInRightPanel} style={{ width: "90%" }}>
+                    <div className={styles.logInTest}>
+                      <div
+                        className={styles.logInRightPanel}
+                        style={{ width: "90%" }}
+                      >
                         <div
                           className={styles.escapeLogIn}
                           onClick={closeModal}
@@ -154,102 +174,108 @@ function Register(props: any) {
                           </svg>
                         </div>
                         <div className={styles.form_container}>
-                          <h1 className={styles.form_title}>
-                            Register: {props.userRole}
-                          </h1>
+                          <h1 className={styles.form_title}>Add</h1>
 
-                          <form onSubmit={registerUser}>
+                          <form onSubmit={handleSubmit(onSubmit)}>
+                            {/*onSubmit={registerUser}>*/}
                             <div className="row">
                               <div className="col-lg-6">
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={email}
-
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder=""
+                                    {...register("username", {
+                                      required: true,
+                                      maxLength: 20,
+                                    })}
                                   />
-                                  <label>Full Name</label>
-                                  <div className={styles.line}></div>
-                                </div>
 
-                                <div className={styles.form_content}>
-                                  <input
-                                    type="date"
-                                    value={email}
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                  />
-                                  <label>Birth Date</label>
+                                  <label>Username</label>
                                   <div className={styles.line}></div>
                                 </div>
 
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={email}
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder=""
+                                    {...register("email", {
+                                      required: true,
+                                      pattern: /^\S+@\S+$/i,
+                                    })}
                                   />
-                                  <label>City</label>
+
+                                  <label>Email</label>
                                   <div className={styles.line}></div>
                                 </div>
 
-                                
-                                <div className={styles.form_content}>
-                                  <input
-                                    type="text"
-                                    value={email}
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                  />
-                                  <label>Zip Code</label>
-                                  <div className={styles.line}></div>
-                                </div>
-
-                              
                                 <div className={styles.form_content}>
                                   <input
                                     type="password"
-                                    value={password}
-                                    required="required"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder=""
+                                    {...register("password", {
+                                      required: true,
+                                      min: 4,
+                                    })}
                                   />
+
                                   <label>Password</label>
                                   <div className={styles.line}></div>
                                 </div>
 
+                                <div className={styles.form_content}>
+                                  <select
+                                    {...register("userRole", {
+                                      required: true,
+                                    })}
+                                  >
+                                    <option value="user">User</option>
+                                    <option value="vendor">Vendor</option>
+                                  </select>
+
+                                  <div className={styles.line}></div>
+                                  <label>UserRole</label>
+                                </div>
+
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="datetime"
+                                    placeholder=""
+                                    {...register("birthDate", {})}
+                                  />
+
+                                  <label>BirthDate</label>
+                                  <div className={styles.line}></div>
+                                </div>
                               </div>
                               <div className="col-lg-6">
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={email}
+                                    placeholder=""
+                                    {...register("address", {})}
+                                  />
 
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                  />
-                                  <label>Email</label>
+                                  <label>Address</label>
                                   <div className={styles.line}></div>
                                 </div>
+
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={email}
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder=""
+                                    {...register("city", {})}
                                   />
-                                  <label>Street</label>
+                                  <label>City</label>
                                   <div className={styles.line}></div>
                                 </div>
-                              
+
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={email}
-                                    required="required"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder=""
+                                    {...register("state", {})}
                                   />
+
                                   <label>State</label>
                                   <div className={styles.line}></div>
                                 </div>
@@ -257,31 +283,32 @@ function Register(props: any) {
                                 <div className={styles.form_content}>
                                   <input
                                     type="text"
-                                    value={username}
-                                    required="required"
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    placeholder=""
+                                    {...register("zipcode", {})}
                                   />
-                                  <label>Username</label>
+
+                                  <label>Zip Code</label>
                                   <div className={styles.line}></div>
                                 </div>
-
 
                                 <div className={styles.form_content}>
                                   <input
-                                    type="password"
-                                    value={password}
-                                    required="required"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    type="tel"
+                                    placeholder=""
+                                    {...register("phonenumber", {
+                                      required: true,
+                                      minLength: 6,
+                                      maxLength: 12,
+                                    })}
                                   />
-                                  <label>Confirm Password</label>
+
+                                  <label>Phone Number</label>
                                   <div className={styles.line}></div>
                                 </div>
-
-                                <button type="submit">Register</button>
+                                <button type="submit">Add</button>
                               </div>
                             </div>
                           </form>
-                          <div className={styles.signUp}></div>
                         </div>
                       </div>
                     </div>

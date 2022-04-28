@@ -38,7 +38,7 @@ const ProductCard = (props: CardProps) => {
       <div className="relative">
         <img className="w-full rounded-xl" src={image} alt={altText} />
         <p className="absolute top-0 right-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-tr-lg rounded-bl-lg">
-          $ {price}.99
+          $ {price}
         </p>
       </div>
 

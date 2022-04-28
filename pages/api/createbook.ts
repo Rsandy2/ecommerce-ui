@@ -16,6 +16,7 @@ export default async function handler(
     language,
     image,
     price,
+    genre,
   } = req.body;
 
   try {
@@ -40,6 +41,7 @@ export default async function handler(
         image,
         description,
         language,
+        genre,
         publishedDate,
         price: parseFloat(price),
         productId: createProduct?.data?.message.id,

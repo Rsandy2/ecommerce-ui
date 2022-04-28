@@ -91,10 +91,9 @@ const Home: NextPage = ({ bookData, cartData, session }: any) => {
             <ProductCard productData={data} />
             <ProductCard productData={data2} /> */}
 
-            {bookData.map((book: any) =>
-              // <ProductCard productData={book} />
-              console.log(book)
-            )}
+            {bookData.map((book: any) => (
+              <ProductCard productData={book} />
+            ))}
           </div>
         </div>
       </div>
@@ -124,6 +123,8 @@ export async function getServerSideProps(context) {
       image: true,
       price: true,
       isbn: true,
+      productId: true,
+      priceId: true,
     },
   });
 

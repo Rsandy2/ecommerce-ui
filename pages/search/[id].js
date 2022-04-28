@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "../components/product";
-import SearchView from "../components/searchView";
-import SideBar from "../components/sideBar";
+import "../../components/product";
+import SearchView from "../../components/searchView";
+import SideBar from "../../components/sideBar";
 // import MenuSideBar from "../components/MenuSideBar";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Search() {
@@ -41,11 +41,11 @@ export default function Search() {
                 <option value="author">Search by Author</option>
                 <option value="isbn">Search by ISBN</option>
               </select>
-              <input
+              {/* <input
                 type="text"
                 className="form-control"
                 placeholder="Sample Search"
-              />
+              /> */}
             </div>
           </form>
 
@@ -62,3 +62,9 @@ export default function Search() {
     </div>
   );
 }
+
+// export async function getStaticProps() {
+//   console.log("/search/[id]");
+//   // Pass post data to the page via props
+//   return { props: {} };
+// }
