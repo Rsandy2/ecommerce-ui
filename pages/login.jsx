@@ -8,7 +8,7 @@ import { BeakerIcon } from "@heroicons/react/solid";
 import styles from "../styles/Login.module.scss";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginStarted, setIsLoginStarted] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -17,7 +17,7 @@ export default function Login() {
   useEffect(() => {
     if (router.query.error) {
       setLoginError(router.query.error);
-      setEmail(router.query.email);
+      setUsername(router.query.username);
     }
   }, [router]);
 
@@ -26,7 +26,7 @@ export default function Login() {
     event.stopPropagation();
 
     signIn("credentials", {
-      email,
+      username,
       password,
       callbackUrl: `${window.location.origin}`,
       redirect: false,
@@ -46,16 +46,15 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-slate-500 h-screen w-full flex justify-center items-center">
+    <div className="h-screen w-full flex justify-center items-center" style={{backgroundColor: "#DDBEA9"}}>
       <div className={styles.logInTest}>
         <div className={styles.logInLeftPanel}>
           <div className={styles.img}></div>
           <div className={styles.logInLeftTitleCard}>
-            <h1>The Interactive look into new origins</h1>
+            <h1>Knowledge at your fingertips</h1>
             <p>
-              The rousing soundtrack imbues the film with a thrilling power, and
-              builds to a tremendous climax, offering an all-round exhilarating
-              experience for the viewer.
+            Bogus Books offers a wide variety of books at your perusal. 
+            Finding and buying a book you like has never been easier.
             </p>
           </div>
         </div>
@@ -77,16 +76,16 @@ export default function Login() {
           <div className={styles.form_container}>
             <h1 className={styles.form_title}>Welcome</h1>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin}> {/*  USERNAME INSTEAD*/}
               {loginError}
               <div className={styles.form_content}>
                 <input
                   type="text"
-                  value={email}
+                  value={username}
                   required="required"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
-                <label>Email</label>
+                <label>Username</label>
                 <div className={styles.line}></div>
               </div>
 

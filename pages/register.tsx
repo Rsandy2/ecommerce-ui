@@ -134,20 +134,8 @@ function Register(props: any) {
                 {/* modal content */}
                 <div>
                   <div className=" h-screen w-full flex justify-center items-center">
-                    <div className={styles.logInTest}>
-                      <div className={styles.logInLeftPanel}>
-                        <div className={styles.img}></div>
-                        <div className={styles.logInLeftTitleCard}>
-                          <h1>The Interactive look into new origins</h1>
-                          <p>
-                            The rousing soundtrack imbues the film with a
-                            thrilling power, and builds to a tremendous climax,
-                            offering an all-round exhilarating experience for
-                            the viewer.
-                          </p>
-                        </div>
-                      </div>
-                      <div className={styles.logInRightPanel}>
+                    <div className={styles.logInTest} >
+                      <div className={styles.logInRightPanel} style={{ width: "90%" }}>
                         <div
                           className={styles.escapeLogIn}
                           onClick={closeModal}
@@ -171,39 +159,127 @@ function Register(props: any) {
                           </h1>
 
                           <form onSubmit={registerUser}>
-                            <div className={styles.form_content}>
-                              <input
-                                type="text"
-                                value={username}
-                                // required="required"
-                                onChange={(e) => setUsername(e.target.value)}
-                              />
-                              <label>Username</label>
-                              <div className={styles.line}></div>
-                            </div>
-                            <div className={styles.form_content}>
-                              <input
-                                type="text"
-                                value={email}
-                                // required="required"
-                                onChange={(e) => setEmail(e.target.value)}
-                              />
-                              <label>Email</label>
-                              <div className={styles.line}></div>
-                            </div>
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
 
-                            <div className={styles.form_content}>
-                              <input
-                                type="password"
-                                value={password}
-                                // required="required"
-                                onChange={(e) => setPassword(e.target.value)}
-                              />
-                              <label>Password</label>
-                              <div className={styles.line}></div>
-                            </div>
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>Full Name</label>
+                                  <div className={styles.line}></div>
+                                </div>
 
-                            <button type="submit">Register</button>
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="date"
+                                    value={email}
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>Birth Date</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>City</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                                
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>Zip Code</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                              
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="password"
+                                    value={password}
+                                    required="required"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                  />
+                                  <label>Password</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                              </div>
+                              <div className="col-lg-6">
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
+
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>Email</label>
+                                  <div className={styles.line}></div>
+                                </div>
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>Street</label>
+                                  <div className={styles.line}></div>
+                                </div>
+                              
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={email}
+                                    required="required"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                  />
+                                  <label>State</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="text"
+                                    value={username}
+                                    required="required"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                  />
+                                  <label>Username</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+
+                                <div className={styles.form_content}>
+                                  <input
+                                    type="password"
+                                    value={password}
+                                    required="required"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                  />
+                                  <label>Confirm Password</label>
+                                  <div className={styles.line}></div>
+                                </div>
+
+                                <button type="submit">Register</button>
+                              </div>
+                            </div>
                           </form>
                           <div className={styles.signUp}></div>
                         </div>
