@@ -17,6 +17,8 @@ export default async function handler(
     image,
     price,
     genre,
+    userRole,
+    email,
   } = req.body;
 
   try {
@@ -49,7 +51,19 @@ export default async function handler(
       },
     });
 
-    console.log(setPrice, "Set Price");
+    if (userRole === "vendor") {
+      await prisma.vendor.update({
+        where: { email: email },
+        data: {
+          books: {
+            connect: {
+              isbn: isbn,
+            },
+          },
+        },
+      });
+    }
+
     res.status(200).json({ message: "Endpoint Success" });
   } catch (err) {
     res.status(400).json({

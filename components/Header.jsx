@@ -67,6 +67,13 @@ const MenuSideBar = () => {
       <a id="" className="menu-item" href="/cartPage">
         Cart View
       </a>
+      <button
+        id=""
+        className="menu-item"
+        onClick={() => router.push("/vendorBooks")}
+      >
+        Vendor Books
+      </button>
       <a className="menu-item--small" href="">
         Settings
       </a>

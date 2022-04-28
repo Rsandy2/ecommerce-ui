@@ -14,6 +14,9 @@ const confirmPasswordHash = (plainPassword, hashedPassword) => {
     });
   });
 };
+const basicCompare = (x, y) => {
+  return x === y;
+};
 
 const configuration = {
   cookie: {

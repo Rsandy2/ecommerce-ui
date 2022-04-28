@@ -27,7 +27,7 @@ export default async (req, res) => {
             data: {
               email: email,
               username: username,
-              password: hash,
+              password: password,
               userRole: userRole,
             },
           })

@@ -46,15 +46,18 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen w-full flex justify-center items-center" style={{backgroundColor: "#DDBEA9"}}>
+    <div
+      className="h-screen w-full flex justify-center items-center"
+      style={{ backgroundColor: "#DDBEA9" }}
+    >
       <div className={styles.logInTest}>
         <div className={styles.logInLeftPanel}>
           <div className={styles.img}></div>
           <div className={styles.logInLeftTitleCard}>
             <h1>Knowledge at your fingertips</h1>
             <p>
-            Bogus Books offers a wide variety of books at your perusal. 
-            Finding and buying a book you like has never been easier.
+              Bogus Books offers a wide variety of books at your perusal.
+              Finding and buying a book you like has never been easier.
             </p>
           </div>
         </div>
@@ -76,7 +79,9 @@ export default function Login() {
           <div className={styles.form_container}>
             <h1 className={styles.form_title}>Welcome</h1>
 
-            <form onSubmit={handleLogin}> {/*  USERNAME INSTEAD*/}
+            <form onSubmit={handleLogin}>
+              {" "}
+              {/*  USERNAME INSTEAD*/}
               {loginError}
               <div className={styles.form_content}>
                 <input
@@ -88,7 +93,6 @@ export default function Login() {
                 <label>Username</label>
                 <div className={styles.line}></div>
               </div>
-
               <div className={styles.form_content}>
                 <input
                   type="password"
@@ -99,7 +103,6 @@ export default function Login() {
                 <label>Password</label>
                 <div className={styles.line}></div>
               </div>
-
               <button type="submit">Login</button>
             </form>
             <div className={styles.signUp}>
