@@ -14,24 +14,6 @@ import { getToken } from "next-auth/jwt";
 // import Footer from "../components/Footer";
 import axios from "axios";
 
-const notify = () => toast("Here is a toast.");
-
-// export async function getServerSideProps() {
-//   const cart = await prisma.shoppingCart.findMany({
-//     where: {
-//       userId: "cl2dgsopn000007nu7g7tw4w3",
-//     },
-//     select: {
-//       books: true,
-//     },
-//   });
-//   return {
-//     props: {
-//       initialCart: cart,
-//     },
-//   };
-// }
-
 const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
   const { data: session } = useSession();
   console.log(session);
@@ -39,40 +21,13 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
   async function getData() {
     await axios.post("/api/session");
   }
-  const data = {
-    title: "The Lightning Thief",
-    author: "Rick Riordan",
-    image: "https://images-na.ssl-images-amazon.com/images/I/91RQ5d-eIqL.jpg",
-    altText: "Percy Jackson Book Cover",
-    price: "$15.00",
-  };
-
-  const data2 = {
-    bookTitle: "City of Bones",
-    authorName: "Cassandra Clare",
-    bookCoverUrl:
-      "https://images-na.ssl-images-amazon.com/images/I/81GvNdZqETL.jpg",
-    altText: "City of Bones Book Cover",
-    bookPrice: "$15.00",
-  };
-
-  // async function test() {
-  //   const cart = await prisma.shoppingCart.findMany({
-  //     where: {
-  //       userId: "cl2dgsopn000007nu7g7tw4w3",
-  //     },
-  //     select: {
-  //       books: true,
-  //     },
-  //   });
-
-  //   console.log(cart);
-  // }
-
-  // test();
 
   return (
-    <div id="outer-container" className="bg-p1 h-screen w-full">
+    <div
+      id="outer-container"
+      className="bg-p1 h-screen w-full"
+      style={{ backgroundColor: "#dfbea9" }}
+    >
       <Toaster />
       <div id="page-wrap">
         <SessionContext.Provider value={Csession}>
@@ -83,16 +38,16 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
         <Banner />
 
         {/* product container */}
-        <div className="flex flex-col items-center">
-          <h1 className=" text-coffee text-3xl m-6">Trending Books</h1>
-          <div className="flex justify-center content-evenly space-x-6">
-            {/* <ProductCard productData={data} /> */}
-            {/* <ProductCard productData={data2} />
-            <ProductCard productData={data} />
-            <ProductCard productData={data2} /> */}
-
+        <div
+          className="flex flex-col items-center"
+          style={{ backgroundColor: "#dfbea9" }}
+        >
+          <h1 className="text-coffee text-3xl m-6">Book Library</h1>
+          <div className="flex justify-center content-evenly space-x-2 flex-wrap">
             {bookData.map((book: any) => (
-              <ProductCard productData={book} />
+              <div className="w-1/5" style={{ margin: "0rem 1rem 0rem 1rem" }}>
+                <ProductCard productData={book} />
+              </div>
             ))}
           </div>
         </div>
@@ -104,7 +59,7 @@ export async function getServerSideProps(context) {
   // const session = await fetch("http://localhost:3000/api/session");
   // console.log(context);
   const Csession = await getToken(context);
-  console.log(Csession, "Csession");
+  // console.log(Csession, "Csession");
   // console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({

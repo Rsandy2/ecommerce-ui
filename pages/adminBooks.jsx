@@ -25,13 +25,22 @@ export default function AdminPanel({ booksData }) {
     router.replace(router.asPath);
   }
 
+  const card = {
+    backgroundColor: "white",
+    padding: "3rem 3rem 5rem 3rem",
+    boxShadow: "0px 2px 5px #B98B73",
+    borderRadius: ".25rem",
+    marginBottom: "1rem",
+    marginTop: "2rem",
+  };
+
   return (
     <div
       className="h-screen w-full flex justify-center items-center"
       style={{ backgroundColor: "#DDBEA9" }}
     >
-      <div className="container-xl">
-        <div className="table_responsive" style={{ marginTop: "10%" }}>
+      <div className="container-lg" style={card}>
+        <div className="table_responsive">
           <div className={styles.table_wrapper}>
             <div className={styles.table_title}>
               <div className="row">
@@ -87,7 +96,7 @@ export default function AdminPanel({ booksData }) {
                           <td>{book.title}</td>
 
                           <td>{book.id}</td>
-                          <td>${book.price}99</td>
+                          <td>${book.price}</td>
 
                           <td>
                             <a
@@ -117,7 +126,7 @@ export default function AdminPanel({ booksData }) {
                   : null}
               </tbody>
             </table>
-            <div className="clearfix">
+            {/* <div className="clearfix">
               <div className="hint_text">
                 Showing <b>5</b> out of <b>25</b> entries
               </div>
@@ -156,7 +165,7 @@ export default function AdminPanel({ booksData }) {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
