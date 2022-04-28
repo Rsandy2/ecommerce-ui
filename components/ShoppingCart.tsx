@@ -273,7 +273,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                         </select>
                       </div> */}
 
-                      {/* <div className="py-10">
+                      <div className="py-10">
                         <label
                           htmlFor="promo"
                           className="font-semibold inline-block mb-3 text-sm uppercase"
@@ -286,7 +286,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                           placeholder="Enter your code"
                           className="p-2 text-sm w-full"
                         ></input>
-                      </div> */}
+                      </div>
                       {/* <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
                         Apply
                       </button> */}
