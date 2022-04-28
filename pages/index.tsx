@@ -32,8 +32,8 @@ const notify = () => toast("Here is a toast.");
 //   };
 // }
 
-const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
-  const { data: session } = useSession();
+const Home: NextPage = ({ bookData, cartData, session }: any) => {
+  // const { data: session } = useSession();
   console.log(session);
   // const cartContext = createContext(cartData);
   async function getData() {
@@ -75,7 +75,7 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
     <div id="outer-container" className="bg-p1 h-screen w-full">
       <Toaster />
       <div id="page-wrap">
-        <SessionContext.Provider value={Csession}>
+        <SessionContext.Provider value={session}>
           <CartContext.Provider value={cartData}>
             <Header />
           </CartContext.Provider>
@@ -91,9 +91,10 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
             <ProductCard productData={data} />
             <ProductCard productData={data2} /> */}
 
-            {bookData.map((book: any) => (
-              <ProductCard productData={book} />
-            ))}
+            {bookData.map((book: any) =>
+              // <ProductCard productData={book} />
+              console.log(book)
+            )}
           </div>
         </div>
       </div>
@@ -103,13 +104,13 @@ const Home: NextPage = ({ bookData, cartData, Csession }: any) => {
 export async function getServerSideProps(context) {
   // const session = await fetch("http://localhost:3000/api/session");
   // console.log(context);
-  const Csession = await getToken(context);
-  console.log(Csession, "Csession");
+  const session = await getToken(context);
+  console.log(session, "Csession works");
   // console.log("hrhhhhhh", session["token"]["user"]["userId"]);
   // const prisma = new PrismaClient();
   const cartData = await prisma.shoppingCart.findMany({
     where: {
-      userId: `${Csession ? Csession["token"]["user"]["userId"] : ""}`,
+      userId: `${session ? session?.token["user"]["userId"] : ""}`,
     },
     select: {
       books: true,
@@ -130,7 +131,7 @@ export async function getServerSideProps(context) {
     props: {
       bookData: bookData,
       cartData: cartData,
-      session: Csession,
+      session: session,
     },
   };
 }
