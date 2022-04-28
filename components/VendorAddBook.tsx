@@ -24,9 +24,6 @@ const AddBook = ({ addisOpen, addsetIsOpen, userRoleCustom }: ModalProp) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = async (data) => {
-    sepFunc(data);
-  };
 
   async function sepFunc(data) {
     console.log(data);
@@ -37,6 +34,19 @@ const AddBook = ({ addisOpen, addsetIsOpen, userRoleCustom }: ModalProp) => {
   }
   // const [cart, setCart] = useState<ShoppingCart[]>();
   console.log(userRoleCustom);
+
+  const router = useRouter();
+  async function create(data) {
+    data["userRole"] = userRoleCustom;
+    data["email"] = session?.user.email;
+    await axios.post("/api/createbook", data);
+    router.replace(router.asPath);
+  }
+  const onSubmit = (data) => {
+    console.log(data);
+    create(data);
+  };
+  console.log(errors);
   return (
     <>
       <div>
