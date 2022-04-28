@@ -147,7 +147,7 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
 
                             <div className={styles.form_content}>
                               <input
-                                type="number"
+                                type="text"
                                 placeholder=""
                                 {...register("price")}
                               />

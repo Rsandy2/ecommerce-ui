@@ -27,7 +27,7 @@ export default async function handler(
     console.log(createProduct?.data?.message.id, "HERE IT IS");
 
     const setPrice = await stripe.prices.create({
-      unit_amount: price,
+      unit_amount: 100 * parseFloat(price),
       currency: "usd",
       product: createProduct?.data?.message.id,
     });
@@ -41,7 +41,7 @@ export default async function handler(
         description,
         language,
         publishedDate,
-        price: price,
+        price: parseFloat(price),
         productId: createProduct?.data?.message.id,
         priceId: setPrice?.id,
       },
