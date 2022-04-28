@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import EditOrder from "../components/EditOrder";
 import AddOrder from "../components/AddOrder";
+import ManageHeader from "../components/ManageHeader";
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
 export default function AdminPanel() {
@@ -15,9 +16,12 @@ export default function AdminPanel() {
 
   return (
     <div
-      className="h-screen w-full flex justify-center items-center"
+      className="container-fluid min-h-screen w-screen"
       style={{ backgroundColor: "#DDBEA9" }}
     >
+      <div className="" style={{ backgroundColor: "#B98B73" }}>
+				<ManageHeader />
+			</div>
       <div className="container-xl">
         <div className="table_responsive" style={{ marginTop: "10%" }}>
           <div className={styles.table_wrapper}>

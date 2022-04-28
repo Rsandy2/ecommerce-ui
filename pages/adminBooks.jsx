@@ -8,6 +8,7 @@ import AddBook from "../components/AddBook";
 import { prisma } from "../lib/prisma";
 import axios from "axios";
 import { useRouter } from "next/router";
+import ManageHeader from "../components/ManageHeader";
 
 // https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=crud-data-table-for-database-with-modal-form
 
@@ -27,9 +28,12 @@ export default function AdminPanel({ booksData }) {
 
   return (
     <div
-      className="h-screen w-full flex justify-center items-center"
+      className="container-fluid min-h-screen w-screen"
       style={{ backgroundColor: "#DDBEA9" }}
     >
+      <div className="" style={{ backgroundColor: "#B98B73" }}>
+				<ManageHeader />
+			</div>
       <div className="container-xl">
         <div className="table_responsive" style={{ marginTop: "10%" }}>
           <div className={styles.table_wrapper}>
