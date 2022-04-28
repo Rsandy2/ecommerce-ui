@@ -6,7 +6,7 @@ export default function () {
     backgroundColor: "white",
     padding: "3rem 3rem 5rem 3rem",
     boxShadow: "0px 2px 5px #B98B73",
-    borderRadius: ".25rem",
+    borderRadius: ".5rem",
     marginBottom: "1rem",
     marginTop: "2rem",
   };

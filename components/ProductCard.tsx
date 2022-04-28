@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/ProductCard.module.scss";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
@@ -39,7 +39,7 @@ const ProductCard = (props: CardProps) => {
   const handleAddCart = () => {
     if (session == null) {
       console.log("session is null");
-      location.href = "./login";
+      router.push("/login");
     } else {
       console.log("session is not null");
       notify();

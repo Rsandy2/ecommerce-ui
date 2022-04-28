@@ -39,7 +39,6 @@ const Home: NextPage = ({ bookData, cartData, session }: any) => {
   async function getData() {
     await axios.post("/api/session");
   }
-
   return (
     <div
       id="outer-container"
