@@ -29,21 +29,21 @@ export default function profile({ userData }) {
                     Address
                   </td>
                   <td className="px-2 py-2">
-                    {userData?.profile.address.address}
+                    {userData?.profile?.address?.address}
                   </td>
                   <td className="px-2 py-2">
                     City:
-                    {userData?.profile.address.city}
+                    {userData?.profile?.address?.city}
                   </td>
                   <tr>
                     <td className="px-2 py-2">
                       State:
-                      {userData?.profile.address.state}
+                      {userData?.profile?.address?.state}
                     </td>
                   </tr>
                   <td className="px-2 py-2">
                     Zip:
-                    {userData?.profile.address.zip}
+                    {userData?.profile?.address?.zip}
                   </td>
                 </tr>
                 <tr>
@@ -56,7 +56,7 @@ export default function profile({ userData }) {
                   <td className="px-2 py-2 text-gray-500 font-semibold">
                     Email
                   </td>
-                  <td className="px-2 py-2">{userData?.profile.user.email}</td>
+                  <td className="px-2 py-2">{userData?.profile?.user.email}</td>
                 </tr>
               </tbody>
             </table>
