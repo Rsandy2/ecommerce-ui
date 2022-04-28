@@ -5,8 +5,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { isbn, title, author, publishedDate, description, language, image } =
-    req.body;
+  const {
+    isbn,
+    title,
+    author,
+    publishedDate,
+    description,
+    language,
+    image,
+    price,
+  } = req.body;
 
   try {
     await prisma.book.create({
@@ -18,6 +26,7 @@ export default async function handler(
         description,
         language,
         publishedDate,
+        price: parseFloat(price),
       },
     });
 
