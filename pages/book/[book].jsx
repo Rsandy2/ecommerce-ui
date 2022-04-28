@@ -54,8 +54,8 @@ export default function BookView({ bookData }) {
               <p>{bookData.language}</p>
               <h5>Published Date</h5>
               <p>{bookData.publishedDate}</p>
-              <h5>Vender</h5>
-              <p>{bookData.Vendor[0].username}</p>
+              {/* <h5>Vender</h5>
+              <p>{bookData.Vendor[0].username}</p> */}
               <h5>ISBN</h5>
               <p>{bookData.isbn}</p>
               <h5>Price</h5>

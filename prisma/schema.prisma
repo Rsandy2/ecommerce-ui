@@ -43,43 +43,38 @@ model VerificationToken {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  fullname      String?      
-  username      String?       @unique
-  email         String?       @unique
-  password      String        @db.VarChar(250)
-  emailVerified DateTime?
-  image         String?
-  userRole      String?       @default("user")
-  profileId     String        @unique
-  profile       Profile       @relation(fields: [profileId], references: [id])
-  accounts      Account[]
-  sessions      Session[]
-  shoppingCart  ShoppingCart?
-  processedPayments    ProcessedPayments?
-  promotions    Promotions[]
-  cards         Payment[]
+  id                String             @id @default(cuid())
+  username          String?            @unique
+  email             String?            @unique
+  password          String             @db.VarChar(250)
+  emailVerified     DateTime?
+  image             String?
+  userRole          String?            @default("user")
+  profileId         String             @unique
+  fullname          String?
+  profile           Profile            @relation(fields: [profileId], references: [id])
+  accounts          Account[]
+  cards             Payment[]
+  processedPayments ProcessedPayments?
+  sessions          Session[]
+  shoppingCart      ShoppingCart?
+  promotions        Promotions[]
 }
 
 model Promotions {
-  id            String @id @default(cuid())
-  user          User[]
-  books         Book[]
-  discountType  discountType? @default(FLAT)
-  discount      Float
-}
-
-enum discountType {
-  FLAT
-  PERCENTAGE
+  id           String        @id @default(cuid())
+  discountType discountType? @default(FLAT)
+  discount     Float
+  books        Book[]
+  user         User[]
 }
 
 model Profile {
-  id      String   @id @default(cuid())
-  address Address?
-  user    User?
-  mobile  String?
+  id        String   @id @default(cuid())
+  mobile    String?
   birthdate String?
+  address   Address?
+  user      User?
 }
 
 model Address {
@@ -90,7 +85,7 @@ model Address {
   state            String?
   zip              Int?
   addressSecondary String?
-  profile          Profile @relation(fields: [profileId], references: [id],onDelete: Cascade)
+  profile          Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model ShoppingCart {
@@ -120,14 +115,14 @@ model Content {
 }
 
 model Book {
-  id            String          @id @unique @default(cuid())
+  id            String         @id @unique @default(cuid())
   isbn          String         @unique
   title         String
   author        String
   image         String?
   publishedDate String?
   description   String
-  genre         Genre?          @default(GENERIC)
+  genre         Genre?         @default(GENERIC)
   language      String?
   vendorId      String?
   promotionId   String?
@@ -135,9 +130,30 @@ model Book {
   price         Float?
   priceId       String?
   productId     String?
-  Vendor        Vendor[]      
-  shoppingCart  ShoppingCart[]
   promotion     Promotions?    @relation(fields: [promotionId], references: [id])
+  shoppingCart  ShoppingCart[]
+  Vendor        Vendor[]
+}
+
+model Payment {
+  id         String   @id @default(cuid())
+  userId     String
+  cardNumber Int
+  expiration String
+  cvv        Int
+  type       CardType @default(VISA)
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model ProcessedPayments {
+  id     String @id @unique @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum discountType {
+  FLAT
+  PERCENTAGE
 }
 
 enum Genre {
@@ -150,25 +166,8 @@ enum Genre {
   GENERIC
 }
 
-model Payment {
-  id            String    @id @default(cuid())
-  userId        String
-  cardNumber    Int
-  expiration    String
-  cvv           Int
-  type          CardType  @default(VISA)
-  user          User      @relation(fields: [userId], references: [id])
-}
-
 enum CardType {
   VISA
   DISCOVER
   MASTERCARD
-}
-
-
-model ProcessedPayments {
-  id     String     @id @unique @default(cuid())
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

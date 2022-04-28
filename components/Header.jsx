@@ -64,9 +64,6 @@ const MenuSideBar = () => {
       <a id="" className="menu-item" href="/search">
         Search View
       </a>
-      {/* <a id="" className="menu-item" href="/cartPage">
-        Cart View
-      </a> */}
       <a id="" className="menu-item" href="/adminBooks">
         Admin Book View
       </a>
@@ -182,7 +179,11 @@ const header = () => {
             <BsCart3 size="2rem" className="pr-2" />
             Cart
           </button>
-          {/* <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+          <ShoppingCart
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            session={session}
+          />
           {!session ? (
             <div>
               <></>
