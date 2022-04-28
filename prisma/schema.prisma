@@ -131,7 +131,9 @@ model Book {
   vendorId      String?
   promotionId   String?
   cardId        String?
-  price         Float?
+  price         Int?
+  priceId       String?
+  productId     String?
   Vendor        Vendor[]      
   shoppingCart  ShoppingCart[]
   promotion     Promotions?    @relation(fields: [promotionId], references: [id])

@@ -89,6 +89,16 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
                               <label>Title</label>
                               <div className={styles.line}></div>
                             </div>
+                            <div className={styles.form_content}>
+                              <input
+                                type="text"
+                                placeholder=""
+                                {...register("image")}
+                              />
+
+                              <label>Image</label>
+                              <div className={styles.line}></div>
+                            </div>
 
                             <div className={styles.form_content}>
                               <input
@@ -137,7 +147,7 @@ const AddBook = ({ addisOpen, addsetIsOpen }: ModalProp) => {
 
                             <div className={styles.form_content}>
                               <input
-                                type="text"
+                                type="number"
                                 placeholder=""
                                 {...register("price")}
                               />
