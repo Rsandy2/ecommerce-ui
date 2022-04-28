@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { loadStripe } from "@stripe/stripe-js";
+import emailjs from "@emailjs/browser";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -40,6 +41,12 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
     router.reload();
   }
 
+  const handleCheckout = () => {
+    console.log("handling checkout");
+    sendEmail();
+    proceedCheckout();
+  };
+
   async function proceedCheckout() {
     const payloads = {
       line_items: [...listItems],
@@ -55,6 +62,28 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
     //   let cartObject = {};
     // setCartData(cartObject);
   }, [setCartData, setTotalData, setBookData, listItems, setListItems]);
+
+  const sendEmail = () => {
+    // e.preventDefault();
+    emailjs.init("kvMbDFm5UqrDUyUvy");
+    emailjs
+      .send("service_t61tx0k", "template_927474s", {
+        to_name: session?.user["userId"],
+        confirmation_number: "11830483171",
+        message: "Catching Fire, The Recruit, The Dealer",
+        send_to: session?.user["email"],
+      })
+      .then(
+        (result) => {
+          console.log(result.text);
+          // toast.success("Order Confirmed!");
+        },
+        (error) => {
+          console.log(error.text);
+          // toast.error("Whoops! Something went wrong...");
+        }
+      );
+  };
 
   return (
     <>
@@ -302,7 +331,7 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                           <button
                             type="submit"
                             role="link"
-                            onClick={() => proceedCheckout()}
+                            onClick={handleCheckout}
                             className="bg-indigo-500 font-semibold hover:bg-indigo-600 hover:cursor-pointer py-3 text-sm text-white uppercase w-full"
                           >
                             Checkout

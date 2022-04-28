@@ -9,7 +9,12 @@ function SideBar() {
   return (
     <nav
       id="navbar-example3"
-      className="navbar navbar-light bg-light flex-column align-items-stretch p-3"
+      className="shadow-md navbar navbar-light flex-column align-items-stretch p-3"
+      style={{
+        borderRadius: ".5rem",
+        background: "#FFFFFF",
+        marginTop: "1rem",
+      }}
     >
       <FilterItems />
     </nav>

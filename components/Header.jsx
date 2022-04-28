@@ -64,8 +64,20 @@ const MenuSideBar = () => {
       <a id="" className="menu-item" href="/search">
         Search View
       </a>
-      <a id="" className="menu-item" href="/cartPage">
-        Cart View
+      <a id="" className="menu-item" href="/adminBooks">
+        Admin Book View
+      </a>
+      <a id="" className="menu-item" href="/edit">
+        Admin Edit User
+      </a>
+      <a id="" className="menu-item" href="/adminOrders">
+        Admin Order View
+      </a>
+      <a id="" className="menu-item" href="/editprofile">
+        Edit Profile
+      </a>
+      <a id="" className="menu-item" href="/profile">
+        Profile
       </a>
       <button
         id=""
@@ -83,6 +95,8 @@ const MenuSideBar = () => {
 
 const header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   const { data: session } = useSession();
   const {
     register,
@@ -98,6 +112,7 @@ const header = () => {
   function submitSearch(data) {
     console.log(data);
   }
+
   return (
     <MyProvider>
       <MenuSideBar
@@ -122,21 +137,25 @@ const header = () => {
                   x-model="q"
                   className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
                 ></input> */}
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input
-                  type="text"
-                  className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
-                  x-model="q"
-                  placeholder="search..."
-                  {...register("search", {})}
-                />
+              {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+              <input
+                type="text"
+                className="w-full px-4 text-sm outline-none focus:outline-none bg-transparent"
+                x-model="q"
+                placeholder="search..."
+                {...register("search", {})}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <Link href={`/search/${searchValue}`}>
                 <button
                   type="submit"
                   className="flex items-center justify-center pl-3 pr-2 border-l border-slate-300"
                 >
                   <BsSearch size="1rem" color="gray" />
                 </button>
-              </form>
+              </Link>
+              {/* </form> */}
             </div>
           </div>
         </div>
@@ -160,7 +179,11 @@ const header = () => {
             <BsCart3 size="2rem" className="pr-2" />
             Cart
           </button>
-          <ShoppingCart isOpen={isOpen} setIsOpen={setIsOpen} />
+          <ShoppingCart
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            session={session}
+          />
           {!session ? (
             <div>
               <></>
