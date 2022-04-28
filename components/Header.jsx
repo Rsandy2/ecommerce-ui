@@ -82,6 +82,13 @@ const MenuSideBar = () => {
       <a id="" className="menu-item" href="/profile">
         Profile
       </a>
+      <button
+        id=""
+        className="menu-item"
+        onClick={() => router.push("/vendorBooks")}
+      >
+        Vendor Books
+      </button>
       <a className="menu-item--small" href="">
         Settings
       </a>

@@ -13,7 +13,13 @@ import { useSession, getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 // import Footer from "../components/Footer";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 const notify = () => toast("Here is a toast.");
 
 // export async function getServerSideProps() {

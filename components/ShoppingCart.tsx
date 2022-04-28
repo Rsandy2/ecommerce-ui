@@ -6,6 +6,13 @@ import CartContext from "../components/context/cartContext";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { loadStripe } from "@stripe/stripe-js";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 type ModalProp = {
   isOpen: boolean;
@@ -32,13 +39,22 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
     await axios.post("api/cartdelete", dataP);
     router.reload();
   }
+
+  async function proceedCheckout() {
+    const payloads = {
+      line_items: [...listItems],
+    };
+    const res = await axios.post("/api/checkout_sessions", payloads);
+    const body = res.data;
+    router.push(body.url);
+  }
   useEffect(() => {
     if (cart != null) {
       setCartData(cart[0]?.books);
     }
     //   let cartObject = {};
     // setCartData(cartObject);
-  }, [setCartData, setTotalData, setBookData]);
+  }, [setCartData, setTotalData, setBookData, listItems, setListItems]);
 
   return (
     <>
@@ -141,13 +157,67 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                                       <input
                                         className="appearance-none mx-2 border text-center w-8 outline-none focus:outline-none"
                                         onChange={(e) => {
-                                          setListItems((listItems) => [
-                                            ...listItems,
-                                            {
-                                              productId: cartItem?.productId,
-                                              quantity: e.target.value,
-                                            },
-                                          ]);
+                                          console.log(listItems.length);
+                                          if (listItems.length > 0) {
+                                            let found = listItems.find(
+                                              function (item, index) {
+                                                if (
+                                                  item?.price ===
+                                                  cartItem?.priceId
+                                                ) {
+                                                  console.log(
+                                                    cartItem?.productId,
+                                                    "duplication"
+                                                  );
+                                                  return true;
+                                                }
+                                              }
+                                            );
+
+                                            if (found) {
+                                              console.log("Duplicate");
+                                              console.log(found);
+                                              let area = e.target.value;
+                                              let newArr = [...listItems];
+
+                                              let index = listItems.findIndex(
+                                                function (item, index) {
+                                                  if (
+                                                    item?.price ===
+                                                    cartItem?.priceId
+                                                  )
+                                                    return true;
+                                                }
+                                              );
+
+                                              console.log(index);
+                                              console.log(newArr);
+                                              newArr[index]["quantity"] =
+                                                parseInt(e.target.value);
+                                              setListItems(newArr);
+                                            } else {
+                                              setListItems((listItems) => [
+                                                ...listItems,
+                                                {
+                                                  price: cartItem?.priceId,
+                                                  quantity: parseInt(
+                                                    e.target.value
+                                                  ),
+                                                },
+                                              ]);
+                                            }
+                                          } else {
+                                            console.log("free to do so");
+                                            setListItems((listItems) => [
+                                              ...listItems,
+                                              {
+                                                price: cartItem?.priceId,
+                                                quantity: parseInt(
+                                                  e.target.value
+                                                ),
+                                              },
+                                            ]);
+                                          }
                                         }}
                                       ></input>
                                       <button data-action="">
@@ -187,23 +257,23 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                       <h1 className="font-semibold text-2xl border-b pb-8">
                         Order Summary
                       </h1>
-                      <div className="flex justify-between mt-10 mb-5">
+                      {/* <div className="flex justify-between mt-10 mb-5">
                         <span className="font-semibold text-sm uppercase">
                           Subtotal
                         </span>
                         <span className="font-semibold text-sm">$800</span>
-                      </div>
+                      </div> */}
 
-                      <div>
+                      {/* <div>
                         <label className="font-medium inline-block mb-3 text-sm uppercase">
                           Shipping
                         </label>
                         <select className="block p-2 text-gray-600 w-full text-sm">
                           <option>Standard shipping-$10.00</option>
                         </select>
-                      </div>
+                      </div> */}
 
-                      <div className="py-10">
+                      {/* <div className="py-10">
                         <label
                           htmlFor="promo"
                           className="font-semibold inline-block mb-3 text-sm uppercase"
@@ -216,24 +286,29 @@ const ShoppingCart = ({ isOpen, setIsOpen }: ModalProp) => {
                           placeholder="Enter your code"
                           className="p-2 text-sm w-full"
                         ></input>
-                      </div>
-                      <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+                      </div> */}
+                      {/* <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
                         Apply
-                      </button>
+                      </button> */}
 
                       <div className="border-t mt-8">
                         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
-                          <span>Total cost</span>
-                          <span>${totalData}</span>
+                          {/* <span>Total cost</span>
+                          <span>${totalData}</span> */}
                         </div>
                         {/* checkout button */}
-                        <button
-                          type="button"
-                          onClick={() => setIsOpen(false)}
-                          className="bg-indigo-500 font-semibold hover:bg-indigo-600 hover:cursor-pointer py-3 text-sm text-white uppercase w-full"
-                        >
-                          Checkout
-                        </button>
+                        {/* <form action="/api/checkout_sessions" method="POST"> */}
+                        <section>
+                          <button
+                            type="submit"
+                            role="link"
+                            onClick={() => proceedCheckout()}
+                            className="bg-indigo-500 font-semibold hover:bg-indigo-600 hover:cursor-pointer py-3 text-sm text-white uppercase w-full"
+                          >
+                            Checkout
+                          </button>
+                        </section>
+                        {/* </form> */}
                       </div>
                     </div>
                   </div>

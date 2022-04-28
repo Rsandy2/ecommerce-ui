@@ -14,6 +14,9 @@ const confirmPasswordHash = (plainPassword, hashedPassword) => {
     });
   });
 };
+const basicCompare = (x, y) => {
+  return x === y;
+};
 
 const configuration = {
   cookie: {
@@ -37,9 +40,9 @@ const configuration = {
           // console.log("good nhere");
           // console.log(credentials.email);
 
-          const user = await prisma.user.findFirst({
+          const user = await prisma.user.findUnique({
             where: {
-              email: credentials.email,
+              username: credentials.username,
             },
           });
 
